@@ -10,14 +10,9 @@
 
         var model = this;
 
-        var config = {headers:  {
-            'X-API-Key': ''
-        }
-        };
-
-        $http
-            .get("https://api.propublica.org/congress/v1/115/senate/members.json", config)
+        $http.get('/api/congress/senate')
             .then(function (response) {
+                console.log(response);
                 model.members = response.data.results[0].members;
             });
     }
