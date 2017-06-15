@@ -26,5 +26,10 @@
                 controller: 'profileController',
                 controllerAs: 'model'
             })
+            .when('/search', {
+                templateUrl: 'views/search.view.client.html',
+                controller: 'searchController',
+                controllerAs: 'model'
+            })
     }
 })();

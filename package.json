@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/vcantu/ryzeup-site.git"
   },
-  "author": "Viviano Cantu & Ryan Orlando Bender",
+  "author": "Viviano Cantu & Nicholas Westin",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/vcantu/ryzeup-site/issues"
@@ -19,8 +19,10 @@
   "dependencies": {
     "body-parser": "^1.15.1",
     "express": "^4.13.4",
+    "fast-levenshtein": "^2.0.6",
     "mdi": "^1.9.33",
     "mongoose": "^4.4.15",
+    "ngtweet": "^0.6.1",
     "q": "^1.5.0"
   }
 }

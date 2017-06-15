@@ -11,9 +11,8 @@
         var model = this;
 
         $http.get('/api/congress/senate')
-            .then(function (response) {
-                console.log(response);
-                model.members = response.data.results[0].members;
+            .then(function (members) {
+                model.members = members.data.results[0].members;
             });
     }
 })();

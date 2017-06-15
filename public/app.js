@@ -3,5 +3,5 @@
  */
 (function () {
     angular
-        .module('RU', ['ngRoute']);
+        .module('RU', ['ngRoute', 'ui.materialize', 'ngtweet']);
 })();
