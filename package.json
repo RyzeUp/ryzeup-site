@@ -1,0 +1,28 @@
+{
+  "name": "ryzeup-site",
+  "version": "0.1.0",
+  "description": "Track government actions, discuss and organize",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vcantu/ryzeup-site.git"
+  },
+  "author": "Viviano Cantu & Nicholas Westin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vcantu/ryzeup-site/issues"
+  },
+  "homepage": "https://github.com/vcantu/ryzeup-site#readme",
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "express": "^4.13.4",
+    "fast-levenshtein": "^2.0.6",
+    "mdi": "^1.9.33",
+    "mongoose": "^4.4.15",
+    "ngtweet": "^0.6.1",
+    "q": "^1.5.0"
+  }
+}

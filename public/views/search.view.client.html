@@ -1,0 +1,40 @@
+<div class="container-fluid">
+    <label for="search">Search</label>
+    <input
+            ng-model="searchText"
+            id="search"
+            type="text"
+            class="form-control"
+            placeholder="'Purple St, Springfield MA' or 'Pennsylvania'"/>
+
+    <a ng-click="model.search(searchText)"
+       class="btn btn-block btn-primary">Login</a>
+
+
+    <div class="col-md-8 col-md-offset-2"
+         ng-repeat="member in model.members">
+        <div class="col s12 m7">
+            <div class="card horizontal">
+                <div class="card-image">
+                    <img src="https://theunitedstates.io/images/congress/225x275/{{member.id}}.jpg">
+                </div>
+                <div class="card-stacked">
+                    <div class="card-content">
+                        <h4>{{member.name}}</h4><h4 class="pull-right">{{member.state}}</h4>
+                        <h5>{{member.role}}</h5>
+                        <br>
+                        <span class="pull-right"><h5>Up for Re-election in {{member.next_election}}</h5></span>
+                    </div>
+
+                    <div class="card-action">
+                        <a href="https://twitter.com/{{member.twitter_id}}"
+                           class="{{ member.party === 'R' ? 'red-text' : 'blue-text' }}
+                       text-darken-2">
+                            <i class="mdi mdi-twitter mdi-24px"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
