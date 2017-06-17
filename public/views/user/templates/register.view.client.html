@@ -1,23 +1,23 @@
-<div class="container-fluid">
+<div class="container-fluid col-sm-6 col-md-offset-3" style="margin-top: 100px;">
     <h1>Register</h1>
 
-    <label for="username">Username</label>
-    <input id="username"
-           type="text"
-           class="form-control"
-           placeholder="username"/>
+    <div class="input-field col s6">
+        <i class="material-icons prefix">account_circle</i>
+        <input id="username" type="text" class="validate">
+        <label for="username">Username</label>
+    </div>
 
-    <label for="password">Password</label>
-    <input id="password"
-           type="password"
-           class="form-control"
-           placeholder="password"/>
+    <div class="input-field col s6">
+        <i class="material-icons prefix">lock</i>
+        <input id="password" type="password" class="validate">
+        <label for="password">Password</label>
+    </div>
 
-    <label for="password1">Confirm Password</label>
-    <input id="password1"
-           type="password"
-           class="form-control"
-           placeholder="confirm password"/>
+    <div class="input-field col s6">
+        <i class="material-icons prefix">lock</i>
+        <input id="password2" type="password" class="validate">
+        <label for="password2">Retype Password</label>
+    </div>
 
     <a class="btn btn-primary btn-block"
        href="#!/profile">Register</a>
