@@ -1,54 +1,31 @@
-<img class="background-image" src="/assets/Capitol.jpg">
+<div>
+    <!--<img class="background-image" src="/assets/Capitol.jpg">-->
 
-<div class="col-sm-6 col-md-offset-3">
+    <div class="col-md-6 col-md-offset-3">
 
-    <h1 class="center" style="color: #FFF; margin-top: 150px;">THIS SHOULD B A LOGO</h1>
+        <div class="card container-fluid z-depth-4" style="margin-top: 150px;">
+            <img class="img-responsive center-block"
+                 width="80%"
+                 style="margin-top: 50px; margin-bottom: 50px;"
+                 src="/assets/logos/RyzeUp-logo-noback.png">
+            <!--<span class="card-title"><h3>Login</h3></span>-->
 
-    <div class="card container-fluid" style="padding-bottom: 20px">
-        <span class="card-title"><h1>Login</h1></span>
+            <div class="input-field col s6">
+                <i class="material-icons prefix">account_circle</i>
+                <input id="username" type="text" class="validate">
+                <label for="username">Username</label>
+            </div>
 
-        <div class="input-field col s6">
-            <i class="material-icons prefix">account_circle</i>
-            <input id="username" type="text" class="validate">
-            <label for="username">Username</label>
+            <div class="input-field col s6">
+                <i class="material-icons prefix">lock</i>
+                <input id="password" type="password" class="validate">
+                <label for="password">Password</label>
+            </div>
+
+            <a href="../website/website-list.html"
+               class="btn btn-block btn-primary blue">Login</a>
+            <br>
+            <p class="center">Don't have an account? <a href="#!/register">Sign Up</a></p>
         </div>
-
-        <div class="input-field col s6">
-            <i class="material-icons prefix">lock</i>
-            <input id="password" type="password" class="validate">
-            <label for="password">Password</label>
-        </div>
-
-        <a href="../website/website-list.html"
-           class="btn btn-block btn-primary">Login</a>
     </div>
-
-    <h5 class="center">Don't have an account? <a href="#!/register">Sign Up</a></h5>
-
 </div>
-
-<footer class="page-footer" style="position: absolute;">
-    <div class="container">
-        <div class="row">
-            <div class="col l6 s12">
-                <h5 class="white-text">Footer Content</h5>
-                <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
-            </div>
-            <div class="col l4 offset-l2 s12">
-                <h5 class="white-text">Links</h5>
-                <ul>
-                    <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-                    <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
-                    <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
-                    <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="footer-copyright">
-        <div class="container">
-            © 2014 Copyright Text
-            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
-        </div>
-    </div>
-</footer>
