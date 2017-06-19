@@ -25,6 +25,6 @@
                 templateUrl: '/views/search.view.client.html',
                 controller: 'searchController',
                 controllerAs: 'model'
-            })
+            });
     }
 })();

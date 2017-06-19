@@ -1,10 +1,16 @@
+.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    overflow: auto;
+    background: #FAFAFA
+}
+
 .background-image {
     height: 100%;
     position: absolute;
     background-position: center;
 }
-/*
-    Change input field colors
-*/
-
 

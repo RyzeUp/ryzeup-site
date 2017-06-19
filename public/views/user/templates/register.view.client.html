@@ -1,37 +1,41 @@
-<div class="container">
-    <div class="col-md-8 col-md-offset-2">
+<md-content layout="row">
+    <div layout flex-gt-xs="60" flex-offset-gt-xs="20">
 
-        <div class="card container-fluid z-depth-4" style="margin-top: 150px;">
+        <md-card layout="column" style="padding: 30px; margin-top: 150px">
             <img class="img-responsive center-block"
-                 width="80%"
-                 style="margin-top: 50px; margin-bottom: 50px;"
+                 style="margin-bottom: 20px;"
                  src="/assets/logos/RyzeUp-logo-noback.png">
 
-            <div class="input-field col s6">
-                <i class="material-icons prefix">account_circle</i>
-                <input id="username" type="text" class="validate">
-                <label for="username">Username</label>
+
+            <md-input-container class="md-icon-float md-block">
+                <!-- Use floating label instead of placeholder -->
+                <label>Name</label>
+                <md-icon md-font-set="material-icons" class="name">account_circle</md-icon>
+                <input ng-model="user.name" type="text">
+            </md-input-container>
+
+            <md-input-container class="md-icon-float md-block">
+                <!-- Use floating label instead of placeholder -->
+                <label>Password</label>
+                <md-icon md-font-set="material-icons" class="password">lock</md-icon>
+                <input ng-model="user.password" type="text">
+            </md-input-container>
+            <md-input-container class="md-icon-float md-block">
+                <!-- Use floating label instead of placeholder -->
+                <label>Retype Password</label>
+                <md-icon md-font-set="material-icons" class="password2">lock</md-icon>
+                <input ng-model="user.password2" type="text">
+            </md-input-container>
+
+            <md-button class="md-raised md-primary" ng-href="#!/">Register</md-button>
+            <md-button class="md-raised md-warn" ng-href="#!/login">Cancel</md-button>
+
+
+            <div layout="row" layout-align="center center">
+                <p>Already have an account? <a href="#!/login">Log In</a></p>
             </div>
 
-            <div class="input-field col s6">
-                <i class="material-icons prefix">lock</i>
-                <input id="password" type="password" class="validate">
-                <label for="password">Password</label>
-            </div>
+        </md-card>
 
-            <div class="input-field col s6">
-                <i class="material-icons prefix">lock</i>
-                <input id="password2" type="password" class="validate">
-                <label for="password2">Retype Password</label>
-            </div>
-
-            <a class="btn btn-primary btn-block blue"
-               href="/">Register</a>
-
-            <a class="btn btn-danger btn-block blue"
-               href="login.view.client.html">Cancel</a>
-            <br>
-            <p class="center">Already have an account? <a href="#!/login">Log In</a></p>
-        </div>
     </div>
-</div>
+</md-content>
