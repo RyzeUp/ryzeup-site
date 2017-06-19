@@ -1,0 +1,88 @@
+<md-toolbar class="md-hue-2">
+    <div class="md-toolbar-tools">
+        <md-button class="md-icon-button" aria-label="Settings" ng-disabled="true">
+            <md-icon md-font-set="material-icons">menu</md-icon>
+        </md-button>
+
+        <h2 flex md-truncate>Ryze Up</h2>
+
+        <md-button class="md-icon-button" aria-label="Favorite">
+            <md-icon md-font-set="material-icons">favorite</md-icon>
+        </md-button>
+
+        <md-button class="md-icon-button" aria-label="More">
+            <md-icon md-font-set="material-icons">more_vert</md-icon>
+        </md-button>
+    </div>
+</md-toolbar>
+<md-nav-bar
+        md-selected-nav-item="currentNavItem"
+        nav-bar-aria-label="navigation links">
+    <md-nav-item md-nav-click="goto('page1')" name="page1">
+        Page One
+    </md-nav-item>
+    <md-nav-item md-nav-click="goto('page2')" name="page2">
+        Page Two
+    </md-nav-item>
+    <md-nav-item md-nav-click="goto('page3')" name="page3">
+        Page Three
+    </md-nav-item>
+</md-nav-bar>
+
+
+
+<!--<nav class="nav-extended blue navbar-fixed-top">-->
+    <!--<div class="nav-wrapper">-->
+        <!--<a href="#" class="brand-logo">Logo</a>-->
+        <!--<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>-->
+        <!--<ul id="nav-mobile" class="right hide-on-med-and-down">-->
+            <!--<li><a href="sass.html">Sass</a></li>-->
+            <!--<li><a href="badges.html">Components</a></li>-->
+            <!--<li><a href="collapsible.html">JavaScript</a></li>-->
+        <!--</ul>-->
+        <!--<ul class="side-nav" id="mobile-demo">-->
+            <!--<li><a href="sass.html">Sass</a></li>-->
+            <!--<li><a href="badges.html">Components</a></li>-->
+            <!--<li><a href="collapsible.html">JavaScript</a></li>-->
+        <!--</ul>-->
+    <!--</div>-->
+    <!--<div class="nav-content blue">-->
+        <!--<ul tabs>-->
+            <!--<li class="tab"><a href="#!/">Home</a></li>-->
+            <!--<li class="tab"><a href="#!/search">Search</a></li>-->
+            <!--<li class="tab"><a class="active" href="#!/senate">Senate</a></li>-->
+            <!--<li class="tab"><a href="#!/house">House</a></li>-->
+        <!--</ul>-->
+
+    <!--</div>-->
+<!--</nav>-->
+
+<!--<div class="col-md-8 col-md-offset-2" style="overflow-y: scroll; height:400px;">-->
+    <!--<twitter-widget>-->
+        <!--<a class="twitter-timeline" href="https://twitter.com/SenAlexander">Tweets by SenAlexander</a>-->
+    <!--</twitter-widget>-->
+<!--</div>-->
+
+<!--<div class="col-md-8 col-md-offset-2"-->
+        <!--ng-repeat="senator in model.members">-->
+    <!--<div class="col s12 m7">-->
+        <!--<div class="card horizontal">-->
+            <!--<div class="card-image">-->
+                <!--<img src="https://theunitedstates.io/images/congress/225x275/{{senator.id}}.jpg">-->
+            <!--</div>-->
+            <!--<div class="card-stacked">-->
+                <!--<div class="card-content">-->
+                    <!--<h4>{{senator.first_name}} {{senator.last_name}}</h4><h4 class="pull-right">{{senator.state}}</h4>-->
+                    <!--<p>I am a very simple card. I am good at containing small bits of information.</p>-->
+                <!--</div>-->
+
+                <!--<div class="card-action">-->
+                    <!--<a href="https://twitter.com/{{senator.twitter_account}}"-->
+                       <!--class="{{ senator.party === 'R' ? 'red-text' : 'blue-text' }}-->
+                       <!--text-darken-2">-->
+                        <!--<i class="mdi mdi-twitter mdi-24px"></i></a>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
