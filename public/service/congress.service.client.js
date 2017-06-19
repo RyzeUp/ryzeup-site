@@ -7,8 +7,6 @@
         .factory('congressService', congressService);
 
     function congressService($http) {
-        app.get('/api/v1/congress/member/:memberId', memberReq);
-        app.get('/api/v1/congress/details/:memberId', detailsReq);
 
         return {
             search: search,
