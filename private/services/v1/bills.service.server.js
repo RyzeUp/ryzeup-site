@@ -11,5 +11,4 @@ module.exports = function (app) {
 
     // app.get('/api/bills/recent', recentReq);
     // app.get('/api/congress/house', houseReq);
-
 };
