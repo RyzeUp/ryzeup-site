@@ -6,14 +6,15 @@ const q = require('q');
 const https = require('https');
 const levenshtein = require('fast-levenshtein');
 
-var propublica = require('./propublica.service.server')();
+var propublica = require('./helpers/propublica.service.server')();
 
 module.exports = function (app) {
 
-    app.get('/api/congress/senate', senateReq);
-    app.get('/api/congress/house', houseReq);
+    console.log('setting apis');
+    app.get('/api/v1/congress/senate', senateReq);
+    app.get('/api/v1/congress/house', houseReq);
 
-    app.get('/api/congress/search', search);
+    app.get('/api/v1/congress/search', search);
 
     var senateCache = null;
     var houseCache = null;
@@ -71,9 +72,9 @@ module.exports = function (app) {
     }
 
     function houseReq(req, res) {
-        getHouse()
+        return getHouse()
             .then(function (response) {
-                res.json(response);
+                res.json(response.results);
             }, function (error) {
                 res.sendStatus(404);
             })
@@ -100,7 +101,8 @@ module.exports = function (app) {
     function senateReq(req, res) {
         getSenate()
             .then(function (response) {
-                res.json(response);
+                //unwrap response
+                res.json(response.results);
             }, function (error) {
                 res.sendStatus(404);
             })

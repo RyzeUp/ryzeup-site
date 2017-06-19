@@ -5,7 +5,7 @@
 const q = require('q');
 const https = require('https');
 
-var google = require('./google.service.server.js')();
+var google = require('./helpers/google.service.server')();
 
 module.exports = function (app) {
 
