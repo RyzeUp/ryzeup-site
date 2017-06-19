@@ -12,11 +12,11 @@ module.exports = function (app) {
     app.post('/auth/v1/login', passport.authenticate('local'), login);
     app.post('/auth/v1/logout', logout);
     app.post('/auth/v1/register', register);
-    app.get ('/auth/v1/loggedin', loggedin);
+    app.get('/auth/v1/loggedin', loggedin);
 
     //TODO: google & facebook auth
 
-    function login (req, res) {
+    function login(req, res) {
         var user = req.user;
         res.json(user);
     }

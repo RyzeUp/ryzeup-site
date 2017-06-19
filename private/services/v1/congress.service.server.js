@@ -31,7 +31,7 @@ module.exports = function (app) {
                     })
             }, function (error) {
                 res.sendStatus(404);
-            })
+            });
         res.sendStatus(200);
     }
 
@@ -58,9 +58,9 @@ module.exports = function (app) {
                             for (var i in response.results) {
                                 result.push(response.results[i]);
                             }
-                            res.json(result);
+                            res.json(result[0]);
                         }, function (err) {
-                            res.json(result);
+                            res.json(result[0]);
                         });
                 }, function (err) {
                     res.sendStatus(404);
