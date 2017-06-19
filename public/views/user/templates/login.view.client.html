@@ -1,20 +1,33 @@
-<div>
-    <!--<img class="background-image" src="/assets/Capitol.jpg">-->
+<div class="container">
+    <div class="col-md-8 col-md-offset-2">
 
-    <div class="col-md-6 col-md-offset-3">
+        <md-content layout-padding>
+            <md-input-container class="md-icon-float md-block">
+                <!-- Use floating label instead of placeholder -->
+                <label>Name</label>
+                <md-icon md-font-set="material-icons" class="name">account_circle</md-icon>
+                <input ng-model="user.name" type="text">
+            </md-input-container>
+
+            <md-input-container class="md-icon-float md-block">
+                <!-- Use floating label instead of placeholder -->
+                <label>Passwordz</label>
+                <md-icon md-font-set="material-icons" class="password">lock</md-icon>
+                <input ng-model="user.password" type="text">
+            </md-input-container>
+        </md-content>
 
         <div class="card container-fluid z-depth-4" style="margin-top: 150px;">
             <img class="img-responsive center-block"
                  width="80%"
                  style="margin-top: 50px; margin-bottom: 50px;"
                  src="/assets/logos/RyzeUp-logo-noback.png">
-            <!--<span class="card-title"><h3>Login</h3></span>-->
 
-            <div class="input-field col s6">
-                <i class="material-icons prefix">account_circle</i>
-                <input id="username" type="text" class="validate">
-                <label for="username">Username</label>
-            </div>
+            <!--<div class="input-field col s6">-->
+                <!--<i class="material-icons prefix">account_circle</i>-->
+                <!--<input id="username" type="text" class="validate">-->
+                <!--<label for="username">Username</label>-->
+            <!--</div>-->
 
             <div class="input-field col s6">
                 <i class="material-icons prefix">lock</i>
@@ -22,10 +35,17 @@
                 <label for="password">Password</label>
             </div>
 
-            <a href="../website/website-list.html"
+            <div style="margin-left: 6px;">
+                <input class="filled-in" type="checkbox" id="remember" />
+                <label for="remember">Remember me</label>
+            </div>
+
+            <a href="#!/"
                class="btn btn-block btn-primary blue">Login</a>
             <br>
             <p class="center">Don't have an account? <a href="#!/register">Sign Up</a></p>
+
         </div>
+
     </div>
 </div>

@@ -1,14 +1,10 @@
 .background-image {
-    height: 1000px;
-    position: fixed;
+    height: 100%;
+    position: absolute;
+    background-position: center;
 }
-
-
 /*
     Change input field colors
 */
 
-/* label color */
-.input-field label {
-    color: #2196f3;
-}
+
