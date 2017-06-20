@@ -30,7 +30,12 @@ module.exports = function () {
             response.on('end', function() {
                 try {
                     body = JSON.parse(body);
-                    deferred.resolve(body);
+                    if (body.status === "ERROR") {
+                        deferred.reject({error: e});
+                    }
+                    else {
+                        deferred.resolve(body);
+                    }
                 } catch(e) {
                     deferred.reject({error: e});
                 }
