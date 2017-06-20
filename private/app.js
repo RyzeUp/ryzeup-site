@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 mongoose.Promise = require('q').Promise;
 
 module.exports = function (app) {
-    var connectionString = 'mongodb://localhost/ryze-up-dev'; // for local
+    var connectionString = 'mongodb://localhost/ryzeup-dev'; // for local
     if(process.env.MONGODB_URI) { // check if running remotely
         connectionString = process.env.MONGODB_URI;
     }
@@ -15,4 +15,7 @@ module.exports = function (app) {
     require('./services/v1/civicinfo.service.server.js')(app);
     require('./services/v1/bills.service.server.js')(app);
     require('./services/v1/auth.service.server.js')(app);
+
+    var userModel = require('./models/user/user.model.server');
+    require('./services/v1/user.service.server')(app, userModel);
 };
