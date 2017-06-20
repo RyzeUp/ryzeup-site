@@ -12,7 +12,8 @@ module.exports = function (app) {
     app.get('/api/v1/bills/recent/introduced/:chamber', introducedReq);
     app.get('/api/v1/bills/recent/updated/:chamber', updatedReq);
     app.get('/api/v1/bills/recent/passed/:chamber', passedReq);
-    app.get('/api/v1/bills/details/:billId', detailsReq)
+    app.get('/api/v1/bills/details/:billId', detailsReq);
+    app.get('/api/v1/bills/votes/:chamber/:session/:rollcall', votesReq);
 
     function introducedReq(req, res) {
         var chamber = req.params['chamber'];
@@ -51,6 +52,18 @@ module.exports = function (app) {
         propublica.get('/congress/v1/' + billCongress + '/bills/' + billId + '.json')
             .then(function (response) {
                 res.json(response.results[0]);
+            }, function (e) {
+                res.sendStatus(404);
+            });
+    }
+
+    function votesReq(req, res) {
+        var chamber = req.params['chamber'];
+        var session = req.params['session'];
+        var rollcall = req.params['rollcall'];
+        propublica.get('/congress/v1/115/' + chamber + '/sessions/' + session + '/votes/' + rollcall + '.json')
+            .then(function (response) {
+                res.json(response.results);
             }, function (e) {
                 res.sendStatus(404);
             });
