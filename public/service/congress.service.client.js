@@ -14,7 +14,6 @@
             senateReq: senateReq,
             memberReq: memberReq,
             detailsReq: detailsReq
-
         };
 
         function search(state, district, name) {
@@ -38,7 +37,7 @@
                 });
         }
 
-        function senateReq(user) {
+        function senateReq() {
             var url = '/api/v1/congress/senate';
             return $http.get(url)
                 .then(function (res) {
