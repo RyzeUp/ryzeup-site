@@ -44,4 +44,8 @@ model.findUserByFacebookId = function(facebook_id) {
     return model.findOne({ 'facebook.id': facebook_id });
 };
 
+model.findUserByGoogleId = function(google_id) {
+    return model.findOne({ 'google.id': google_id });
+};
+
 module.exports = model;
