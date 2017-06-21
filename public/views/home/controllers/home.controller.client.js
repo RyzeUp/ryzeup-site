@@ -25,6 +25,7 @@
                         console.log(model.house);
                     });
 
+
             function setContact(representatives) {
                 representatives.forEach(function (rep) {
                     var contact = {};
