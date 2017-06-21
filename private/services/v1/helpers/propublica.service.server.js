@@ -29,6 +29,7 @@ module.exports = function () {
             });
             response.on('end', function() {
                 try {
+                    body = body.replace(/: ,/g, ': \"\",');
                     body = JSON.parse(body);
                     if (body.status === "ERROR") {
                         deferred.reject({error: e});

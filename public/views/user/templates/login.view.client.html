@@ -26,6 +26,21 @@
             </md-checkbox>
             <md-button class="md-raised md-primary" ng-href="#!/">Login</md-button>
 
+            <md-button layout="row"
+                       class="md-raised md-primary"
+                       style="background-color: #3b5998;"
+                       ng-href="/auth/v1/facebook">
+                <i class="mdi mdi-facebook-box mdi-24px" flex="5"></i>
+                <span flex="90">Login with Facebook</span>
+            </md-button>
+            <md-button layout="row"
+                       class="md-raised md-primary"
+                       style="background-color: #dd4b39;"
+                       ng-href="/auth/v1/google">
+                <i class="mdi mdi-google-plus-box mdi-24px" flex="5"></i>
+                <span flex="90">Login with Google</span>
+            </md-button>
+
 
             <div layout="row" layout-align="center center">
                 <p>Don't have an account? <a href="#!/register">Sign Up</a></p>

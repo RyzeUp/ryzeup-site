@@ -8,6 +8,7 @@ const validate = require('./user.validation.server');
 var model = mongoose.model('UserModel', schema);
 
 model.createUser = function (user) {
+    console.log('creating model');
     return model.create(validate(user));
 };
 
@@ -20,7 +21,7 @@ model.findByUsername = function (username) {
 };
 
 model.findByEmail = function (email) {
-    return model.findByEmail({ email: email });
+    return model.findOne({ email: email });
 };
 
 model.updateUserById = function (id, newUser) {
@@ -31,6 +32,10 @@ model.updateUserById = function (id, newUser) {
 
 model.removeUserById = function (id) {
     return model.remove({ _id: id })
+};
+
+model.findUserByFacebookId = function(facebook_id) {
+    return model.findOne({ 'facbook.id': facebook_id });
 };
 
 module.exports = model;

@@ -12,21 +12,23 @@ const LocalStrategy    = require('passport-local').Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
 const GoogleStrategy   = require('passport-google-oauth').OAuth2Strategy;
 
-
-module.exports = function (app) {
+module.exports = function (app, model) {
 
     app.post('/auth/v1/login', passport.authenticate('local'), login);
     app.post('/auth/v1/logout', logout);
     app.post('/auth/v1/register', register);
     app.get ('/auth/v1/loggedin', loggedin);
 
-    app.post('/auth/v1/facebook',       passport.authenticate('facebook', { scope : 'email'}));
-    app.get ('/auth/facebook/callback', passport.authenticate('facebook', {
-            successRedirect: '/assignment/index.html#!/profile',
-            failureRedirect: '/assignment/index.html#!/login'
-        }));
+    app.get ('/auth/v1/facebook',          passport.authenticate('facebook', { scope : ['email', 'user_friends'] }));
+    app.get ('/auth/v1/facebook/callback', passport.authenticate('facebook',
+        {
+            successRedirect: '/',
+            failureRedirect: '/#!/login'
+        }), test);
 
-    //TODO: google & facebook auth
+    function test(req, res) {
+        console.log('passed');
+    }
 
     function login(req, res) {
         var user = req.user;
@@ -42,6 +44,11 @@ module.exports = function (app) {
     function register(req, res) {
         var newUser = req.body;
         newUser.password = bcrypt.hashSync(newUser.password);
+        if (!newUser.picture) {
+            // TODO: random image url
+            newUser.picture.is_unset = true;
+            //newUser.picture.url = getRandomProfileImageUrl();
+        }
         model.createUser(newUser)
             .then(function (response) {
                 res.sendStatus(200);
@@ -80,23 +87,15 @@ module.exports = function (app) {
             .then(function (res) {
                 if (res) {
                     //authenticated
+                    console.log('no then');
                     done(null, res);
                 }
                 else {
-                    var names = profile.displayName.split(' ');
-                    var newUser = {
-                        firstName: names[0],
-                        lastName: names[names.length - 1],
-                        facebook: {
-                            id: profile.id,
-                            token: token
-                        }
-                    };
-                    // model.createObj(newUser)
-                    //     .then(function (response) {
-                    //         done(null, response);
-                    //     })
+                    return registerWithFacebook(profile, token);
                 }
+            })
+            .then(function (response) {
+                done(null, response);
             })
     }
 
@@ -118,5 +117,92 @@ module.exports = function (app) {
                     done(err, null);
                 }
             );
+    }
+
+
+
+    // ---- Register Logic ----
+    function registerLocally(user) {
+        var deferred = q.defer();
+
+        if (!newUser.picture) {
+            user.picture = {
+                is_unset: true,
+                url: null,
+                // TODO
+                //url: getRandomProfileImageUrl();
+            };
+        }
+        return deferred.promise;
+    }
+
+    function registerWithFacebook(profile, token) {
+        var deferred = q.defer();
+        model.findByEmail(profile.emails[0].value)
+            .then(function (user) {
+                // user exists
+                if (user) {
+                    // add facebook attributes to existing user
+                    user.facebook = {
+                        id:     profile.id,
+                        token:  token,
+                        picture: profile._json.picture.data
+                    };
+                    user = updateFBPicture(user);
+                    return model.updateUserById(user._id, user);
+                }
+                else {
+                    // create new facebook user
+                    var newUser = {
+                        firstName:  profile.name.givenName,
+                        middleName: profile.name.middleName,
+                        lastName:   profile.name.familyName,
+                        gender:     profile.gender,
+                        email:      profile.emails[0].value,
+
+                        facebook: {
+                            id:     profile.id,
+                            token:  token,
+                            picture: profile._json.picture.data
+                        }
+                    };
+                    newUser = updateFBPicture(newUser);
+                    return model.createUser(newUser);
+                }
+            })
+            .then(function (user) {
+                deferred.resolve(user);
+            }, function (e) {
+                deferred.reject({error: e});
+            });
+
+        return deferred.promise;
+    }
+
+    // updates picture to facebook picture if they don't have one set
+    function updateFBPicture(user) {
+        // if user has image
+        if (!user.facebook.picture.is_silhouette) {//if user has fb image
+            user.picture = {
+                is_unset: false,
+                url: user.facebook.picture.url
+            }
+        }
+        else {
+            user.picture = {
+                is_unset: true,
+                url: null
+                // TODO
+                //url: getRandomProfileImageUrl();
+            };
+        }
+        return user;
+    }
+
+    function registerWithGoogle(profile, token) {
+        var deferred = q.defer();
+
+
+        return deferred.promise;
     }
 };
