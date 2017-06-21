@@ -1,5 +1,5 @@
 <md-content layout="row">
-    <div layout flex-gt-xs="60" flex-offset-gt-xs="20">
+    <div layout flex-gt-sm="60" flex-offset-gt-sm="20">
 
         <md-card layout="column" style="padding: 30px; margin-top: 150px">
             <img class="img-responsive center-block login-card"
@@ -9,22 +9,23 @@
 
             <md-input-container class="md-icon-float md-block">
                 <!-- Use floating label instead of placeholder -->
-                <label>Name</label>
-                <md-icon md-font-set="material-icons" class="name">account_circle</md-icon>
-                <input ng-model="user.name" type="text">
+                <label>Email</label>
+                <md-icon md-font-set="material-icons" class="name">mail</md-icon>
+                <input ng-model="model.user.email" type="text">
             </md-input-container>
 
             <md-input-container class="md-icon-float md-block">
                 <!-- Use floating label instead of placeholder -->
                 <label>Password</label>
                 <md-icon md-font-set="material-icons" class="password">lock</md-icon>
-                <input ng-model="user.password" type="text">
+                <input ng-model="model.user.password" type="text">
             </md-input-container>
 
             <md-checkbox ng-model="checkbox" aria-label="Remember Me">
                 Remember Me
             </md-checkbox>
-            <md-button class="md-raised md-primary" ng-href="#!/">Login</md-button>
+            <md-button class="md-raised md-primary" ng-click="model.login()">
+                Login</md-button>
 
             <md-button layout="row"
                        class="md-raised md-primary"

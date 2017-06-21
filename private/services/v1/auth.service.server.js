@@ -22,13 +22,9 @@ module.exports = function (app, model) {
     app.get ('/auth/v1/facebook',          passport.authenticate('facebook', { scope : ['email', 'user_friends'] }));
     app.get ('/auth/v1/facebook/callback', passport.authenticate('facebook',
         {
-            successRedirect: '/',
+            successRedirect: '/#!',
             failureRedirect: '/#!/login'
-        }), test);
-
-    function test(req, res) {
-        console.log('passed');
-    }
+        }));
 
     function login(req, res) {
         var user = req.user;
@@ -46,13 +42,16 @@ module.exports = function (app, model) {
         newUser.password = bcrypt.hashSync(newUser.password);
         if (!newUser.picture) {
             // TODO: random image url
-            newUser.picture.is_unset = true;
-            //newUser.picture.url = getRandomProfileImageUrl();
+            newUser.picture = {
+                is_unset: true,
+                //url: getRandomProfileImageUrl();
+            }
         }
         model.createUser(newUser)
             .then(function (response) {
                 res.sendStatus(200);
-            }, function (error) {
+            }, function (e) {
+                console.log(e);
                 res.sendStatus(404);
             })
 
@@ -87,7 +86,6 @@ module.exports = function (app, model) {
             .then(function (res) {
                 if (res) {
                     //authenticated
-                    console.log('no then');
                     done(null, res);
                 }
                 else {
@@ -96,6 +94,8 @@ module.exports = function (app, model) {
             })
             .then(function (response) {
                 done(null, response);
+            }, function (error) {
+                console.log(error);
             })
     }
 
@@ -142,6 +142,7 @@ module.exports = function (app, model) {
             .then(function (user) {
                 // user exists
                 if (user) {
+                    console.log('found user updating');
                     // add facebook attributes to existing user
                     user.facebook = {
                         id:     profile.id,

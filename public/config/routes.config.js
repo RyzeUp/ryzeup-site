@@ -19,7 +19,9 @@
                 controllerAs: 'model'
             })
             .when('/register', {
-                templateUrl: 'views/user/templates/register.view.client.html'
+                templateUrl: 'views/user/templates/register.view.client.html',
+                controller: 'registerController',
+                controllerAs: 'model'
             })
             .when('/search', {
                 templateUrl: '/views/search.view.client.html',

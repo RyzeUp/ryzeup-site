@@ -1,15 +1,19 @@
 /**
  * Created by vcantu on 6/20/17.
  */
+const q        = require('q');
 const mongoose = require('mongoose');
 const schema   = require('./user.schema.server');
-const validate = require('./user.validation.server');
+const validations = require('./user.model.validation.server');
+const validate    = require('../model.validator.server')(validations);
 
 var model = mongoose.model('UserModel', schema);
 
 model.createUser = function (user) {
-    console.log('creating model');
-    return model.create(validate(user));
+    return validate(user)
+        .then(function(validatedUser) {
+            return model.create(validatedUser);
+        });
 };
 
 model.findUserById = function (id) {
@@ -23,11 +27,13 @@ model.findByUsername = function (username) {
 model.findByEmail = function (email) {
     return model.findOne({ email: email });
 };
-
 model.updateUserById = function (id, newUser) {
-    return model.update(
-        { _id: id },
-        { $set: validate(newUser) });
+    return validate(newUser)
+        .then(function(validatedUser) {
+            return model.update(
+                { _id: id },
+                { $set: validatedUser });
+        });
 };
 
 model.removeUserById = function (id) {
@@ -35,7 +41,7 @@ model.removeUserById = function (id) {
 };
 
 model.findUserByFacebookId = function(facebook_id) {
-    return model.findOne({ 'facbook.id': facebook_id });
+    return model.findOne({ 'facebook.id': facebook_id });
 };
 
 module.exports = model;
