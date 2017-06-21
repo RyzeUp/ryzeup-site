@@ -16,144 +16,142 @@
     </div>
 </md-toolbar>
 
-<md-nav-bar
-        md-selected-nav-item="currentChamber"
-        nav-bar-aria-label="chamber navigation links">
-    <md-nav-item md-nav-click="model.goto('senate')"
-                 name="senate">
-        Senate
-    </md-nav-item>
-    <md-nav-item md-nav-click="model.goto('house')"
-                 name="house">
-        House
-    </md-nav-item>
-</md-nav-bar>
-
-<md-list ng-if="model.currentChamber">
-    <md-list-item ng-repeat="rep in model.senate">
-        <md-card>
-            <md-card-header>
-                <md-card-avatar>
-                    <img class="md-user-avatar"
-                         src="https://theunitedstates.io/images/congress/225x275/{{senate.id}}.jpg">
-                </md-card-avatar>
-                <md-card-header-text>
-                    <span class="md-title">{{rep.first_name}} {{rep.middle_name}} {{rep.last_name}}</span>
-                    <span class="md-subhead" ng-hide="{{rep.party}}">{{rep.party}}, {{rep.state}}</span>
-                    <span class="md-subhead" ng-show="{{rep.party}}">I, {{rep.state}}</span>
-                </md-card-header-text>
-            </md-card-header>
-            <md-card-title>
-                <md-card-title-text>
-                    <span class="md-headline">Votes with party: {{rep.votes_with_party_pct}}%</span>
-                    <span class="md-subhead">
+<md-tabs md-dynamic-height md-border-bottom>
+    <md-tab label="senate">
+        <md-content class="md-padding">
+            <h1 class="md-display-2">Senate</h1>
+            <md-list>
+                <md-list-item ng-repeat="rep in model.senate">
+                    <md-card>
+                        <md-card-header>
+                            <md-card-avatar>
+                                <img class="md-user-avatar"
+                                     src="https://theunitedstates.io/images/congress/225x275/{{senate.id}}.jpg">
+                            </md-card-avatar>
+                            <md-card-header-text>
+                                <span class="md-title">{{rep.first_name}} {{rep.middle_name}} {{rep.last_name}}</span>
+                                <span class="md-subhead" ng-hide="{{rep.party}}">{{rep.party}}, {{rep.state}}</span>
+                                <span class="md-subhead" ng-show="{{rep.party}}">I, {{rep.state}}</span>
+                            </md-card-header-text>
+                        </md-card-header>
+                        <md-card-title>
+                            <md-card-title-text>
+                                <span class="md-headline">Votes with party: {{rep.votes_with_party_pct}}%</span>
+                                <span class="md-subhead">
                         Missed votes: {{rep.missed_votes_pct}}% or {{rep.missed_votes}} total missed
                     </span>
-                </md-card-title-text>
-            </md-card-title>
-            <md-card-content>
-                <p>
-                    Next election: {{rep.next_election}}
-                </p>
-            </md-card-content>
-            <md-card-actions layout="row" layout-align="start center">
-                <md-button href="{{rep.contact.facebook}}"
-                           ng-show="rep.contact.facebook"
-                           aria-label="facebook-button">
-                    <i class="mdi mdi-facebook"></i>
-                </md-button>
-                <md-button href="{{rep.contact.twitter}}"
-                           ng-show="rep.contact.twitter"
-                           aria-label="twitter-button">
-                    <i class="mdi mdi-twitter"></i>
-                </md-button>
-                <md-button href="{{rep.contact.youtube}}"
-                           ng-show="rep.contact.youtube"
-                           aria-label="youtube-button">
-                    <i class="mdi mdi-television"></i>
-                </md-button>
-                <md-button href="{{rep.contact.url}}"
-                           ng-show="rep.contact.url"
-                           aria-label="url-button">
-                    <i class="mdi mdi-domain"></i>
-                </md-button>
-                <md-button href="{{rep.contact.rss}}"
-                           ng-show="rep.contact.rss"
-                           aria-label="rss-button">
-                    <i class="mdi mdi-rss"></i>
-                </md-button>
-                <md-button href=""
-                           ng-show="rep.contact.phone"
-                           aria-label="phone-button">
-                    <i class="mdi mdi-phone"></i>
-                </md-button>
-            </md-card-actions>
-        </md-card>
-    </md-list-item>
-</md-list>
-
-<md-list ng-if="! model.currentChamber">
-    <md-list-item ng-repeat="rep in model.house">
-        <md-card>
-            <md-card-header>
-                <md-card-avatar>
-                    <img class="md-user-avatar"
-                         src="https://theunitedstates.io/images/congress/225x275/{{senate.id}}.jpg">
-                </md-card-avatar>
-                <md-card-header-text>
-                    <span class="md-title">{{rep.first_name}} {{rep.middle_name}} {{rep.last_name}}</span>
-                    <span class="md-subhead" ng-hide="{{rep.party}}">{{rep.party}}, {{rep.state}}</span>
-                    <span class="md-subhead" ng-show="{{rep.party}}">I, {{rep.state}}</span>
-                </md-card-header-text>
-            </md-card-header>
-            <md-card-title>
-                <md-card-title-text>
-                    <span class="md-headline">Votes with party: {{rep.votes_with_party_pct}}%</span>
-                    <span class="md-subhead">
+                            </md-card-title-text>
+                        </md-card-title>
+                        <md-card-content>
+                            <p>
+                                Next election: {{rep.next_election}}
+                            </p>
+                        </md-card-content>
+                        <md-card-actions layout="row" layout-align="start center">
+                            <md-button href="{{rep.contact.facebook}}"
+                                       ng-show="rep.contact.facebook"
+                                       aria-label="facebook-button">
+                                <i class="mdi mdi-facebook"></i>
+                            </md-button>
+                            <md-button href="{{rep.contact.twitter}}"
+                                       ng-show="rep.contact.twitter"
+                                       aria-label="twitter-button">
+                                <i class="mdi mdi-twitter"></i>
+                            </md-button>
+                            <md-button href="{{rep.contact.youtube}}"
+                                       ng-show="rep.contact.youtube"
+                                       aria-label="youtube-button">
+                                <i class="mdi mdi-television"></i>
+                            </md-button>
+                            <md-button href="{{rep.contact.url}}"
+                                       ng-show="rep.contact.url"
+                                       aria-label="url-button">
+                                <i class="mdi mdi-domain"></i>
+                            </md-button>
+                            <md-button href="{{rep.contact.rss}}"
+                                       ng-show="rep.contact.rss"
+                                       aria-label="rss-button">
+                                <i class="mdi mdi-rss"></i>
+                            </md-button>
+                            <md-button href=""
+                                       ng-show="rep.contact.phone"
+                                       aria-label="phone-button">
+                                <i class="mdi mdi-phone"></i>
+                            </md-button>
+                        </md-card-actions>
+                    </md-card>
+                </md-list-item>
+            </md-list>
+        </md-content>
+    </md-tab>
+    <md-tab label="house">
+        <md-content class="md-padding">
+            <h1 class="md-display-2">House</h1>
+            <md-list>
+                <md-list-item ng-repeat="rep in model.house">
+                    <md-card>
+                        <md-card-header>
+                            <md-card-avatar>
+                                <img class="md-user-avatar"
+                                     src="https://theunitedstates.io/images/congress/225x275/{{senate.id}}.jpg">
+                            </md-card-avatar>
+                            <md-card-header-text>
+                                <span class="md-title">{{rep.first_name}} {{rep.middle_name}} {{rep.last_name}}</span>
+                                <span class="md-subhead" ng-hide="{{rep.party}}">{{rep.party}}, {{rep.state}}</span>
+                                <span class="md-subhead" ng-show="{{rep.party}}">I, {{rep.state}}</span>
+                            </md-card-header-text>
+                        </md-card-header>
+                        <md-card-title>
+                            <md-card-title-text>
+                                <span class="md-headline">Votes with party: {{rep.votes_with_party_pct}}%</span>
+                                <span class="md-subhead">
                         Missed votes: {{rep.missed_votes_pct}}% or {{rep.missed_votes}} total missed
                     </span>
-                </md-card-title-text>
-            </md-card-title>
-            <md-card-content>
-                <p>
-                    Next election: {{rep.next_election}}
-                </p>
-            </md-card-content>
-            <md-card-actions layout="row" layout-align="start center">
-                <md-button href="{{rep.contact.facebook}}"
-                           ng-show="rep.contact.facebook"
-                           aria-label="facebook-button">
-                    <i class="mdi mdi-facebook"></i>
-                </md-button>
-                <md-button href="{{rep.contact.twitter}}"
-                           ng-show="rep.contact.twitter"
-                           aria-label="twitter-button">
-                    <i class="mdi mdi-twitter"></i>
-                </md-button>
-                <md-button href="{{rep.contact.youtube}}"
-                           ng-show="rep.contact.youtube"
-                           aria-label="youtube-button">
-                    <i class="mdi mdi-television"></i>
-                </md-button>
-                <md-button href="{{rep.contact.url}}"
-                           ng-show="rep.contact.url"
-                           aria-label="url-button">
-                    <i class="mdi mdi-domain"></i>
-                </md-button>
-                <md-button href="{{rep.contact.rss}}"
-                           ng-show="rep.contact.rss"
-                           aria-label="rss-button">
-                    <i class="mdi mdi-rss"></i>
-                </md-button>
-                <md-button href=""
-                           ng-show="rep.contact.phone"
-                           aria-label="phone-button">
-                    <i class="mdi mdi-phone"></i>
-                </md-button>
-            </md-card-actions>
-        </md-card>
-    </md-list-item>
-</md-list>
+                            </md-card-title-text>
+                        </md-card-title>
+                        <md-card-content>
+                            <p>
+                                Next election: {{rep.next_election}}
+                            </p>
+                        </md-card-content>
+                        <md-card-actions layout="row" layout-align="start center">
+                            <md-button href="{{rep.contact.facebook}}"
+                                       ng-show="rep.contact.facebook"
+                                       aria-label="facebook-button">
+                                <i class="mdi mdi-facebook"></i>
+                            </md-button>
+                            <md-button href="{{rep.contact.twitter}}"
+                                       ng-show="rep.contact.twitter"
+                                       aria-label="twitter-button">
+                                <i class="mdi mdi-twitter"></i>
+                            </md-button>
+                            <md-button href="{{rep.contact.youtube}}"
+                                       ng-show="rep.contact.youtube"
+                                       aria-label="youtube-button">
+                                <i class="mdi mdi-television"></i>
+                            </md-button>
+                            <md-button href="{{rep.contact.url}}"
+                                       ng-show="rep.contact.url"
+                                       aria-label="url-button">
+                                <i class="mdi mdi-domain"></i>
+                            </md-button>
+                            <md-button href="{{rep.contact.rss}}"
+                                       ng-show="rep.contact.rss"
+                                       aria-label="rss-button">
+                                <i class="mdi mdi-rss"></i>
+                            </md-button>
+                            <md-button href=""
+                                       ng-show="rep.contact.phone"
+                                       aria-label="phone-button">
+                                <i class="mdi mdi-phone"></i>
+                            </md-button>
+                        </md-card-actions>
+                    </md-card>
+                </md-list-item>
+            </md-list>
+        </md-content>
+    </md-tab>
+</md-tabs>
 
 
 <!--<nav class="nav-extended blue navbar-fixed-top">-->

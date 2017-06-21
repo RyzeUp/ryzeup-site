@@ -16,7 +16,6 @@
                         model.senate = res.members;
                         setContact(model.senate);
                         console.log(model.senate);
-                        model.currentChamber = true;
                     });
             congressService.houseReq()
                 .then(
@@ -54,15 +53,5 @@
         }
 
         init();
-
-        model.goto = function (chamber) {
-            if (chamber == 'senate') {
-                model.currentChamber = true;
-                console.log('changed to senate');
-            } else if (chamber == 'house') {
-                model.currentChamber = false;
-                console.log('changed to house');
-            }
-        };
     }
 })();
