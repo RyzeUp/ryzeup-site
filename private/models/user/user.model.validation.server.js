@@ -9,8 +9,7 @@ const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+")
 var validations = {
     validatesCanAuthenticate: validatesCanAuthenticate,
     validatesUsername: validatesUsername,
-    validatesEmail: validatesEmail,
-    validatesFacebook: validatesFacebook
+    validatesEmail: validatesEmail
 };
 module.exports = validations;
 
@@ -46,14 +45,5 @@ function validatesEmail(user) {
     if (!emailRegex.test(user.email))
         return null;
     user.email = user.email.toLowerCase();
-    return user;
-}
-
-// makes sure all of the facebook fields are present
-function validatesFacebook(user) {
-    if (!user.facebook)
-        return user;
-    if (!user.facebook.id || !user.facebook.token || !user.facebook.picture)
-        return null;
     return user;
 }

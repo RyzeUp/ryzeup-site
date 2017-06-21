@@ -26,8 +26,16 @@ module.exports = function (app, model) {
             failureRedirect: '/#!/login'
         }));
 
+    app.get ('/auth/v1/google',          passport.authenticate('google', { scope : ['email'] }));
+    app.get ('/auth/v1/google/callback', passport.authenticate('google',
+        {
+            successRedirect: '/#!',
+            failureRedirect: '/#!/login'
+        }));
+
     function login(req, res) {
         var user = req.user;
+        console.log('user logged in');
         delete user.password;// delete password before sending
         res.json(user);
     }
@@ -39,22 +47,12 @@ module.exports = function (app, model) {
 
     function register(req, res) {
         var newUser = req.body;
-        newUser.password = bcrypt.hashSync(newUser.password);
-        if (!newUser.picture) {
-            // TODO: random image url
-            newUser.picture = {
-                is_unset: true,
-                //url: getRandomProfileImageUrl();
-            }
-        }
-        model.createUser(newUser)
+        registerLocally(newUser)
             .then(function (response) {
                 res.sendStatus(200);
             }, function (e) {
-                console.log(e);
                 res.sendStatus(404);
             })
-
     }
 
     function loggedin(req, res) {
@@ -64,6 +62,7 @@ module.exports = function (app, model) {
     // ---- Set Strategies ---
     passport.use(new LocalStrategy(localStrategy));
     function localStrategy(username, password, done) {
+        console.log('logging in ', username, password);
         model.findByUsername({username: username})
             .then(function(user) {
                     if (user.username === username &&
@@ -99,6 +98,25 @@ module.exports = function (app, model) {
             })
     }
 
+    passport.use(new GoogleStrategy(authConfig.google, googleStrategy));
+    function googleStrategy(token, refreshToken, profile, done) {
+        model.findUserByGoogleId(profile.id)
+            .then(function (res) {
+                if (res) {
+                    //authenticated
+                    done(null, res);
+                }
+                else {
+                    return registerWithGoogle(profile, token);
+                }
+            })
+            .then(function (response) {
+                done(null, response);
+            }, function (error) {
+                console.log(error);
+            })
+    }
+
     // ---- Serialize and Deserialize ---
     passport.serializeUser(serializeUser);
     function serializeUser(user, done) {
@@ -123,17 +141,15 @@ module.exports = function (app, model) {
 
     // ---- Register Logic ----
     function registerLocally(user) {
-        var deferred = q.defer();
-
-        if (!newUser.picture) {
+        user.password = bcrypt.hashSync(user.password);
+        if (!user.picture) {
+            // TODO: random image url
             user.picture = {
                 is_unset: true,
-                url: null,
-                // TODO
                 //url: getRandomProfileImageUrl();
-            };
+            }
         }
-        return deferred.promise;
+        return model.createUser(user);
     }
 
     function registerWithFacebook(profile, token) {
@@ -142,14 +158,14 @@ module.exports = function (app, model) {
             .then(function (user) {
                 // user exists
                 if (user) {
-                    console.log('found user updating');
+                    console.log('found user from facebook updating');
                     // add facebook attributes to existing user
                     user.facebook = {
                         id:     profile.id,
                         token:  token,
                         picture: profile._json.picture.data
                     };
-                    user = updateFBPicture(user);
+                    user = updateFacebookPicture(user);
                     return model.updateUserById(user._id, user);
                 }
                 else {
@@ -161,13 +177,17 @@ module.exports = function (app, model) {
                         gender:     profile.gender,
                         email:      profile.emails[0].value,
 
+                        picture: {
+                            is_unset: true
+                        },
+
                         facebook: {
                             id:     profile.id,
                             token:  token,
                             picture: profile._json.picture.data
                         }
                     };
-                    newUser = updateFBPicture(newUser);
+                    newUser = updateFacebookPicture(newUser);
                     return model.createUser(newUser);
                 }
             })
@@ -181,29 +201,77 @@ module.exports = function (app, model) {
     }
 
     // updates picture to facebook picture if they don't have one set
-    function updateFBPicture(user) {
+    function updateFacebookPicture(user) {
         // if user has image
-        if (!user.facebook.picture.is_silhouette) {//if user has fb image
+        console.log(user.picture.is_unset);
+        console.log(!user.facebook.picture.is_silhouette);
+        if (user.picture.is_unset && !user.facebook.picture.is_silhouette) {//if user has fb image
+            console.log('setting new fb image');
             user.picture = {
                 is_unset: false,
                 url: user.facebook.picture.url
             }
-        }
-        else {
-            user.picture = {
-                is_unset: true,
-                url: null
-                // TODO
-                //url: getRandomProfileImageUrl();
-            };
         }
         return user;
     }
 
     function registerWithGoogle(profile, token) {
         var deferred = q.defer();
+        model.findByEmail(profile.emails[0].value)
+            .then(function (user) {
+                // user exists
+                if (user) {
+                    console.log('found user from google updating');
+                    // add facebook attributes to existing user
+                    user.google = {
+                        id:     profile.id,
+                        token:  token,
+                        picture: profile._json.image
+                    };
+                    user = updateGooglePicture(user);
+                    return model.updateUserById(user._id, user);
+                }
+                else {
+                    // create new facebook user
+                    var newUser = {
+                        firstName:  profile.name.givenName,
+                        middleName: profile.name.middleName,
+                        lastName:   profile.name.familyName,
+                        gender:     profile.gender,
+                        email:      profile.emails[0].value,
 
+                        picture: {
+                            is_unset: true
+                        },
+
+                        google: {
+                            id:     profile.id,
+                            token:  token,
+                            picture: profile._json.image
+                        }
+                    };
+                    newUser = updateGooglePicture(newUser);
+                    return model.createUser(newUser);
+                }
+            })
+            .then(function (user) {
+                deferred.resolve(user);
+            }, function (e) {
+                deferred.reject({error: e});
+            });
 
         return deferred.promise;
+    }
+
+    // updates picture to facebook picture if they don't have one set
+    function updateGooglePicture(user) {
+        // if user has image
+        if (user.picture.is_unset && !user.google.picture.isDefault) {//if user has google image
+            user.picture = {
+                is_unset: false,
+                url: user.google.picture.url
+            }
+        }
+        return user;
     }
 };

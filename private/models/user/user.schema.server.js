@@ -27,6 +27,14 @@ var userSchema = mongoose.Schema({
             url:           String
         }
     },
+    google: {
+        id:     String,
+        token:  String,
+        picture: {
+            isDefault:    Boolean,
+            url:           String
+        }
+    },
 
     _following: [
         {type: mongoose.Schema.Types.ObjectId, ref:"UserModel"}
