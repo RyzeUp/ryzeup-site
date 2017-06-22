@@ -25,6 +25,10 @@ app.use(express.static(__dirname + '/public'));
 // expose node_module libs
 app.use('/scripts', express.static(__dirname + '/node_modules/ngtweet/dist/'));
 
+
+// expose images
+app.use('/assets', express.static(__dirname + '/assets'));!
+
 require('./private/app.js')(app);
 
 var port = process.env.PORT || 3000;

@@ -12,11 +12,13 @@ module.exports = function (app) {
     mongoose.connect(connectionString);
 
     // declare models
-    var userModel = require('./models/user/user.model.server');
+    var userModel    = require('./models/user/user.model.server');
+    // var commentModel = require('./models/comment/comment.model.server');
 
     require('./services/v1/congress.service.server.js')(app);
     require('./services/v1/civicinfo.service.server.js')(app);
     require('./services/v1/bills.service.server.js')(app);
     require('./services/v1/auth.service.server.js')(app, userModel);
     require('./services/v1/user.service.server')(app, userModel);
+    require('./services/v1/comment.service.server')(app, userModel);
 };

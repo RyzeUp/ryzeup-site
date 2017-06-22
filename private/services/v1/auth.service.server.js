@@ -49,10 +49,17 @@ module.exports = function (app, model) {
         var newUser = req.body;
         registerLocally(newUser)
             .then(function (response) {
-                res.sendStatus(200);
+                req.login(response, function (err) {
+                    if (err) {
+                        res.status(400).send(err);
+                    }
+                    else {
+                        res.json(response);
+                    }
+                });
             }, function (e) {
-                res.sendStatus(404);
-            })
+                console.log(e);
+            });
     }
 
     function loggedin(req, res) {
@@ -137,16 +144,13 @@ module.exports = function (app, model) {
             );
     }
 
-
-
     // ---- Register Logic ----
     function registerLocally(user) {
         user.password = bcrypt.hashSync(user.password);
         if (!user.picture) {
-            // TODO: random image url
             user.picture = {
                 is_unset: true,
-                //url: getRandomProfileImageUrl();
+                url: getRandomProfileImageUrl(user)
             }
         }
         return model.createUser(user);
@@ -273,5 +277,11 @@ module.exports = function (app, model) {
             }
         }
         return user;
+    }
+
+
+    function getRandomProfileImageUrl(user) {
+        // TODO: update this later
+        return '/assets/images/profile-images/default-profile.png';
     }
 };

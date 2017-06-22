@@ -3,8 +3,8 @@
  */
 var mongoose = require('mongoose');
 var userSchema = mongoose.Schema({
-    username: { type: String },
-    username_lower: { type: String, unique: true },
+    // username: { type: String },
+    // username_lower: { type: String, unique: true },
     password: { type: String },
     email: { type: String, require: true, unique: true},
 
@@ -18,7 +18,7 @@ var userSchema = mongoose.Schema({
         url:      String
     },
 
-    dateCreated: {type: Date, default: Date.now},
+    dateCreated: { type: Date, default: Date.now },
     facebook: {
         id:     String,
         token:  String,
@@ -37,7 +37,7 @@ var userSchema = mongoose.Schema({
     },
 
     _following: [
-        {type: mongoose.Schema.Types.ObjectId, ref:"UserModel"}
+        { type: mongoose.Schema.Types.ObjectId, ref:"UserModel" }
     ]
 
 }, { collection: "user" });

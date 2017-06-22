@@ -1,0 +1,19 @@
+/**
+ * Created by vcantu on 6/20/17.
+ */
+var mongoose = require('mongoose');
+var commentSchema = mongoose.Schema({
+    _discussion: { type: mongoose.Schema.Types.ObjectId, ref:"DiscussionModel" },
+    _parent:     { type: mongoose.Schema.Types.ObjectId, ref:"CommentModel" },
+    dateCreated: { type: Date, default: Date.now },
+    author:     {
+        _id: { type: mongoose.Schema.Types.ObjectId, ref:"UserModel" },
+        name:      String,
+        image_url: String
+        // TODO: Other user information
+    },
+    _text: String
+
+
+}, { collection: "comment" });
+module.exports = commentSchema;
