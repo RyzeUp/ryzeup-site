@@ -34,8 +34,8 @@ module.exports = function (app, model) {
         }));
 
     function login(req, res) {
+        console.log()
         var user = req.user;
-        console.log('user logged in');
         delete user.password;// delete password before sending
         res.json(user);
     }
@@ -63,7 +63,7 @@ module.exports = function (app, model) {
     }
 
     function loggedin(req, res) {
-        res.send(req.isAuthenticated() ? req.user : 401);
+        res.send(req.isAuthenticated() ? req.user : '0');
     }
 
     // ---- Set Strategies ---

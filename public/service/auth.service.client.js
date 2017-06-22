@@ -16,7 +16,7 @@
         };
 
         function login(user) {
-            return $http.post('/auth/v1/register', user)
+            return $http.post('/auth/v1/login', user)
         }
 
         function register(user) {

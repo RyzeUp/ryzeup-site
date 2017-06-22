@@ -26,7 +26,27 @@
             .when('/search', {
                 templateUrl: '/views/search.view.client.html',
                 controller: 'searchController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: {
+                    loggedIn: checkLoggedIn
+                }
             });
     }
+
+    var checkLoggedIn = function($q, $timeout, $http, $location, $rootScope) {
+        var deferred = $q.defer();
+        $http.get('/auth/v1/loggedin')
+            .then(function(user) {
+                console.log('response', user);
+                $rootScope.errorMessage = null;
+                if (user.data !== '0') {
+                    $rootScope.currentUser = user.data;
+                    deferred.resolve(user.data);
+                } else {
+                    deferred.reject();
+                    $location.url('/login');
+                }
+            });
+        return deferred.promise;
+    };
 })();
