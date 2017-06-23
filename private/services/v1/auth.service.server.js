@@ -45,6 +45,7 @@ module.exports = function (app, model) {
     }
 
     function register(req, res) {
+        console.log(req);
         var newUser = req.body;
         registerLocally(newUser)
             .then(function (response) {

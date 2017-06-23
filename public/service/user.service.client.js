@@ -11,7 +11,7 @@
         return {
             unregister:     unregister,
             updateUser:     updateUser,
-            updatePassword: updatePassword,
+            updatePassword: updatePassword
         };
 
         function unregister(user) {
@@ -23,7 +23,10 @@
         }
 
         function updatePassword(user, newPassword) {
-            return $http.post('/api/v1/user/newpass/' + user._id, newPassword);
+            var newObj = {
+              new: newPassword
+            };
+            return $http.post('/api/v1/user/newpass/' + user._id, newObj);
         }
     }
 })();

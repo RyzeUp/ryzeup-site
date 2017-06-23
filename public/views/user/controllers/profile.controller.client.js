@@ -40,7 +40,9 @@
         };
 
         model.changePassword = function () {
+            console.log(model.newPassword, '===', model.newPassword2);
             if (model.newPassword === model.newPassword2) {
+                console.log('sending new pass');
                 userService.updatePassword(model.user, model.newPassword)
                     .then(function (res) {
                         console.log(res);

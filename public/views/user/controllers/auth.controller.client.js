@@ -27,7 +27,7 @@
         var model = this;
 
         model.register = function () {
-            if ($scope.registerForm.valid) {
+            if ($scope.registerForm.$valid) {
                 authService.register(model.user)
                     .then(function (response) {
                         $location.url('/');

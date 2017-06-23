@@ -3,6 +3,7 @@
  */
 const q = require('q');
 const https = require('https');
+const bcrypt = require('bcrypt-nodejs');
 
 module.exports = function (app, model) {
 
@@ -49,10 +50,26 @@ module.exports = function (app, model) {
         var userId = req.params['id'];
         if (req.isAuthenticated() && (req.user._id + '') === userId) {
             // allow request
-            model.updateUserById(userId, req.body)
+            model.updateUserPassword(userId, req.body.new)// TODO: bcrypt
                 .then(function (user) {
-                    cleanUser(user);
-                    res.json(user);
+                    res.sendStatus(200);
+                }, function (e) {
+                    res.sendStatus(404);
+                })
+        }
+        else {
+            res.sendStatus(401);
+        }
+    }
+
+    function unregisterReq(req, res) {
+        console.log('unregister request for', req.user._id);
+        var userId = req.params['id'];
+        if (req.isAuthenticated() && (req.user._id + '') === userId) {
+            // allow request
+            model.removeUserById(userId.body)
+                .then(function (user) {
+                    res.sendStatus(200);
                 }, function (e) {
                     res.sendStatus(404);
                 })

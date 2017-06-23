@@ -36,8 +36,15 @@ model.updateUserById = function (id, newUser) {
         });
 };
 
+model.updateUserPassword = function (id, newPass) {
+    return model.update(
+                { _id: id },
+                { password: newPass });
+};
+
 model.removeUserById = function (id) {
-    return model.remove({ _id: id })
+    console.log('model removing..');
+    return model.remove({ _id: id }).exec();
 };
 
 model.findUserByFacebookId = function(facebook_id) {

@@ -103,7 +103,7 @@
                 <label>New Password</label>
                 <md-icon md-font-set="material-icons">lock</md-icon>
                 <input ng-model="model.newPassword"
-                       required min="8" name="newPassword" type="password">
+                       name="newPassword" type="password">
                 <div ng-messages="registerForm.newPassword.$error">
                     <div ng-message="required">Password required.</div>
                     <div ng-message="min">Must be greater than 8 characters</div>
@@ -115,13 +115,12 @@
                 <label>Retype New Password</label>
                 <md-icon md-font-set="material-icons">lock</md-icon>
                 <input ng-model="model.newPassword2"
-                       required compare-to="model.newPassword2" name="newPassword2" type="password">
+                       compare-to="model.newPassword" name="newPassword2" type="password">
                 <div ng-messages="registerForm.newPassword2.$error" multiple md-auto-hide="false">
                     <div ng-message="required">Password required.</div>
                     <div ng-message="compareTo">Passwords must match</div>
                 </div>
             </md-input-container>
-
 
             <md-card-actions layout="row" layout-align="end center">
                 <md-button class="md-warn" ng-click="model.changePassword()">Change Password</md-button>
