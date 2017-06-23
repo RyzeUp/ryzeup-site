@@ -6,7 +6,8 @@
         .module('RU')
         .controller('homeController', homeController);
 
-    function homeController(congressService) {
+    function homeController($location,
+                            congressService) {
         var model = this;
 
         function init() {
@@ -24,7 +25,6 @@
                         setContact(model.house);
                         console.log(model.house);
                     });
-
 
             function setContact(representatives) {
                 representatives.forEach(function (rep) {
@@ -53,5 +53,13 @@
         }
 
         init();
+
+        model.showPhone = function (number) {
+            alert(number);
+        };
+
+        model.goToDetailsPage = function (repId) {
+            $location.url('/representative/details/' + repId);
+        };
     }
 })();

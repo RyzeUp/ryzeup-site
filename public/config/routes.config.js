@@ -13,6 +13,11 @@
                 controller: 'homeController',
                 controllerAs: 'model'
             })
+            .when('/representative/details/:repid', {
+                templateUrl: 'views/representative/templates/representative.view.client.html',
+                controller: 'representativeController',
+                controllerAs: 'model'
+            })
             .when('/login', {
                 templateUrl: 'views/user/templates/login.view.client.html',
                 controller: 'loginController',
@@ -32,7 +37,7 @@
                 }
             })
             .when('/search', {
-                templateUrl: '/views/search.view.client.html',
+                templateUrl: 'views/search.view.client.html',
                 controller: 'searchController',
                 controllerAs: 'model',
                 resolve: {
@@ -41,10 +46,10 @@
             });
     }
 
-    var checkLoggedIn = function($q, $timeout, $http, $location, $rootScope) {
+    var checkLoggedIn = function ($q, $timeout, $http, $location, $rootScope) {
         var deferred = $q.defer();
         $http.get('/auth/v1/loggedin')
-            .then(function(user) {
+            .then(function (user) {
                 console.log('response', user);
                 $rootScope.errorMessage = null;
                 if (user.data !== '0') {

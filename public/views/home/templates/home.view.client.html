@@ -21,8 +21,9 @@
         <md-content class="md-padding">
             <h1 class="md-display-2">Senate</h1>
             <md-list>
-                <md-list-item ng-repeat="rep in model.senate | limitTo:15">
-                    <md-card>
+                <md-list-item ng-repeat="rep in model.senate | limitTo: 25">
+                    <md-card class="{{rep.party}}"
+                             ng-click="model.goToDetailsPage(rep.id)">
                         <md-card-header>
                             <md-card-avatar>
                                 <img class="md-user-avatar"
@@ -30,16 +31,18 @@
                             </md-card-avatar>
                             <md-card-header-text>
                                 <span class="md-title">{{rep.first_name}} {{rep.middle_name}} {{rep.last_name}}</span>
-                                <span class="md-subhead" ng-hide="{{rep.party}}">{{rep.party}}, {{rep.state}}</span>
-                                <span class="md-subhead" ng-show="{{rep.party}}">I, {{rep.state}}</span>
+                                <span class="md-subhead"
+                                      ng-if="rep.party && rep.party !== 'I'">{{rep.party}}, {{rep.state}}
+                                </span>
+                                <span class="md-subhead"
+                                      ng-if="rep.party == null || rep.party == undefined || rep.party == 'I'">I, {{rep.state}}
+                                </span>
                             </md-card-header-text>
                         </md-card-header>
                         <md-card-title>
                             <md-card-title-text>
                                 <span class="md-headline">Votes with party: {{rep.votes_with_party_pct}}%</span>
-                                <span class="md-subhead">
-                        Missed votes: {{rep.missed_votes_pct}}% or {{rep.missed_votes}} total missed
-                    </span>
+                                <span class="md-subhead">Missed votes: {{rep.missed_votes_pct}}% or {{rep.missed_votes}} total missed</span>
                             </md-card-title-text>
                         </md-card-title>
                         <md-card-content>
@@ -73,8 +76,8 @@
                                        aria-label="rss-button">
                                 <i class="mdi mdi-rss"></i>
                             </md-button>
-                            <md-button href=""
-                                       ng-show="rep.contact.phone"
+                            <md-button ng-show="rep.contact.phone"
+                                       ng-click="model.showPhone(rep.contact.phone)"
                                        aria-label="phone-button">
                                 <i class="mdi mdi-phone"></i>
                             </md-button>
@@ -84,12 +87,13 @@
             </md-list>
         </md-content>
     </md-tab>
+
     <md-tab label="house">
         <md-content class="md-padding">
             <h1 class="md-display-2">House</h1>
             <md-list>
-                <md-list-item ng-repeat="rep in model.house | limitTo:15">
-                    <md-card>
+                <md-list-item ng-repeat="rep in model.house | limitTo:25">
+                    <md-card ng-click="model.goToDetailsPage(rep.id)">
                         <md-card-header>
                             <md-card-avatar>
                                 <img class="md-user-avatar"
@@ -140,8 +144,8 @@
                                        aria-label="rss-button">
                                 <i class="mdi mdi-rss"></i>
                             </md-button>
-                            <md-button href=""
-                                       ng-show="rep.contact.phone"
+                            <md-button ng-show="rep.contact.phone"
+                                       ng-click="model.showPhone(rep.contact.phone)"
                                        aria-label="phone-button">
                                 <i class="mdi mdi-phone"></i>
                             </md-button>
