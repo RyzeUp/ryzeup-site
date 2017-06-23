@@ -4,26 +4,56 @@
 (function () {
     angular
         .module('RU')
-        .controller('loginController', loginController);
+        .controller('loginController', loginController)
+        .controller('registerController', registerController)
+        .directive('compareTo', compareTo);
 
-    function loginController(authService, $location) {
+    function loginController(authService, $location, $scope) {
         var model = this;
 
         model.login = function () {
-            authService.login(model.user);
-            $location.route('#!/')
+            if ($scope.loginForm.$valid) {
+                authService.login(model.user)
+                    .then(function (response) {
+                        $location.url('/');
+                    }, function (error) {
+                        console.log('invalid username of password')
+                    });
+            }
         }
     }
 
-    angular
-        .module('RU')
-        .controller('registerController', registerController);
-
-    function registerController(authService, $location) {
+    function registerController(authService, $location, $scope) {
         var model = this;
 
         model.register = function () {
-            authService.register(model.user);
+            if ($scope.registerForm.valid) {
+                authService.register(model.user)
+                    .then(function (response) {
+                        $location.url('/');
+                    }, function (error) {
+                        console.log('some invalid fields');
+                    });
+            }
         }
+    }
+
+    function compareTo() {
+        return {
+            require: "ngModel",
+            scope: {
+                otherModelValue: "=compareTo"
+            },
+            link: function(scope, element, attributes, ngModel) {
+
+                ngModel.$validators.compareTo = function(modelValue) {
+                    return modelValue == scope.otherModelValue;
+                };
+
+                scope.$watch("otherModelValue", function() {
+                    ngModel.$validate();
+                });
+            }
+        };
     }
 })();

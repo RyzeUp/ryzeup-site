@@ -3,5 +3,5 @@
  */
 (function () {
     angular
-        .module('RU', ['ngRoute', 'ngMaterial', 'ngMdIcons', 'ngtweet']);
+        .module('RU', ['ngRoute', 'ngMaterial', 'ngMdIcons', 'ngtweet', 'ngMessages']);
 })();

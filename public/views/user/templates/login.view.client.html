@@ -6,26 +6,40 @@
                  style="margin-bottom: 20px;"
                  src="/assets/logos/RyzeUp-logo-noback.png">
 
+            <form name="loginForm" layout="column">
+                <md-input-container class="md-icon-float md-block">
+                    <!-- Use floating label instead of placeholder -->
+                    <label>Email</label>
+                    <md-icon md-font-set="material-icons" class="name">mail</md-icon>
+                    <input required ng-pattern="/^.+@.+\..+$/"
+                           ng-model="model.user.email" name="email" type="text">
+                    <div ng-messages="loginForm.email.$error" multiple md-auto-hide="false">
+                        <div ng-message="required">You must enter a password.</div>
+                        <div ng-message="pattern">
+                            Must be a valid email address
+                        </div>
+                    </div>
+                </md-input-container>
 
-            <md-input-container class="md-icon-float md-block">
-                <!-- Use floating label instead of placeholder -->
-                <label>Email</label>
-                <md-icon md-font-set="material-icons" class="name">mail</md-icon>
-                <input ng-model="model.user.email" type="text">
-            </md-input-container>
+                <md-input-container class="md-icon-float md-block">
+                    <!-- Use floating label instead of placeholder -->
+                    <label>Password</label>
+                    <md-icon md-font-set="material-icons" class="password">lock</md-icon>
+                    <input required
+                           ng-model="model.user.password" name="password" type="password">
+                    <div ng-messages="loginForm.password.$error">
+                        <div ng-message="required">You must enter a password.</div>
+                    </div>
+                </md-input-container>
 
-            <md-input-container class="md-icon-float md-block">
-                <!-- Use floating label instead of placeholder -->
-                <label>Password</label>
-                <md-icon md-font-set="material-icons" class="password">lock</md-icon>
-                <input ng-model="model.user.password" type="text">
-            </md-input-container>
+                <md-checkbox ng-model="checkbox" aria-label="Remember Me">
+                    Remember Me
+                </md-checkbox>
 
-            <md-checkbox ng-model="checkbox" aria-label="Remember Me">
-                Remember Me
-            </md-checkbox>
-            <md-button class="md-raised md-primary" ng-click="model.login()">
-                Login</md-button>
+                <md-button class="md-raised md-primary"
+                           ng-click="model.login()" type="submit">
+                    Login</md-button>
+            </form>
 
             <md-button layout="row"
                        class="md-raised md-primary"

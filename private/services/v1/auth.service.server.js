@@ -34,7 +34,6 @@ module.exports = function (app, model) {
         }));
 
     function login(req, res) {
-        console.log()
         var user = req.user;
         delete user.password;// delete password before sending
         res.json(user);
@@ -42,7 +41,7 @@ module.exports = function (app, model) {
 
     function logout(req, res) {
         req.logout();
-        res.send(200);
+        res.sendStatus(200);
     }
 
     function register(req, res) {
@@ -67,23 +66,27 @@ module.exports = function (app, model) {
     }
 
     // ---- Set Strategies ---
-    passport.use(new LocalStrategy(localStrategy));
-    function localStrategy(username, password, done) {
-        console.log('logging in ', username, password);
-        model.findByUsername({username: username})
+
+    passport.use(new LocalStrategy({
+        usernameField: 'email',
+        passwordField: 'password'
+    }, localStrategy));
+    function localStrategy(email, password, done) {
+        model.findByEmail(email)
             .then(function(user) {
-                    if (user.username === username &&
-                        bcrypt.compareSync(password, user.password)) {
-                        delete user.password;// delete password before sending
-                        return done(null, user);
-                    }
-                    else {
-                        return done(null, false);
-                    }
-                },
-                function(err) {
-                    if (err) { return done(err); }
-                });
+                if (user && user.email === email &&
+                    bcrypt.compareSync(password, user.password)) {
+                    delete user.password;// delete password before sending
+                    return done(null, user);
+                }
+                else {
+                    return done(null, false);
+                }
+            },
+            function(err) {
+                // not found
+                if (err) { return done(err); }
+            });
     }
 
     passport.use(new FacebookStrategy(authConfig.facebook, facebookStrategy));
