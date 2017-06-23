@@ -16,11 +16,6 @@
                     loggedIn: checkLoggedIn
                 }
             })
-            .when('/representative/details/:repid', {
-                templateUrl: 'views/representative/templates/representative.view.client.html',
-                controller: 'representativeController',
-                controllerAs: 'model'
-            })
             .when('/login', {
                 templateUrl: 'views/user/templates/login.view.client.html',
                 controller: 'loginController',
@@ -31,6 +26,14 @@
                 controller: 'registerController',
                 controllerAs: 'model'
             })
+            .when('/profile', {
+                templateUrl: 'views/user/templates/profile.view.client.html',
+                controller: 'profileController',
+                controllerAs: 'model',
+                resolve: {
+                    loggedIn: checkLoggedIn
+                }
+            })
             .when('/bills', {
                 templateUrl: '/views/.view.client.html',
                 controller: 'searchController',
@@ -38,6 +41,11 @@
                 resolve: {
                     loggedIn: checkLoggedIn
                 }
+            })
+            .when('/representative/details/:repid', {
+                templateUrl: 'views/representative/templates/representative.view.client.html',
+                controller: 'representativeController',
+                controllerAs: 'model'
             })
             .when('/search', {
                 templateUrl: 'views/search.view.client.html',

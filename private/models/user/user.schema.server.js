@@ -11,7 +11,12 @@ var userSchema = mongoose.Schema({
     firstName:  String,
     middleName: String,
     lastName:   String,
-    gender:     { type: String },
+    gender:     { type: String }, //TODO: one of...
+
+    address:  String,
+    city:      String,
+    state:     String,
+    zipCode:   String,
 
     picture: {
         is_unset: Boolean,

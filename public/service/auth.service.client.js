@@ -9,9 +9,9 @@
     function authService($http) {
 
         return {
-            login:    login,
+            login: login,
             register: register,
-            logout:   logout,
+            logout: logout,
             loggedIn: loggedIn
         };
 
