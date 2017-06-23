@@ -23,6 +23,14 @@
                 controller: 'registerController',
                 controllerAs: 'model'
             })
+            .when('/bills', {
+                templateUrl: '/views/.view.client.html',
+                controller: 'searchController',
+                controllerAs: 'model',
+                resolve: {
+                    loggedIn: checkLoggedIn
+                }
+            })
             .when('/search', {
                 templateUrl: '/views/search.view.client.html',
                 controller: 'searchController',

@@ -6,6 +6,11 @@
                  style="margin-bottom: 20px;"
                  src="/assets/logos/RyzeUp-logo-noback.png">
 
+            <md-card md-whiteframe="5" md-colors="{ background: 'deep-orange-500' }"
+                 layout-padding style="margin-bottom: 20px"
+                 ng-show="model.message">
+                <span flex="100">{{model.message}}</span></md-card>
+
             <form name="loginForm" layout="column">
                 <md-input-container class="md-icon-float md-block">
                     <!-- Use floating label instead of placeholder -->

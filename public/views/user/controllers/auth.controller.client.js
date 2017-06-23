@@ -17,7 +17,7 @@
                     .then(function (response) {
                         $location.url('/');
                     }, function (error) {
-                        console.log('invalid username of password')
+                        model.message = 'Invalid username or password. Please try again';
                     });
             }
         }
