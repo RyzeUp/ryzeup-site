@@ -59,6 +59,7 @@ md-card md-card-header md-card-avatar .md-user-avatar {
     height: 40px;
     border-radius: 50%;
 }
+
 .profile-image {
     height: 40px;
 }
@@ -79,4 +80,12 @@ md-card md-card-header md-card-avatar .md-user-avatar {
     /*box-sizing: border-box;*/
     height: 400px;
     /*padding-top: 10px;*/
+}
+
+.rep-details {
+    margin-left: 40px;
+}
+
+.md-card-image {
+    max-width: 100%;
 }
