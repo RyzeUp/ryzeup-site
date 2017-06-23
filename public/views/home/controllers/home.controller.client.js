@@ -59,7 +59,7 @@
         };
 
         model.goToDetailsPage = function (repId) {
-            $location.url('/congress/details/' + repId);
+            $location.url('/representative/details/' + repId);
         };
     }
 })();
