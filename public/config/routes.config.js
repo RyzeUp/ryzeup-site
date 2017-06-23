@@ -13,13 +13,18 @@
                 controller: 'homeController',
                 controllerAs: 'model'
             })
+            .when('/representative/details/:repid', {
+                templateUrl: '/views/representative/templates/representative.view.client.html',
+                controller: 'representativeController',
+                controllerAs: 'model'
+            })
             .when('/login', {
-                templateUrl: 'views/user/templates/login.view.client.html',
+                templateUrl: '/views/user/templates/login.view.client.html',
                 controller: 'loginController',
                 controllerAs: 'model'
             })
             .when('/register', {
-                templateUrl: 'views/user/templates/register.view.client.html',
+                templateUrl: '/views/user/templates/register.view.client.html',
                 controller: 'registerController',
                 controllerAs: 'model'
             })
@@ -33,10 +38,10 @@
             });
     }
 
-    var checkLoggedIn = function($q, $timeout, $http, $location, $rootScope) {
+    var checkLoggedIn = function ($q, $timeout, $http, $location, $rootScope) {
         var deferred = $q.defer();
         $http.get('/auth/v1/loggedin')
-            .then(function(user) {
+            .then(function (user) {
                 console.log('response', user);
                 $rootScope.errorMessage = null;
                 if (user.data !== '0') {

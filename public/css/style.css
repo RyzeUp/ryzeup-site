@@ -22,6 +22,21 @@
     min-width: 10px;
 }
 
+.D:hover {
+    background: #BBDEFB;
+    opacity: 0.85;
+}
+
+.R:hover {
+    background: #FFCDD2;
+    opacity: 0.85;
+}
+
+.I:hover {
+    background: #ffffa8;
+    opacity: 0.85;
+}
+
 md-card md-card-title {
     padding-top: 5px;
 }
