@@ -48,7 +48,7 @@
                 controllerAs: 'model'
             })
             .when('/search', {
-                templateUrl: 'views/search.view.client.html',
+                templateUrl: 'views/search/templates/search.view.client.html',
                 controller: 'searchController',
                 controllerAs: 'model',
                 resolve: {
@@ -60,8 +60,8 @@
                 controller: 'adminController',
                 controllerAs: 'model',
                 resolve: {
-                    loggedIn: checkLoggedIn,
-                    isAdmin: checkAdmin
+                    loggedIn: checkLoggedIn
+                    //isAdmin: checkAdmin
                 }
             });
     }
