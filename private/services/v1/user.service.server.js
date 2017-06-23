@@ -6,10 +6,10 @@ const https = require('https');
 
 module.exports = function (app, model) {
 
-    app.get ('/api/v1/user/:id', userReq);
+    app.get('/api/v1/user/:id', userReq);
     app.post('/api/v1/user/update/:id', updateReq);
     app.post('/api/v1/user/newpass/:id', newpassReq);
-    app.get ('/api/v1/user/unregister/:id', unregisterReq);
+    app.get('/api/v1/user/unregister/:id', unregisterReq);
 
     function userReq(req, res) {
         var userId = req.params['id'];
