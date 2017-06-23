@@ -54,6 +54,15 @@
                 resolve: {
                     loggedIn: checkLoggedIn
                 }
+            })
+            .when('/admin', {
+                templateUrl: 'views/admin/templates/admin.view.client.html',
+                controller: 'adminController',
+                controllerAs: 'model',
+                resolve: {
+                    loggedIn: checkLoggedIn,
+                    isAdmin: checkAdmin
+                }
             });
     }
 
