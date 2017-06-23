@@ -18,7 +18,7 @@
         };
 
         function introduced(chamber) {
-            var url = 'api/v1/bills/recent/introduced' + chamber;
+            var url = 'api/v1/bills/recent/introduced/' + chamber;
             return $http.get(url)
                 .then(function (res) {
                     console.log(res);
@@ -26,7 +26,7 @@
                 })
         }
         function updated(chamber) {
-            var url = 'api/v1/bills/recent/updated' + chamber;
+            var url = 'api/v1/bills/recent/updated/' + chamber;
             return $http.get(url)
                 .then(function (res) {
                     console.log(res);
@@ -34,7 +34,7 @@
                 })
         }
         function passed(chamber) {
-            var url = 'api/v1/bills/recent/passed' + chamber;
+            var url = 'api/v1/bills/recent/passed/' + chamber;
             return $http.get(url)
                 .then(function (res) {
                     console.log(res);

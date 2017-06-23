@@ -7,7 +7,8 @@
         .controller('homeController', homeController);
 
     function homeController($location,
-                            congressService) {
+                            congressService,
+                            billsService) {
         var model = this;
 
         function init() {
@@ -50,8 +51,14 @@
                     rep.contact = contact;
                 });
             }
-        }
 
+            billsService.updated('house')
+                .then(function (res) {
+                    console.log(res.bills);
+                    model.bills = res.bills;
+                })
+
+        }
         init();
 
         model.showPhone = function (number) {
@@ -61,5 +68,6 @@
         model.goToDetailsPage = function (repId) {
             $location.url('/representative/details/' + repId);
         };
+
     }
 })();

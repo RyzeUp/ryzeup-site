@@ -1,215 +1,42 @@
-<md-toolbar class="md-hue-2">
-    <div class="md-toolbar-tools">
-        <md-button class="md-icon-button" aria-label="Settings" ng-disabled="true">
-            <md-icon md-font-set="material-icons">menu</md-icon>
-        </md-button>
+<ru-navbar model="model"></ru-navbar>
 
-        <h2 flex md-truncate>Ryze Up</h2>
-
-        <md-button class="md-icon-button" aria-label="Favorite">
-            <md-icon md-font-set="material-icons">favorite</md-icon>
-        </md-button>
-
-        <md-button class="md-icon-button" aria-label="More">
-            <md-icon md-font-set="material-icons">more_vert</md-icon>
-        </md-button>
-    </div>
-</md-toolbar>
-
-<md-tabs md-dynamic-height md-border-bottom>
+<md-tabs style="margin-top: 48px;" md-dynamic-height md-border-bottom>
     <md-tab label="senate">
-        <md-content class="md-padding">
+        <md-content class="md-padding"
+                    flex-gt-sm="70" flex-offset-gt-sm="15">
             <h1 class="md-display-2">Senate</h1>
             <md-list>
-                <md-list-item ng-repeat="rep in model.senate | limitTo: 25">
-                    <md-card class="{{rep.party}}"
-                             ng-click="model.goToDetailsPage(rep.id)">
-                        <md-card-header>
-                            <md-card-avatar>
-                                <img class="md-user-avatar"
-                                     src="https://theunitedstates.io/images/congress/225x275/{{rep.id}}.jpg">
-                            </md-card-avatar>
-                            <md-card-header-text>
-                                <span class="md-title">{{rep.first_name}} {{rep.middle_name}} {{rep.last_name}}</span>
-                                <span class="md-subhead"
-                                      ng-if="rep.party && rep.party !== 'I'">{{rep.party}}, {{rep.state}}
-                                </span>
-                                <span class="md-subhead"
-                                      ng-if="rep.party == null || rep.party == undefined || rep.party == 'I'">I, {{rep.state}}
-                                </span>
-                            </md-card-header-text>
-                        </md-card-header>
-                        <md-card-title>
-                            <md-card-title-text>
-                                <span class="md-headline">Votes with party: {{rep.votes_with_party_pct}}%</span>
-                                <span class="md-subhead">Missed votes: {{rep.missed_votes_pct}}% or {{rep.missed_votes}} total missed</span>
-                            </md-card-title-text>
-                        </md-card-title>
-                        <md-card-content>
-                            <p>
-                                Next election: {{rep.next_election}}
-                            </p>
-                        </md-card-content>
-                        <md-card-actions layout="row" layout-align="start center">
-                            <md-button href="{{rep.contact.facebook}}"
-                                       ng-show="rep.contact.facebook"
-                                       aria-label="facebook-button">
-                                <i class="mdi mdi-facebook"></i>
-                            </md-button>
-                            <md-button href="{{rep.contact.twitter}}"
-                                       ng-show="rep.contact.twitter"
-                                       aria-label="twitter-button">
-                                <i class="mdi mdi-twitter"></i>
-                            </md-button>
-                            <md-button href="{{rep.contact.youtube}}"
-                                       ng-show="rep.contact.youtube"
-                                       aria-label="youtube-button">
-                                <i class="mdi mdi-youtube-play"></i>
-                            </md-button>
-                            <md-button href="{{rep.contact.url}}"
-                                       ng-show="rep.contact.url"
-                                       aria-label="url-button">
-                                <i class="mdi mdi-earth"></i>
-                            </md-button>
-                            <md-button href="{{rep.contact.rss}}"
-                                       ng-show="rep.contact.rss"
-                                       aria-label="rss-button">
-                                <i class="mdi mdi-rss"></i>
-                            </md-button>
-                            <md-button ng-show="rep.contact.phone"
-                                       ng-click="model.showPhone(rep.contact.phone)"
-                                       aria-label="phone-button">
-                                <i class="mdi mdi-phone"></i>
-                            </md-button>
-                        </md-card-actions>
-                    </md-card>
+                <md-list-item ng-repeat="rep in model.senate | limitTo: 15">
+                    <representative-item model="model" representative="rep"
+                                         flex="100"></representative-item>
                 </md-list-item>
             </md-list>
         </md-content>
     </md-tab>
 
     <md-tab label="house">
-        <md-content class="md-padding">
+        <md-content class="md-padding"
+                    flex-gt-sm="70" flex-offset-gt-sm="15">
             <h1 class="md-display-2">House</h1>
             <md-list>
-                <md-list-item ng-repeat="rep in model.house | limitTo:25">
-                    <md-card ng-click="model.goToDetailsPage(rep.id)">
-                        <md-card-header>
-                            <md-card-avatar>
-                                <img class="md-user-avatar"
-                                     src="https://theunitedstates.io/images/congress/225x275/{{rep.id}}.jpg">
-                            </md-card-avatar>
-                            <md-card-header-text>
-                                <span class="md-title">{{rep.first_name}} {{rep.middle_name}} {{rep.last_name}}</span>
-                                <span class="md-subhead" ng-hide="{{rep.party}}">{{rep.party}}, {{rep.state}}</span>
-                                <span class="md-subhead" ng-show="{{rep.party}}">I, {{rep.state}}</span>
-                            </md-card-header-text>
-                        </md-card-header>
-                        <md-card-title>
-                            <md-card-title-text>
-                                <span class="md-headline">Votes with party: {{rep.votes_with_party_pct}}%</span>
-                                <span class="md-subhead">
-                        Missed votes: {{rep.missed_votes_pct}}% or {{rep.missed_votes}} total missed
-                    </span>
-                            </md-card-title-text>
-                        </md-card-title>
-                        <md-card-content>
-                            <p>
-                                Next election: {{rep.next_election}}
-                            </p>
-                        </md-card-content>
-                        <md-card-actions layout="row" layout-align="start center">
-                            <md-button href="{{rep.contact.facebook}}"
-                                       ng-show="rep.contact.facebook"
-                                       aria-label="facebook-button">
-                                <i class="mdi mdi-facebook"></i>
-                            </md-button>
-                            <md-button href="{{rep.contact.twitter}}"
-                                       ng-show="rep.contact.twitter"
-                                       aria-label="twitter-button">
-                                <i class="mdi mdi-twitter"></i>
-                            </md-button>
-                            <md-button href="{{rep.contact.youtube}}"
-                                       ng-show="rep.contact.youtube"
-                                       aria-label="youtube-button">
-                                <i class="mdi mdi-youtube-play"></i>
-                            </md-button>
-                            <md-button href="{{rep.contact.url}}"
-                                       ng-show="rep.contact.url"
-                                       aria-label="url-button">
-                                <i class="mdi mdi-earth"></i>
-                            </md-button>
-                            <md-button href="{{rep.contact.rss}}"
-                                       ng-show="rep.contact.rss"
-                                       aria-label="rss-button">
-                                <i class="mdi mdi-rss"></i>
-                            </md-button>
-                            <md-button ng-show="rep.contact.phone"
-                                       ng-click="model.showPhone(rep.contact.phone)"
-                                       aria-label="phone-button">
-                                <i class="mdi mdi-phone"></i>
-                            </md-button>
-                        </md-card-actions>
-                    </md-card>
+                <md-list-item ng-repeat="rep in model.house | limitTo:15">
+                    <representative-item model="model" representative="rep"
+                                         flex="100"></representative-item>
+                </md-list-item>
+            </md-list>
+        </md-content>
+    </md-tab>
+
+    <md-tab label="bills">
+        <md-content class="md-padding"
+                    flex-gt-sm="70" flex-offset-gt-sm="15">
+            <h1 class="md-display-2">Bills</h1>
+            <md-list>
+                <md-list-item ng-repeat="bill in model.bills | limitTo:25">
+                    <bill-item model="model" bill="bill"
+                               flex="100"></bill-item>
                 </md-list-item>
             </md-list>
         </md-content>
     </md-tab>
 </md-tabs>
-
-
-<!--<nav class="nav-extended blue navbar-fixed-top">-->
-<!--<div class="nav-wrapper">-->
-<!--<a href="#" class="brand-logo">Logo</a>-->
-<!--<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>-->
-<!--<ul id="nav-mobile" class="right hide-on-med-and-down">-->
-<!--<li><a href="sass.html">Sass</a></li>-->
-<!--<li><a href="badges.html">Components</a></li>-->
-<!--<li><a href="collapsible.html">JavaScript</a></li>-->
-<!--</ul>-->
-<!--<ul class="side-nav" id="mobile-demo">-->
-<!--<li><a href="sass.html">Sass</a></li>-->
-<!--<li><a href="badges.html">Components</a></li>-->
-<!--<li><a href="collapsible.html">JavaScript</a></li>-->
-<!--</ul>-->
-<!--</div>-->
-<!--<div class="nav-content blue">-->
-<!--<ul tabs>-->
-<!--<li class="tab"><a href="#!/">Home</a></li>-->
-<!--<li class="tab"><a href="#!/search">Search</a></li>-->
-<!--<li class="tab"><a class="active" href="#!/senate">Senate</a></li>-->
-<!--<li class="tab"><a href="#!/house">House</a></li>-->
-<!--</ul>-->
-
-<!--</div>-->
-<!--</nav>-->
-
-<!--<div class="col-md-8 col-md-offset-2" style="overflow-y: scroll; height:400px;">-->
-<!--<twitter-widget>-->
-<!--<a class="twitter-timeline" href="https://twitter.com/SenAlexander">Tweets by SenAlexander</a>-->
-<!--</twitter-widget>-->
-<!--</div>-->
-
-<!--<div class="col-md-8 col-md-offset-2"-->
-<!--ng-repeat="senator in model.members">-->
-<!--<div class="col s12 m7">-->
-<!--<div class="card horizontal">-->
-<!--<div class="card-image">-->
-<!--<img src="https://theunitedstates.io/images/congress/225x275/{{senator.id}}.jpg">-->
-<!--</div>-->
-<!--<div class="card-stacked">-->
-<!--<div class="card-content">-->
-<!--<h4>{{senator.first_name}} {{senator.last_name}}</h4><h4 class="pull-right">{{senator.state}}</h4>-->
-<!--<p>I am a very simple card. I am good at containing small bits of information.</p>-->
-<!--</div>-->
-
-<!--<div class="card-action">-->
-<!--<a href="https://twitter.com/{{senator.twitter_account}}"-->
-<!--class="{{ senator.party === 'R' ? 'red-text' : 'blue-text' }}-->
-<!--text-darken-2">-->
-<!--<i class="mdi mdi-twitter mdi-24px"></i></a>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->

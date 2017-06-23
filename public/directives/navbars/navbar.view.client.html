@@ -1,0 +1,29 @@
+<md-toolbar class="md-hue-2 navbar-fixed-top" ng-controller="navbarController as ctrl">
+    <div class="md-toolbar-tools">
+        <md-button class="md-icon-button" aria-label="Settings" ng-disabled="true">
+            <md-icon md-font-set="material-icons">menu</md-icon>
+        </md-button>
+
+        <h2 flex md-truncate>Ryze Up</h2>
+
+        <!--<md-button class="md-icon-button" aria-label="Favorite">-->
+            <!--<md-icon md-font-set="material-icons">favorite</md-icon>-->
+        <!--</md-button>-->
+
+        <!--<md-button class="md-icon-button" aria-label="More">-->
+            <!--<md-icon md-font-set="material-icons">more_vert</md-icon>-->
+        <!--</md-button>-->
+
+        <div class="profile-image" ng-click="ctrl.profileClick()">
+            <md-tooltip>Profile</md-tooltip>
+            <img class="profile-avatar"
+                 src="{{ctrl.userImgUrl}}">
+        </div>
+
+        <md-button class="md-icon-button" aria-label="Logout"
+                   ng-click="ctrl.logoutClick()">
+            <md-tooltip>Logout</md-tooltip>
+            <i class="mdi mdi-logout mdi-24px"></i>
+        </md-button>
+    </div>
+</md-toolbar>

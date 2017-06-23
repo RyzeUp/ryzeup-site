@@ -11,7 +11,10 @@
             .when('/', {
                 templateUrl: 'views/home/templates/home.view.client.html',
                 controller: 'homeController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: {
+                    loggedIn: checkLoggedIn
+                }
             })
             .when('/representative/details/:repid', {
                 templateUrl: 'views/representative/templates/representative.view.client.html',
@@ -50,7 +53,6 @@
         var deferred = $q.defer();
         $http.get('/auth/v1/loggedin')
             .then(function (user) {
-                console.log('response', user);
                 $rootScope.errorMessage = null;
                 if (user.data !== '0') {
                     $rootScope.currentUser = user.data;

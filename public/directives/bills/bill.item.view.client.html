@@ -1,0 +1,22 @@
+<md-content>
+    <md-card >
+        <md-card-header>
+            <md-card-header-text>
+                <span class="md-title">{{bill.number}}</span>
+                <p>{{bill.title}}</p>
+            </md-card-header-text>
+        </md-card-header>
+        <md-card-content>
+            <p>
+                <b>Status:</b> {{bill.latest_major_action}}<br>
+                {{bill.latest_major_action_date}}
+            </p>
+        </md-card-content>
+        <md-card-actions layout="row" layout-align="start center">
+            <md-button href="#"
+                       aria-label="facebook-button">
+                <i class="mdi mdi-facebook"></i>
+            </md-button>
+        </md-card-actions>
+    </md-card>
+</md-content>
