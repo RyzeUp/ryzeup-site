@@ -14,22 +14,22 @@
                 controllerAs: 'model'
             })
             .when('/representative/details/:repid', {
-                templateUrl: '/views/representative/templates/representative.view.client.html',
+                templateUrl: 'views/representative/templates/representative.view.client.html',
                 controller: 'representativeController',
                 controllerAs: 'model'
             })
             .when('/login', {
-                templateUrl: '/views/user/templates/login.view.client.html',
+                templateUrl: 'views/user/templates/login.view.client.html',
                 controller: 'loginController',
                 controllerAs: 'model'
             })
             .when('/register', {
-                templateUrl: '/views/user/templates/register.view.client.html',
+                templateUrl: 'views/user/templates/register.view.client.html',
                 controller: 'registerController',
                 controllerAs: 'model'
             })
             .when('/search', {
-                templateUrl: '/views/search.view.client.html',
+                templateUrl: 'views/search.view.client.html',
                 controller: 'searchController',
                 controllerAs: 'model',
                 resolve: {
