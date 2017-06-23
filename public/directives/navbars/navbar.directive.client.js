@@ -23,9 +23,13 @@
         this.logoutClick = function () {
             authService.logout()
                 .then(function () {
-                        $location.url('/login')
+                    $location.url('/login')
                 });
-        }
+        };
+
+        this.goToSearch = function () {
+            $location.url('/search');
+        };
     }
 
     function ruNavbar($rootScope) {

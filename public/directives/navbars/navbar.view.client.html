@@ -7,12 +7,18 @@
         <h2 flex md-truncate>Ryze Up</h2>
 
         <!--<md-button class="md-icon-button" aria-label="Favorite">-->
-            <!--<md-icon md-font-set="material-icons">favorite</md-icon>-->
+        <!--<md-icon md-font-set="material-icons">favorite</md-icon>-->
         <!--</md-button>-->
 
         <!--<md-button class="md-icon-button" aria-label="More">-->
-            <!--<md-icon md-font-set="material-icons">more_vert</md-icon>-->
+        <!--<md-icon md-font-set="material-icons">more_vert</md-icon>-->
         <!--</md-button>-->
+
+        <md-button class="mdi-icon-button" aria-label="Search"
+                   ng-click="ctrl.goToSearch()">
+            <md-tooltip>Search</md-tooltip>
+            <i class="mdi mdi-magnify mdi-24px"></i>
+        </md-button>
 
         <div class="profile-image" ng-click="ctrl.profileClick()">
             <md-tooltip>Profile</md-tooltip>
