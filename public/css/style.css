@@ -95,6 +95,6 @@ md-card md-card-header md-card-avatar .md-user-avatar {
 }
 
 .admin-user-panel:hover {
-    background: rgba(192, 192, 192, 0.4);
+    background: rgba(122, 122, 122, 0.4);
     opacity: 0.85;
 }

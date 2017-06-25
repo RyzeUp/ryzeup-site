@@ -49,6 +49,19 @@ model.updateUserPassword = function (id, newPass) {
                 { password: newPass });
 };
 
+model.updateUserRole = function (id, newRole) {
+    return model.findUserById(id)
+        .then(function (user) {
+            if (!user.roles)
+                user.roles = [newRole];
+            else if (user.roles.indexOf(newRole) == -1)
+                user.roles.push(newRole);
+            return model.update(
+                {_id: id},
+                {roles: user.roles});
+        })
+};
+
 model.removeUserById = function (id) {
     return model.remove({ _id: id }).exec();
 };
@@ -59,6 +72,10 @@ model.findUserByFacebookId = function(facebook_id) {
 
 model.findUserByGoogleId = function(google_id) {
     return model.findOne({ 'google.id': google_id });
+};
+
+model.getUserPage = function(pageIdx) {
+    return model.find();// TODO: pagination
 };
 
 module.exports = model;
