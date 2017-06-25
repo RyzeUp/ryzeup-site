@@ -9,8 +9,8 @@
     function userService($http) {
 
         return {
-            unregister:     unregister,
-            updateUser:     updateUser,
+            unregister: unregister,
+            updateUser: updateUser,
             updatePassword: updatePassword
         };
 
@@ -24,7 +24,7 @@
 
         function updatePassword(user, newPassword) {
             var newObj = {
-              new: newPassword
+                new: newPassword
             };
             return $http.post('/api/v1/user/newpass/' + user._id, newObj);
         }
