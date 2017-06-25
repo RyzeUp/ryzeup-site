@@ -84,4 +84,16 @@ model.getUserPage = function(pageIdx) {
     return model.find();// TODO: pagination
 };
 
+model.addPost = function(userId, postId) {
+    return model.update(
+        { _id: userId },
+        { $push: { _posts: postId } });
+};
+
+model.removePost = function(userId, postId) {
+    return model.update(
+        { _id: userId },
+        { $pull: { _posts: postId } });
+};
+
 module.exports = model;

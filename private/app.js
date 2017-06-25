@@ -13,14 +13,17 @@ module.exports = function (app) {
 
     // declare models
     var userModel    = require('./models/user/user.model.server');
-    // var commentModel = require('./models/comment/comment.model.server');
+    var postModel    = require('./models/post/post.model.server');
+    var commentModel = require('./models/comment/comment.model.server');
 
     require('./services/v1/congress.service.server.js')(app);
     require('./services/v1/civicinfo.service.server.js')(app);
     require('./services/v1/bills.service.server.js')(app);
     require('./services/v1/auth.service.server.js')(app, userModel);
     require('./services/v1/user.service.server')(app, userModel);
-    require('./services/v1/comment.service.server')(app, userModel);
     require('./services/v1/admin.service.server')(app, userModel);
+
+    require('./services/v1/post.service.server')(app, postModel);
+    require('./services/v1/comment.service.server')(app, commentModel);
 
 };

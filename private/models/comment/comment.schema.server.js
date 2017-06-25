@@ -3,7 +3,7 @@
  */
 var mongoose = require('mongoose');
 var commentSchema = mongoose.Schema({
-    _discussion: { type: mongoose.Schema.Types.ObjectId, ref:"DiscussionModel" },
+    _post: { type: mongoose.Schema.Types.ObjectId, ref:"PostModel" },
     _parent:     { type: mongoose.Schema.Types.ObjectId, ref:"CommentModel" },
     dateCreated: { type: Date, default: Date.now },
     author:     {
@@ -12,7 +12,7 @@ var commentSchema = mongoose.Schema({
         image_url: String
         // TODO: Other user information
     },
-    _text: String
+    text: String
 
 
 }, { collection: "comment" });

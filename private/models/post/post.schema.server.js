@@ -1,12 +1,18 @@
 /**
- * Created by Nick on 6/25/2017.
+ * Created by vcantu on 6/20/17.
  */
 var mongoose = require('mongoose');
 var postSchema = mongoose.Schema({
+    dateCreated: { type: Date, default: Date.now },
+    _author:     {
+        _id: { type: mongoose.Schema.Types.ObjectId, ref:"UserModel" },
+        name:      String,
+        imageUrl: String
+        // TODO: Other user information
+    },
     title: String,
-    content: String,
-    _author: {type: mongoose.Schema.Types.ObjectId, ref: "UserModel"},
-    _bill: {type: mongoose.Schema.Types.ObjectId, ref: "BillModel"},
-    _discussion: {type: mongoose.Schema.Types.ObjectId, ref: "DiscussionModel"}
-}, {collection: "post"});
+    text: String,
+    billId: String
+
+}, { collection: "post" });
 module.exports = postSchema;
