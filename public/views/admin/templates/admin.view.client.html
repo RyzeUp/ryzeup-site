@@ -6,8 +6,10 @@
     <md-tab label="users">
 
         <section>
-            <md-list layout-padding>
-                <md-list-item class="md-3-line"
+            <md-list layout-padding
+                     layout="column"
+                     layout-align="center center">
+                <md-list-item class="md-3-line admin-user-panel"
                               ng-repeat="user in model.users">
                     <div layout="row"
                          layout-align="start center">
@@ -28,8 +30,10 @@
                             </div>
                         </div>
                         <div style="min-height: 18px;">
-                            <i ng-click="model.removeUser({{user}})"
-                               class="mdi mdi-account-remove"></i>
+                            <md-button ng-click="model.removeUser({{user}})"
+                                       aria-label="remove-user-button">
+                                <i class="mdi mdi-account-remove"></i>
+                            </md-button>
                         </div>
                     </div>
                 </md-list-item>
