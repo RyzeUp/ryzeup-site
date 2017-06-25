@@ -14,6 +14,13 @@
         <!--<md-icon md-font-set="material-icons">more_vert</md-icon>-->
         <!--</md-button>-->
 
+        <md-button class="mdi-icon-button" aria-label="Administer"
+                   ng-show="ctrl.isAdmin"
+                   ng-click="ctrl.goToAdminister()">
+            <md-tooltip>Administer</md-tooltip>
+            <i class="mdi mdi-shield-half-full mdi-24px"></i>
+        </md-button>
+
         <md-button class="mdi-icon-button" aria-label="Search"
                    ng-click="ctrl.goToSearch()">
             <md-tooltip>Search</md-tooltip>

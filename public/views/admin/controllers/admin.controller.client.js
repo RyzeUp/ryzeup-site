@@ -20,11 +20,10 @@
                     model.users = res.data;
                     for (var u in model.users) {
                         var user = model.users[u];
-                        $scope.$watch('model.users[' + u + '].role',
+                        $scope.$watch('model.users[' + u +']',
                         function (newVal, oldVal) {
-                            if (oldVal !== newVal) {
-                                console.log('chaging', model.users[u].firstName)
-                                //adminService.updateUserRole(user._id, newVal);
+                            if (oldVal.role !== newVal.role) {
+                                adminService.updateUserRole(newVal._id, newVal.role);
                             }
                         }, true);
                     }

@@ -10,6 +10,7 @@
 
     function navbarController($rootScope, $location, authService) {
         this.userImgUrl = $rootScope.currentUser.picture.url;
+        this.isAdmin = $rootScope.currentUser.role === 'admin';
 
         this.profileClick = function () {
             if ($rootScope.currentUser) {
@@ -29,6 +30,10 @@
 
         this.goToSearch = function () {
             $location.url('/search');
+        };
+
+        this.goToSearch = function () {
+            $location.url('/admin');
         };
     }
 
