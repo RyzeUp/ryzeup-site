@@ -89,3 +89,7 @@ md-card md-card-header md-card-avatar .md-user-avatar {
 .md-card-image {
     max-width: 100%;
 }
+
+.rep-detail-titles {
+    min-width: 208px;
+}
