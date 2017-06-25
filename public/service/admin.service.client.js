@@ -22,11 +22,11 @@
             return $http.delete('/api/v1/admin/delete/' + userId);
         }
 
-        function updateUserRole(user, newRole) {
+        function updateUserRole(userId, newRole) {
             var newObj = {
                 new: newRole
             };
-            return $http.post('/api/v1/admin/update-role/' + user._id, newObj);
+            return $http.post('/api/v1/admin/update-role/' + userId, newObj);
         }
     }
 })();

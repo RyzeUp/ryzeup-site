@@ -20,14 +20,12 @@
                     model.users = res.data;
                     for (var u in model.users) {
                         var user = model.users[u];
-                        setTopRole(user);
-
-                        $scope.$watch('model.users[' + u + '].topRole',
-                        function (oldVal, newVal) {
-                            console.log(user.firstName,
-                                oldVal, ' -> ', newVal);
-
-                            adminService.updateUserRole(user._id, topRole);
+                        $scope.$watch('model.users[' + u + '].role',
+                        function (newVal, oldVal) {
+                            if (oldVal !== newVal) {
+                                console.log('chaging', model.users[u].firstName)
+                                //adminService.updateUserRole(user._id, newVal);
+                            }
                         }, true);
                     }
                 });
@@ -38,7 +36,6 @@
             adminService.deleteUser(userId)
                 .then(function (res) {
                     for (var u in model.users) {
-                        console.log('removed');
                         if (model.users[u]._id === userId)
                             model.users.splice(u, 1);
                     }
@@ -47,15 +44,5 @@
 
                 })
         };
-
-        function setTopRole(user) {
-            console.log(user.roles);
-            if (user.roles.indexOf('admin') != -1)
-                user.topRole = 'admin';
-            else if (user.roles.indexOf('contributor') != -1)
-                user.topRole = 'contributor'
-            else
-                user.topRole = 'user'
-        }
     }
 })();

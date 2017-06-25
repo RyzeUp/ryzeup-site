@@ -10,7 +10,7 @@ var validations = {
     validatesCanAuthenticate: validatesCanAuthenticate,
     validatesUsername: validatesUsername,
     validatesEmail: validatesEmail,
-    validatesRoles: validatesRoles,
+    // validatesRoles: validatesRoles,
     validatesAdminPriviledges: validatesAdminPriviledges
 };
 module.exports = validations;
@@ -52,24 +52,23 @@ function validatesEmail(user) {
 
 // validates only one of each element
 // adds default 'user' roles to roles if no roles
-function validatesRoles(user) {
-    if (user.roles) {
-        // sets unique
-        user.roles = Array.from(new Set(user.roles));
-        if (user.roles.indexOf('user') != -1)
-            user.roles.push('user');
-    }
-    else {
-        user.roles = ['user'];
-    }
-    return user;
-}
+// function validatesRoles(user) {
+//     if (user.roles) {
+//         // sets unique
+//         user.roles = Array.from(new Set(user.roles));
+//         if (user.roles.indexOf('user') != -1)
+//             user.roles.push('user');
+//     }
+//     else {
+//         user.roles = ['user'];
+//     }
+//     return user;
+// }
 
 
 function validatesAdminPriviledges(user) {
-    if (user.email === process.env.ADMIN_EMAIL &&
-        user.roles.indexOf('admin') == -1) {
-        user.roles.push('admin');
+    if (user.email === process.env.ADMIN_EMAIL) {
+        user.role = 'admin';
     }
     return user;
 }

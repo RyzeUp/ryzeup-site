@@ -68,6 +68,6 @@ module.exports = function (app, model) {
     }
 
     function isAdmin(user) {
-        return user.roles && user.roles.indexOf('admin') != -1;
+        return user.role === 'admin';
     }
 };
