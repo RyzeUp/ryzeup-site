@@ -1,19 +1,44 @@
 <ru-navbar model="model"></ru-navbar>
 
-<md-tabs style="margin-top: 48px;" md-dynamic-height md-border-bottom>
-
+<md-tabs style="margin-top: 48px;"
+         md-dynamic-height
+         md-border-bottom>
     <md-tab label="users">
-        <md-content class="md-padding"
-                    flex-gt-sm="70"
-                    flex-offset-gt-sm="15">
-            <h1 class="md-display-2">Users</h1>
-            <md-list>
-                <md-list-item ng-repeat="user in model.users | limitTo:15">
-                    <div>
-                        {{user}}
+
+        <section>
+            <md-list layout-padding
+                     layout="column"
+                     layout-align="center center">
+                <md-list-item class="md-3-line admin-user-panel"
+                              ng-repeat="user in model.users">
+                    <div layout="row"
+                         layout-align="start center">
+                        <div>
+                            <img ng-if="user.picture.url.length > 0"
+                                 ng-src="{{user.picture.url}}"
+                                 class="md-avatar"
+                                 alt="user picture">
+                            <img ng-if="user.picture.url.length == 0"
+                                 class="md-avatar mdi-account-circle"
+                                 alt="user picture">
+                            <div class="md-list-item-text">
+                                <h3>{{user.email}}</h3>
+                                <h4>{{user.firstName}} {{user.lastName}}</h4>
+                                <p>
+                                    Created: {{user.dateCreated}}
+                                </p>
+                            </div>
+                        </div>
+                        <div style="min-height: 18px;">
+                            <md-button ng-click="model.removeUser({{user}})"
+                                       aria-label="remove-user-button">
+                                <i class="mdi mdi-account-remove"></i>
+                            </md-button>
+                        </div>
                     </div>
                 </md-list-item>
             </md-list>
-        </md-content>
+        </section>
+
     </md-tab>
 </md-tabs>
