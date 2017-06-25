@@ -10,11 +10,17 @@
 
         return {
             search: search,
+            searchReq: searchReq,
             houseReq: houseReq,
             senateReq: senateReq,
             memberReq: memberReq,
             detailsReq: detailsReq
         };
+
+        function searchReq(query) {
+            var url = '/api/v1/congress/search?query=' + query;
+            return $http.get(url);
+        }
 
         function search(state, district, name) {
             var url = '/api/v1/congress/search' +

@@ -60,8 +60,7 @@
                 controller: 'adminController',
                 controllerAs: 'model',
                 resolve: {
-                    loggedIn: checkLoggedIn
-                    //isAdmin: checkAdmin
+                    isAdmin: checkAdmin
                 }
             });
     }
@@ -80,5 +79,14 @@
                 }
             });
         return deferred.promise;
+    };
+
+    var checkAdmin = function ($q, $timeout, $http, $location, $rootScope) {
+        checkLoggedIn($q, $timeout, $http, $location, $rootScope)
+            .then(function (user) {
+                if (!user.role === 'admin') {
+                    $location.url('/');
+                }
+            })
     };
 })();

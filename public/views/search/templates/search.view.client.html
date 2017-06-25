@@ -1,40 +1,44 @@
-<div class="container-fluid">
-    <label for="search">Search</label>
-    <input
-            ng-model="searchText"
-            id="search"
-            type="text"
-            class="form-control"
-            placeholder="'Purple St, Springfield MA' or 'Pennsylvania'"/>
+<ru-navbar model="model"></ru-navbar>
 
-    <a ng-click="model.search(searchText)"
-       class="btn btn-block btn-primary">Login</a>
+<md-content flex-gt-sm="70"
+            flex-offset-gt-sm="15"
+            style="margin-top: 60px" layout-padding>
 
-
-    <div class="col-md-8 col-md-offset-2"
-         ng-repeat="member in model.members">
-        <div class="col s12 m7">
-            <div class="card horizontal">
-                <div class="card-image">
-                    <img src="https://theunitedstates.io/images/congress/225x275/{{member.id}}.jpg">
-                </div>
-                <div class="card-stacked">
-                    <div class="card-content">
-                        <h4>{{member.name}}</h4><h4 class="pull-right">{{member.state}}</h4>
-                        <h5>{{member.role}}</h5>
-                        <br>
-                        <span class="pull-right"><h5>Up for Re-election in {{member.next_election}}</h5></span>
-                    </div>
-
-                    <div class="card-action">
-                        <a href="https://twitter.com/{{member.twitter_id}}"
-                           class="{{ member.party === 'R' ? 'red-text' : 'blue-text' }}
-                       text-darken-2">
-                            <i class="mdi mdi-twitter mdi-24px"></i></a>
+    <md-card layout-padding>
+        <form name="loginForm" class="row">
+            <md-input-container class="md-icon-float md-block">
+                <md-icon md-font-set="material-icons" class="location">place</md-icon>
+                <label>Search By Location</label>
+                <input ng-model="searchText" name="search" type="text"
+                       placeholder="'Purple St, Springfield MA' or 'Pennsylvania'">
+                <div ng-messages="loginForm.email.$error" multiple md-auto-hide="false">
+                    <div ng-message="required">You must enter a password.</div>
+                    <div ng-message="pattern">
+                        Must be a valid email address
                     </div>
                 </div>
-            </div>
-        </div>
+            </md-input-container>
+            <md-card-actions layout="row" layout-align="end center">
+                <md-button class="md-raised md-primary" aria-label="Search"
+                           id="submit" flex="30"
+                           ng-click="model.search(searchText)" type="submit">
+                    <i flex hide-gt-xs class="mdi mdi-magnify mdi-24px"></i>
+                    <span flex hide-xs>Search</span>
+                </md-button>
+            </md-card-actions>
+        </form>
+
+    </md-card>
+
+    <md-list ng-show="model.members">
+        <md-list-item ng-repeat="rep in model.members">
+            <representative-item model="model" representative="rep"
+                                 flex="100"></representative-item>
+        </md-list-item>
+    </md-list>
+
+    <div layout="column" layout-align="center center" ng-show="model.loading">
+        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
     </div>
 
-</div>
+</md-content>

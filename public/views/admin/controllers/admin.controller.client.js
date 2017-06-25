@@ -19,7 +19,6 @@
                 .then(function (res) {
                     model.users = res.data;
                     for (var u in model.users) {
-                        var user = model.users[u];
                         $scope.$watch('model.users[' + u +']',
                         function (newVal, oldVal) {
                             if (oldVal.role !== newVal.role) {

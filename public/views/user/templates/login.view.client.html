@@ -19,7 +19,7 @@
                     <input required ng-pattern="/^.+@.+\..+$/"
                            ng-model="model.user.email" name="email" type="text">
                     <div ng-messages="loginForm.email.$error" multiple md-auto-hide="false">
-                        <div ng-message="required">You must enter a password.</div>
+                        <div ng-message="required">You must enter an email.</div>
                         <div ng-message="pattern">
                             Must be a valid email address
                         </div>

@@ -6,7 +6,8 @@ const q = require('q');
 const https = require('https');
 const levenshtein = require('fast-levenshtein');
 
-var propublica = require('./helpers/propublica.service.server')();
+const propublica = require('./helpers/propublica.service.server')();
+const google = require('./helpers/google.service.server')();
 
 module.exports = function (app) {
 
@@ -22,6 +23,59 @@ module.exports = function (app) {
 
     getHouse();
     getSenate();
+
+
+    function searchSenateBy(ocdID, name, state, district) {
+        var deferred = q.defer();
+        results = [];
+        getSenate()
+            .then(function (senate) {
+
+            });
+        return deferred.promise;
+    }
+
+    function search(req, res) {
+        var result = [];
+        var state = req.query.state;
+        var district = req.query.district;
+        var name = req.query.name;
+        var query = req.query.query;
+
+        if (query) {
+            google.get('/representatives', req.query)
+                .then(function (response) {
+                    res.json(response);
+                }, function (error) {
+                    res.sendStatus(404).send(error);
+                })
+        }
+
+        if (state) {
+            propublica.get('/congress/v1/members/senate/' + state + '/current.json')
+                .then(function (response) {
+                    for (var i in response.results) {
+                        result.push(response.results[i]);
+                    }
+                    var url = '/congress/v1/members/house/' + state +
+                        (district ? '/' + district : '') + '/current.json'
+                    propublica.get(url)
+                        .then(function (response) {
+                            for (var i in response.results) {
+                                result.push(response.results[i]);
+                            }
+                            res.json(result[0]);
+                        }, function (err) {
+                            res.json(result[0]);
+                        });
+                }, function (err) {
+                    res.sendStatus(404);
+                })
+        }
+        else if (name) {
+            searchByName(req, res, name);
+        }
+    }
 
 
     function memberReq(req, res) {
@@ -72,38 +126,6 @@ module.exports = function (app) {
                 res.sendStatus(404);
             });
         res.sendStatus(200);
-    }
-
-    function search(req, res) {
-        var result = [];
-        var state = req.query.state;
-        var district = req.query.district;
-        var name = req.query.name;
-
-        if (state) {
-            propublica.get('/congress/v1/members/senate/' + state + '/current.json')
-                .then(function (response) {
-                    for (var i in response.results) {
-                        result.push(response.results[i]);
-                    }
-                    var url = '/congress/v1/members/house/' + state +
-                        (district ? '/' + district : '') + '/current.json'
-                    propublica.get(url)
-                        .then(function (response) {
-                            for (var i in response.results) {
-                                result.push(response.results[i]);
-                            }
-                            res.json(result[0]);
-                        }, function (err) {
-                            res.json(result[0]);
-                        });
-                }, function (err) {
-                    res.sendStatus(404);
-                })
-        }
-        else if (name) {
-            searchByName(req, res, name);
-        }
     }
 
     function houseReq(req, res) {

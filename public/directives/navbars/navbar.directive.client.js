@@ -12,6 +12,10 @@
         this.userImgUrl = $rootScope.currentUser.picture.url;
         this.isAdmin = $rootScope.currentUser.role === 'admin';
 
+        this.goToHome = function () {
+            $location.url('/');
+        };
+
         this.profileClick = function () {
             if ($rootScope.currentUser) {
                 $location.url('/profile');
@@ -32,7 +36,7 @@
             $location.url('/search');
         };
 
-        this.goToSearch = function () {
+        this.goToAdmin = function () {
             $location.url('/admin');
         };
     }
