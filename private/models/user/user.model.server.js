@@ -30,9 +30,16 @@ model.findByEmail = function (email) {
 model.updateUserById = function (id, newUser) {
     return validate(newUser)
         .then(function(validatedUser) {
-            return model.update(
+            var deferred = q.defer();
+            model.update(
                 { _id: id },
-                { $set: validatedUser });
+                { $set: validatedUser })
+                .then(function (res) {
+                    deferred.resolve(validatedUser);
+                }, function (err) {
+                    deferred.reject(err);
+                });
+            return deferred.promise;
         });
 };
 
@@ -43,7 +50,6 @@ model.updateUserPassword = function (id, newPass) {
 };
 
 model.removeUserById = function (id) {
-    console.log('model removing..');
     return model.remove({ _id: id }).exec();
 };
 

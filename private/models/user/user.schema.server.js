@@ -43,6 +43,11 @@ var userSchema = mongoose.Schema({
 
     _following: [
         { type: mongoose.Schema.Types.ObjectId, ref:"UserModel" }
+    ],
+
+
+    roles: [
+        { type: String, require: true, enum: ['user', 'contributor', 'admin'] }
     ]
 
 }, { collection: "user" });

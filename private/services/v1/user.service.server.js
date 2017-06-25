@@ -30,9 +30,11 @@ module.exports = function (app, model) {
     }
 
     function updateReq(req, res) {
+        console.log('updating...')
         var userId = req.params['id'];
         if (req.isAuthenticated() && (req.user._id + '') === userId) {
             // allow request
+            console.log('authenticated user: ', req.body);
             model.updateUserById(userId, req.body)
                 .then(function (user) {
                     cleanUser(user);
@@ -50,7 +52,7 @@ module.exports = function (app, model) {
         var userId = req.params['id'];
         if (req.isAuthenticated() && (req.user._id + '') === userId) {
             // allow request
-            model.updateUserPassword(userId, req.body.new)// TODO: bcrypt
+            model.updateUserPassword(userId, bcrypt.hashSync(req.body.new))
                 .then(function (user) {
                     res.sendStatus(200);
                 }, function (e) {
@@ -63,11 +65,10 @@ module.exports = function (app, model) {
     }
 
     function unregisterReq(req, res) {
-        console.log('unregister request for', req.user._id);
         var userId = req.params['id'];
         if (req.isAuthenticated() && (req.user._id + '') === userId) {
             // allow request
-            model.removeUserById(userId.body)
+            model.removeUserById(userId)
                 .then(function (user) {
                     res.sendStatus(200);
                 }, function (e) {

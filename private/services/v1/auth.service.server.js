@@ -45,7 +45,6 @@ module.exports = function (app, model) {
     }
 
     function register(req, res) {
-        console.log(req);
         var newUser = req.body;
         registerLocally(newUser)
             .then(function (response) {
@@ -150,6 +149,7 @@ module.exports = function (app, model) {
 
     // ---- Register Logic ----
     function registerLocally(user) {
+        console.log('registering');
         user.password = bcrypt.hashSync(user.password);
         if (!user.picture) {
             user.picture = {

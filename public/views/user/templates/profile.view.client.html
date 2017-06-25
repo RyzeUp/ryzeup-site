@@ -45,7 +45,7 @@
                 <label>Email</label>
                 <md-icon md-font-set="material-icons" class="name">mail</md-icon>
                 <input ng-model="model.user.email"
-                       required ng-pattern="/^.+@.+\..+$/" name="email" type="text">
+                       required ng-pattern="model.emailRegex" name="email" type="text">
                 <div ng-messages="registerForm.email.$error" multiple md-auto-hide="false">
                     <div ng-message="required">Email required.</div>
                     <div ng-message="pattern">Must be a valid email address</div>
@@ -66,7 +66,7 @@
                 <md-input-container class="md-block" flex-gt-sm>
                     <label>State</label>
                     <md-select ng-model="user.state">
-                        <md-option ng-repeat="state in states" value="{{state.abbrev}}">
+                        <md-option ng-repeat="state in model.states" value="{{state.abbrev}}">
                             {{state.abbrev}}
                         </md-option>
                     </md-select>

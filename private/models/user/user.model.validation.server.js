@@ -9,7 +9,8 @@ const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+")
 var validations = {
     validatesCanAuthenticate: validatesCanAuthenticate,
     validatesUsername: validatesUsername,
-    validatesEmail: validatesEmail
+    validatesEmail: validatesEmail,
+    validatesRoles: validatesRoles
 };
 module.exports = validations;
 
@@ -45,5 +46,20 @@ function validatesEmail(user) {
     if (!emailRegex.test(user.email))
         return null;
     user.email = user.email.toLowerCase();
+    return user;
+}
+
+// validates only one of each element
+// adds default 'user' roles to roles if no roles
+function validatesRoles(user) {
+    if (user.roles) {
+        // sets unique
+        user.roles = Array.from(new Set(user.roles));
+        if (user.roles.indexOf('user') != -1)
+            user.roles.push('user');
+    }
+    else {
+        user.roles = ['user'];
+    }
     return user;
 }
