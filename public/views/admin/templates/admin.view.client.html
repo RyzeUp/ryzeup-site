@@ -21,6 +21,15 @@
                             <img ng-if="user.picture.url.length == 0"
                                  class="md-avatar mdi-account-circle"
                                  alt="user picture">
+                            <md-select ng-model="selectedRole"
+                                       md-selected-text="model.setUserRole(user, selectedRole)"
+                                       placeholder="Roles"
+                                       style="min-width: 100px;">
+                                <md-option ng-repeat="role in model.possibleRoles"
+                                           ng-value="role">
+                                    {{role}}
+                                </md-option>
+                            </md-select>
                             <div class="md-list-item-text">
                                 <h3>{{user.email}}</h3>
                                 <h4>{{user.firstName}} {{user.lastName}}</h4>
