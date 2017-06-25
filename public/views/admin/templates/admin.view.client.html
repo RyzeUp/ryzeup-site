@@ -6,38 +6,51 @@
     <md-tab label="users">
 
         <section>
-            <md-list layout-padding
+            <md-card
                      layout="column"
-                     layout-align="center center">
-                <md-list-item class="md-3-line admin-user-panel"
-                              ng-repeat="user in model.users">
-                    <div layout="row"
-                         layout-align="start center">
-                        <div>
-                            <img ng-if="user.picture.url.length > 0"
-                                 ng-src="{{user.picture.url}}"
-                                 class="md-avatar"
-                                 alt="user picture">
-                            <img ng-if="user.picture.url.length == 0"
-                                 class="md-avatar mdi-account-circle"
-                                 alt="user picture">
-                            <div class="md-list-item-text">
-                                <h3>{{user.email}}</h3>
-                                <h4>{{user.firstName}} {{user.lastName}}</h4>
-                                <p>
-                                    Created: {{user.dateCreated}}
-                                </p>
+                     flex-gt-sm="70"
+                     flex-offset-gt-sm="15">
+                <md-list flex>
+                    <md-list-item layout-padding
+                                  class="md-3-line admin-user-panel"
+                                  ng-repeat="user in model.users">
+                            <div flex="10" hide-xs>
+                                <img ng-if="user.picture.url.length > 0"
+                                     ng-src="{{user.picture.url}}"
+                                     class="md-avatar"
+                                     alt="user picture">
+                                <img ng-if="user.picture.url.length == 0"
+                                     class="md-avatar mdi-account-circle"
+                                     alt="user picture">
                             </div>
-                        </div>
-                        <div style="min-height: 18px;">
-                            <md-button ng-click="model.removeUser({{user}})"
-                                       aria-label="remove-user-button">
-                                <i class="mdi mdi-account-remove"></i>
-                            </md-button>
-                        </div>
-                    </div>
-                </md-list-item>
-            </md-list>
+                            <div flex="50">
+                                <div>
+                                    <div class="md-list-item-text">
+                                        <h3>{{user.email}}</h3>
+                                        <h4>{{user.firstName}} {{user.lastName}}</h4>
+                                        <p ng>
+                                            Created: {{user.dateCreated}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <md-input-container class="md-block" flex="30">
+                                <label>Role</label>
+                                <md-select ng-model="user.topRole" ng-model-options="">
+                                    <md-option ng-repeat="r in model.roles" value="{{r}}">
+                                        {{r}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+                            <div flex="10">
+                                <md-button ng-click="model.removeUser(user._id)"
+                                           aria-label="remove-user-button">
+                                    <i class="mdi mdi-account-remove mdi-24px"></i>
+                                </md-button>
+                            </div>
+                    </md-list-item>
+                </md-list>
+            </md-card>
         </section>
 
     </md-tab>

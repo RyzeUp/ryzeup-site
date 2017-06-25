@@ -8,33 +8,54 @@
 
     function adminController($rootScope,
                              $location,
-                             userService) {
+                             adminService,
+                             $scope) {
         var model = this;
+        model.roles = ['user', 'contributor', 'admin'];
 
         function init() {
             model.user = $rootScope.currentUser;
-            model.users = [];
-            for (var i = 0; i < 10; i++) {
-                var temp = {
-                    email: model.user.email,
-                    firstName: model.user.firstName,
-                    lastName: model.user.lastName,
-                    dateCreated: model.user.dateCreated,
-                    picture: {
-                        url: model.user.picture.url
-                    }
-                };
-                model.users.push(temp);
-            }
-            //model.users = userService.getUsers();
-            console.log(model.user);
-            console.log(model.users);
-        }
+            adminService.users()
+                .then(function (res) {
+                    model.users = res.data;
+                    for (var u in model.users) {
+                        var user = model.users[u];
+                        setTopRole(user);
 
+                        $scope.$watch('model.users[' + u + '].topRole',
+                        function (oldVal, newVal) {
+                            console.log(user.firstName,
+                                oldVal, ' -> ', newVal);
+
+                            adminService.updateUserRole(user._id, topRole);
+                        }, true);
+                    }
+                });
+        }
         init();
 
         model.removeUser = function (userId) {
-            userService.unregister(userId);
+            adminService.deleteUser(userId)
+                .then(function (res) {
+                    for (var u in model.users) {
+                        console.log('removed');
+                        if (model.users[u]._id === userId)
+                            model.users.splice(u, 1);
+                    }
+                }, function (err) {
+                    // show error
+
+                })
         };
+
+        function setTopRole(user) {
+            console.log(user.roles);
+            if (user.roles.indexOf('admin') != -1)
+                user.topRole = 'admin';
+            else if (user.roles.indexOf('contributor') != -1)
+                user.topRole = 'contributor'
+            else
+                user.topRole = 'user'
+        }
     }
 })();

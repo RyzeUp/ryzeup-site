@@ -21,4 +21,6 @@ module.exports = function (app) {
     require('./services/v1/auth.service.server.js')(app, userModel);
     require('./services/v1/user.service.server')(app, userModel);
     require('./services/v1/comment.service.server')(app, userModel);
+    require('./services/v1/admin.service.server')(app, userModel);
+
 };
