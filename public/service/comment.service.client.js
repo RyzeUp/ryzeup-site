@@ -15,8 +15,8 @@
             deleteReq: deleteReq
         };
 
-        function commentsReq(post) {
-            var url = '/api/v1/posts/comments/' + post._id;
+        function commentsReq(postId) {
+            var url = '/api/v1/posts/comments/' + postId;
             return $http.get(url)
                 .then(function (res) {
                     console.log(res);
@@ -34,8 +34,8 @@
             return $http.post(url, post);
         }
 
-        function deleteReq(post) {
-            var url = '/api/v1/comments/delete/' + post._id;
+        function deleteReq(postId) {
+            var url = '/api/v1/comments/delete/' + postId;
             return $http.delete(url);
         }
     }
