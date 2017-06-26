@@ -12,10 +12,11 @@
                             billsService,
                             postService,
                             commentService,
-    $route) {
+                            $route) {
         var model = this;
 
         var user = $rootScope.currentUser;
+
 
         function init() {
             postService.recentReq()
@@ -31,7 +32,6 @@
                     model.comments = res;
                     console.log('hello comments');
                     console.log(model.comments);
-                    $route.reload();
                 });
         }
 
@@ -67,14 +67,19 @@
             model.newComment._author = {
                 _id: user._id,
                 name: user.firstName + " " + user.lastName,
-                imageUrl: user.picture.url
+                image_url: user.picture.url
             };
             model.newComment._discussion = model.post._id;
             console.log('submitting', model.newComment);
             commentService.newReq(model.newComment)
-                .then(function (then) {
+                .then(function (coms) {
                     model.comments.push(model.newComment);
                     model.newComment = null;
+                    $route.reload();
+                }, function (err) {
+                    model.comments.push(model.newComment);
+                    model.newComment = null;
+                    $route.reload();
                 })
         }
     }

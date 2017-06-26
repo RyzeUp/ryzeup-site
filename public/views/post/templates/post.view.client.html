@@ -35,7 +35,15 @@
         <md-list-item ng-repeat="comment in model.comments | limitTo:15">
             <md-card flex="70"
                      flex-offset="15">
+
                 <md-card-header>
+                    <div class="profile-image" ng-click="ctrl.profileClick()"
+                        ng-show="comment._author.image_url">
+                        <!--<md-tooltip>View Profile</md-tooltip>-->
+                        <img class="profile-avatar"
+                             src="{{comment._author.image_url}}">
+                    </div>
+
                     <md-card-header-text>
                         <span class="md-title">{{comment._author.name}}</span>
                         <span class="md-subhead">{{comment.dateCreated}}</span>

@@ -6,7 +6,7 @@ var commentSchema = mongoose.Schema({
     _discussion: { type: mongoose.Schema.Types.ObjectId, ref:"PostModel" },
     _parent:     { type: mongoose.Schema.Types.ObjectId, ref:"CommentModel" },
     dateCreated: { type: Date, default: Date.now },
-    author:     {
+    _author:     {
         _id: { type: mongoose.Schema.Types.ObjectId, ref:"UserModel" },
         name:      String,
         image_url: String
