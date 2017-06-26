@@ -1,6 +1,8 @@
 <ru-navbar></ru-navbar>
 
 <md-tabs md-dynamic-height md-border-bottom>
+
+    <!--
     <md-tab label="senate">
         <md-content class="md-padding"
                     flex-gt-sm="70"
@@ -14,40 +16,41 @@
             </md-list>
         </md-content>
     </md-tab>
+    -->
 
-    <!--<md-tab label="house">-->
-        <!--<md-content class="md-padding"-->
-                    <!--flex-gt-sm="70" flex-offset-gt-sm="15">-->
-            <!--<h1 class="md-display-2">House</h1>-->
-            <!--<md-list>-->
-                <!--<md-list-item ng-repeat="rep in model.house | limitTo:15">-->
-                    <!--<representative-item model="model" representative="rep"-->
-                                         <!--flex="100"></representative-item>-->
-                <!--</md-list-item>-->
-            <!--</md-list>-->
-        <!--</md-content>-->
-    <!--</md-tab>-->
+    <!--
+    <md-tab label="house">
+        <md-content class="md-padding"
+                    flex-gt-sm="70" flex-offset-gt-sm="15">
+            <h1 class="md-display-2">House</h1>
+            <md-list>
+                <md-list-item ng-repeat="rep in model.house | limitTo:15">
+                    <representative-item model="model" representative="rep"
+                                         flex="100"></representative-item>
+                </md-list-item>
+            </md-list>
+        </md-content>
+    </md-tab>
+    -->
 
-    <!--<md-tab label="bills">-->
-        <!--<md-content class="md-padding"-->
-                    <!--flex-gt-sm="70" flex-offset-gt-sm="15">-->
-            <!--<h1 class="md-display-2">Bills</h1>-->
-            <!--<md-list>-->
-                <!--<md-list-item ng-repeat="bill in model.bills | limitTo:25">-->
-                    <!--<bill-item model="model" bill="bill"-->
-                               <!--flex="100"></bill-item>-->
-                <!--</md-list-item>-->
-            <!--</md-list>-->
-        <!--</md-content>-->
-    <!--</md-tab>-->
+    <md-tab label="bills">
+        <md-content class="md-padding"
+                    flex-gt-sm="70" flex-offset-gt-sm="15">
+            <md-list>
+                <md-list-item ng-repeat="bill in model.bills | limitTo:25">
+                    <bill-item model="model" bill="bill"
+                               flex="100"></bill-item>
+                </md-list-item>
+            </md-list>
+        </md-content>
+    </md-tab>
 
     <md-tab label="posts">
         <md-content class="md-padding"
                     flex-gt-sm="70"
                     flex-offset-gt-sm="15">
-            <h1 class="md-display-2">Posts</h1>
             <md-list>
-                <md-list-item ng-repeat="post in model.posts | limitTo:15">
+                <md-list-item ng-repeat="post in model.posts track by $index">
                     <md-card ng-click="model.goToPostDetailsPage(post._id)">
                         <md-card-header>
                             <md-card-header-text>
