@@ -4,7 +4,8 @@
 (function () {
     angular
         .module('RU')
-        .controller('postController', postController);
+        .controller('postController', postController)
+        .controller('newPostController', newPostController);
 
     function postController($routeParams,
                             billsService,
@@ -69,5 +70,22 @@
         model.followPost = function (postid) {
             //TODO FOLLOW
         };
+    }
+
+
+    function newPostController($rootScope, postService) {
+        var model = this;
+        var user = $rootScope.currentUser;
+
+        model.submit = function() {
+            console.log(user);
+            model.post._author = {
+                _id: user._id,
+                name: user.firstName + " " + user.lastName,
+                imageUrl: user.picture.url
+            };
+            console.log('submitting', model.post);
+            postService.newReq(model.post);
+        }
     }
 })();
