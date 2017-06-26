@@ -8,7 +8,8 @@
 
     function homeController($location,
                             congressService,
-                            billsService) {
+                            billsService,
+                            postService) {
         var model = this;
 
         function init() {
@@ -26,17 +27,48 @@
             //             setContact(model.house);
             //             console.log(model.house);
             //         });
+            billsService.updated('house')
+                .then(function (res) {
+                    console.log(res.bills);
+                    model.bills = res.bills;
+                });
 
+            postService.recentReq()
+                .then(function (res) {
+                    model.posts = res;
+                    console.log(model.posts);
+                });
+
+            for (var i = 0; i < 10; i++) {
+                var temp = {
+                    title: 'title',
+                    text: 'text',
+                    billId: 'billId',
+                    _author: {
+                        _id: 'authorId',
+                        name: 'Barack Obama',
+                        imageUrl: 'authorImageUrl'
+                    }
+                };
+                billsService.details('hr21-115')
+                    .then(function (response) {
+                        console.log(response);
+                        temp.bill = response;
+                        model.posts.push(temp);
+                    });
+            }
+            console.log('set test posts');
+            console.log(model.posts);
         }
         init();
 
 
-        model.getBillById = function (billId) {
-            billsService.details(billId);
+        model.followPost = function (postid) {
+            //TODO FOLLOW
         };
 
-        model.trunc = function (str) {
-            return (this.length > 140) ? this.substr(0, n - 1) + '&hellip;' : this;
+        model.getBillById = function (billId) {
+            billsService.details(billId);
         };
     }
 })();

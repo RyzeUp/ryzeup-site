@@ -8,6 +8,9 @@
 
     function configuration($routeProvider) {
         $routeProvider
+        //.when('/', {
+        //    templateUrl: 'views/landing/templates/landing.view.client.html'
+        //})
             .when('/', {
                 resolve: {
                     loggedIn: sendToLanding
