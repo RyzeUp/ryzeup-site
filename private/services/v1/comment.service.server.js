@@ -23,6 +23,7 @@ module.exports = function (app, model) {
     }
 
     function newReq(req, res) {
+        console.log('new comment');
         model.createComment(req.body)
             .then(function (response) {
                 res.sendStatus(200);

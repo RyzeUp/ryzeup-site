@@ -14,12 +14,12 @@ var model = mongoose.model('CommentModel', schema);
 
 
 model.createComment = function (comment) {
-    return validate(comment)
-        .then(function(validatedComment) {
-            return model.create(validatedComment);
-        })
+    console.log(comment);
+    return model.create(comment)
         .then(function (addedComment) {
             return commentModel.addPost(comment._discussion._id, comment._id);
+        }, function (e) {
+            console.log(e);
         })
 };
 
@@ -41,7 +41,7 @@ model.removeCommentById = function (id) {
 };
 
 model.findCommentsByPostId = function (postId) {
-    model.find({ _discussion: postId });
+    return model.find({ _discussion: postId });
 };
 
 module.exports = model;

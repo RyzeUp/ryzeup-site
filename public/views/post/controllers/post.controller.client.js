@@ -67,6 +67,7 @@
                 name: user.firstName + " " + user.lastName,
                 imageUrl: user.picture.url
             };
+            model.newComment._discussion = model.post._id;
             console.log('submitting', model.newComment);
             commentService.newReq(model.newComment)
                 .then(function (then) {
