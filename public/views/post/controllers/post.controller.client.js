@@ -13,7 +13,7 @@
         var model = this;
 
         function init() {
-            /*postService.detailsReq()
+            /*postService.detailsReq($routeParams['postid'])
              .then(function () {
 
              });
