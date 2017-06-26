@@ -8,15 +8,9 @@
         <form name="loginForm" class="row">
             <md-input-container class="md-icon-float md-block">
                 <md-icon md-font-set="material-icons" class="location">place</md-icon>
-                <label>Search By Location</label>
+                <label>Search By Location or Name</label>
                 <input ng-model="searchText" name="search" type="text"
-                       placeholder="'Purple St, Springfield MA' or 'Pennsylvania'">
-                <div ng-messages="loginForm.email.$error" multiple md-auto-hide="false">
-                    <div ng-message="required">You must enter a password.</div>
-                    <div ng-message="pattern">
-                        Must be a valid email address
-                    </div>
-                </div>
+                       placeholder="'Purple St, Springfield MA', 'Pennsylvania' or 'Rand Paul">
             </md-input-container>
             <md-card-actions layout="row" layout-align="end center">
                 <md-button class="md-raised md-primary" aria-label="Search"

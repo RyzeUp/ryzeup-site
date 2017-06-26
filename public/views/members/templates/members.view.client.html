@@ -9,7 +9,7 @@
                     flex-gt-sm="70"
                     flex-offset-gt-sm="15">
             <md-list>
-                <md-list-item ng-repeat="rep in model.senate | limitTo: 15">
+                <md-list-item ng-repeat="rep in model.senate | limitTo: 50">
                     <representative-item model="model" representative="rep"
                                          flex="100"></representative-item>
                 </md-list-item>
@@ -25,7 +25,7 @@
                     flex-gt-sm="70"
                     flex-offset-gt-sm="15">
             <md-list>
-                <md-list-item ng-repeat="rep in model.house | limitTo: 15">
+                <md-list-item ng-repeat="rep in model.house | limitTo: 50">
                     <representative-item model="model" representative="rep"
                                          flex="100"></representative-item>
                 </md-list-item>
