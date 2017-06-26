@@ -97,7 +97,7 @@
             $location.url('/representative/details/' + repId);
         };
 
-        model.goToPostDetailsPage = function () {
+        model.goToPostDetailsPage = function (postId) {
             $location.url('/post/details/' + postId);
         };
 
