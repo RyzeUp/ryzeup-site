@@ -36,7 +36,7 @@
 
         function deleteReq(post) {
             var url = '/api/v1/posts/delete/' + post._id;
-            return $http.post(url);
+            return $http.delete(url);
         }
     }
 })();
