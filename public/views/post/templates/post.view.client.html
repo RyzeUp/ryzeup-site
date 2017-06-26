@@ -31,7 +31,7 @@
 <md-content>
     <md-list>
         <p class="md-display-1"
-           flex-offset="15">Comments</p>
+           flex-offset="15">Comments: {{model.comments.length}}</p>
         <md-list-item ng-repeat="comment in model.comments | limitTo:15">
             <md-card flex="70"
                      flex-offset="15">
