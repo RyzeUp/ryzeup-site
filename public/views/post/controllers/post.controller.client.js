@@ -27,31 +27,21 @@
                     console.log('hello comments');
                     console.log(model.comments);
                 });
+        }
 
-            var temp = {
-                _id: $routeParams['postid'],
-                title: 'title',
-                text: 'text',
-                billId: 'hr21-115',
-                _author: {
-                    _id: 'authorId',
-                    name: 'Barack Obama',
-                    imageUrl: 'authorImageUrl'
-                }
-            };
-            model.post = temp;
-            billsService.details('hr21-115')
-                .then(function (response) {
-                    console.log(response);
-                    model.post.bill = response;
-                });
+        init();
 
+        model.followPost = function (postid) {
+            //TODO FOLLOW
+        };
+
+        function createTestComments() {
             model.comments = [];
             for (var i = 0; i < 10; i++) {
                 var temp = {
                     _id: i,
                     _discussion: $routeParams['postid'],
-                    dateCreated: Date.now(),
+                    dateCreated: new Date(Date.now()).toLocaleString(),
                     author: {
                         _id: i,
                         name: 'Barack Obama' + i,
@@ -63,13 +53,6 @@
             }
             console.log(model.post);
             console.log(model.comments);
-
         }
-
-        init();
-
-        model.followPost = function (postid) {
-            //TODO FOLLOW
-        };
     }
 })();
