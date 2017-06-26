@@ -57,12 +57,12 @@
                         </md-card-header>
                         <md-card-title>
                             <md-card-title-text>
-                                <span class="md-headline">Bill Title</span>
+                                <span class="md-headline">{{post.bill.title}}</span>
                             </md-card-title-text>
                         </md-card-title>
                         <md-card-content>
                             <p>
-                                {{model.trunc(post.text)}} Post Text
+                                {{(post.text).substring(0, 140)}}
                             </p>
                         </md-card-content>
                     </md-card>

@@ -72,11 +72,13 @@
                 };
                 billsService.details('hr21-115')
                     .then(function (response) {
-                        console.log(response.data);
-                        temp.bill = response.data;
+                        console.log(response);
+                        temp.bill = response;
                         model.posts.push(temp);
                     });
             }
+            console.log('set test posts');
+            console.log(model.posts);
         }
 
         init();
@@ -95,10 +97,6 @@
 
         model.getBillById = function (billId) {
             billsService.details(billId);
-        };
-
-        model.trunc = function (str) {
-            return (this.length > 140) ? this.substr(0, n - 1) + '&hellip;' : this;
         };
     }
 })();
