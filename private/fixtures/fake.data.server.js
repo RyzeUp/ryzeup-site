@@ -8,8 +8,8 @@ const q = require('q');
 const https = require('https');
 const bcrypt = require('bcrypt-nodejs');
 
-var userModel    = require('../models/user/user.model.server');
-var postModel    = require('../models/post/post.model.server');
+var userModel = require('../models/user/user.model.server');
+var postModel = require('../models/post/post.model.server');
 var commentModel = require('../models/comment/comment.model.server');
 
 module.exports = function (app) {
@@ -23,25 +23,36 @@ module.exports = function (app) {
             firstName: 'Alice',
             lastName: 'Wonderland',
             email: 'alice@email.com',
-            password: 'alice'
+            password: 'alice',
+            role: 'user'
         },
         {
             firstName: 'Bob',
             lastName: 'Bo',
             email: 'bob@email.com',
-            password: 'bob'
+            password: 'bob',
+            role: 'contributor'
         },
         {
             firstName: 'Alex',
             lastName: 'Alex',
             email: 'alex@email.com',
-            password: 'alex'
+            password: 'alex',
+            role: 'user'
         },
         {
             firstName: 'Mary',
             lastName: 'Ellen',
             email: 'mary@email.com',
-            password: 'mary'
+            password: 'mary',
+            role: 'user'
+        },
+        {
+            firstName: 'Admin',
+            lastName: 'Adminlast',
+            email: 'admin@email.com',
+            password: 'admin',
+            role: 'admin'
         }
     ];
 
@@ -106,7 +117,7 @@ module.exports = function (app) {
             console.log('looking for ' + fakePosts[u].author);
             userModel.findByEmail(fakePosts[u].author)
                 .then(function (user) {
-                    console.log('adding post '+u+'to ' + user.firstName);
+                    console.log('adding post ' + u + 'to ' + user.firstName);
                     fakePosts[u]._author = {
                         _id: user._id,
                         name: user.firstName + ' ' + user.lastName,
