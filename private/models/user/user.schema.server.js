@@ -44,7 +44,7 @@ var userSchema = mongoose.Schema({
     _following: [
         { type: mongoose.Schema.Types.ObjectId, ref:"UserModel" }
     ],
-    _posts: [
+    _discussions: [
         { type: mongoose.Schema.Types.ObjectId, ref:"PostModel" }
     ],
 

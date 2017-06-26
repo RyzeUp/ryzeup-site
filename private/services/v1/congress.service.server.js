@@ -25,12 +25,43 @@ module.exports = function (app) {
     getSenate();
 
 
-    function searchSenateBy(ocdID, name, state, district) {
+    function searchSenateBy(ocdId, name, state) {
         var deferred = q.defer();
         results = [];
         getSenate()
             .then(function (senate) {
+                for (var s in senate.members) {
+                    var found = false;
+                    var sen = senate.members[s];
+                    console.log('testing..', sen.first_name);
 
+                    if (state) {
+                        if (sen.state === state.toUpperCase()) {
+                            results.push(sen);
+                            found = true;
+                        }
+                    }
+                    else if (!found && ocdId) {
+                        if (sen.ocd_id === ocdId) {
+                            results.push(sen);
+                            found = true;
+                        }
+                    }
+                    else if (!found && name) {
+                        var names = name.split(' ');
+                        for (var n in names) {
+                            if (sen.first_name.toLowerCase() === names[n].toLowerCase()) {
+                                results.push(sen);
+                                break;
+                            }
+                            else if (sen.last_name.toLowerCase() === names[n].toLowerCase()) {
+                                results.push(sen);
+                                break;
+                            }
+                        }
+                    }
+                }
+                deferred.resolve(results);
             });
         return deferred.promise;
     }
@@ -42,38 +73,34 @@ module.exports = function (app) {
         var name = req.query.name;
         var query = req.query.query;
 
+        console.log('query search', query);
         if (query) {
-            google.get('/representatives', req.query)
+            google.get('/representatives', { address: req.query.query })
                 .then(function (response) {
-                    res.json(response);
+                    console.log(response);
+                    for (var d in response.divisions) {
+                        var s = d.indexOf('/state:');
+                        var c = d.indexOf('/cd:');
+                        if (s != -1 && !state) {
+                            state = d.substring(s + 7, s + 9);
+                        }
+                        if (c != -1 && !district) {
+                            district = d.substring(c + 4);
+                            break;
+                        }
+                    }
                 }, function (error) {
                     res.sendStatus(404).send(error);
                 })
         }
 
-        if (state) {
-            propublica.get('/congress/v1/members/senate/' + state + '/current.json')
-                .then(function (response) {
-                    for (var i in response.results) {
-                        result.push(response.results[i]);
-                    }
-                    var url = '/congress/v1/members/house/' + state +
-                        (district ? '/' + district : '') + '/current.json'
-                    propublica.get(url)
-                        .then(function (response) {
-                            for (var i in response.results) {
-                                result.push(response.results[i]);
-                            }
-                            res.json(result[0]);
-                        }, function (err) {
-                            res.json(result[0]);
-                        });
-                }, function (err) {
-                    res.sendStatus(404);
+        if (name) {
+            console.log('searching by ', name);
+            searchSenateBy(null, name, null)
+                .then(function (results) {
+                    console.log('results = ', results);
+                    res.json(results);
                 })
-        }
-        else if (name) {
-            searchByName(req, res, name);
         }
     }
 
@@ -109,23 +136,6 @@ module.exports = function (app) {
             }, function (e) {
                 res.sendStatus(404);
             });
-    }
-
-    //TODO NOT DONE
-    function searchByName(req, res, name) {
-        var names = name.split(' ');
-
-        getSenate()
-            .then(function (response) {
-                console.log(senate);
-                getHouse()
-                    .then(function (house) {
-                        console.log(house);
-                    })
-            }, function (error) {
-                res.sendStatus(404);
-            });
-        res.sendStatus(200);
     }
 
     function houseReq(req, res) {

@@ -87,13 +87,13 @@ model.getUserPage = function(pageIdx) {
 model.addPost = function(userId, postId) {
     return model.update(
         { _id: userId },
-        { $push: { _posts: postId } });
+        { $push: { _discussions: postId } });
 };
 
 model.removePost = function(userId, postId) {
     return model.update(
         { _id: userId },
-        { $pull: { _posts: postId } });
+        { $pull: { _discussions: postId } });
 };
 
 module.exports = model;

@@ -16,7 +16,6 @@ module.exports = function () {
     return api;
 
     function get(path, query) {
-        console.log('getting: www.googleapis.com/civicinfo/v2' + path);
         var deferred = q.defer();
         https.get({
             host: 'www.googleapis.com',

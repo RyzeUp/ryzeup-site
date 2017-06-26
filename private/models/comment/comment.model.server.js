@@ -3,11 +3,11 @@
  */
 const q        = require('q');
 const mongoose = require('mongoose');
-const schema   = require('./user.schema.server');
-const validations = require('./user.model.validation.server');
+const schema   = require('./comment.schema.server');
+const validations = require('./comment.model.validation.server');
 const validate    = require('../model.validator.server')(validations);
 
-var model = mongoose.model('UserModel', schema);
+var model = mongoose.model('CommentModel', schema);
 
 model.createUser = function (user) {
     return validate(user)
