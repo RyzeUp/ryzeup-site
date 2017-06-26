@@ -62,9 +62,9 @@
             postService.recentReq()
                 .then(function (res) {
                     model.posts = res;
+                    console.log(model.posts);
                 });
 
-            model.posts = [];
             for (var i = 0; i < 10; i++) {
                 var temp = {
                     title: 'title',
