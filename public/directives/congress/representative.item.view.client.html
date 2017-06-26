@@ -1,8 +1,8 @@
-<md-content>
-    <md-card ng-click="model.goToDetailsPage(rep.id)"
+<md-content ng-show="rep" ng-controller="representativeController as ctrl">
+    <md-card ng-click="ctrl.goToRepDetailsPage(rep.id)"
              class="{{rep.party}}">
         <md-card-header>
-            <md-card-avatar>
+            <md-card-avatar ng-click="ctrl.test()">
                 <img class="md-user-avatar"
                      src="https://theunitedstates.io/images/congress/225x275/{{rep.id}}.jpg">
             </md-card-avatar>
@@ -52,7 +52,7 @@
                 <i class="mdi mdi-rss"></i>
             </md-button>
             <md-button ng-show="rep.contact.phone"
-                       ng-click="model.showPhone(rep.contact.phone)"
+                       ng-click="this.showPhone(rep.contact.phone)"
                        aria-label="phone-button">
                 <i class="mdi mdi-phone"></i>
             </md-button>

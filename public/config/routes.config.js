@@ -9,7 +9,17 @@
     function configuration($routeProvider) {
         $routeProvider
             .when('/', {
-                templateUrl: 'views/landing/templates/landing.view.client.html'
+                resolve: {
+                    loggedIn: sendToLanding
+                }
+            })
+            .when('/home', {
+                templateUrl: 'views/home/templates/home.view.client.html',
+                controller: 'homeController',
+                controllerAs: 'model',
+                resolve: {
+                    loggedIn: checkLoggedIn
+                }
             })
             .when('/login', {
                 templateUrl: 'views/user/templates/login.view.client.html',
@@ -21,20 +31,17 @@
                 controller: 'registerController',
                 controllerAs: 'model'
             })
-            .when('/home', {
-                templateUrl: 'views/home/templates/home.view.client.html',
-                controller: 'homeController',
-                controllerAs: 'model',
-                resolve: {
-                    loggedIn: checkLoggedIn
-                }
+            .when('/landing', {
+                templateUrl: 'views/landing/templates/landing.view.client.html',
+                controller: 'landingController',
+                controllerAs: 'model'
             })
             .when('/profile', {
                 templateUrl: 'views/user/templates/profile.view.client.html',
                 controller: 'profileController',
                 controllerAs: 'model',
                 resolve: {
-                    loggedIn: checkLoggedIn
+                    loggedIn: requireLoggedIn
                 }
             })
             .when('/bills', {
@@ -48,12 +55,18 @@
             .when('/representative/details/:repid', {
                 templateUrl: 'views/representative/templates/representative.view.client.html',
                 controller: 'representativeController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: {
+                    loggedIn: checkLoggedIn
+                }
             })
             .when('/post/details/:postid', {
                 templateUrl: 'views/post/templates/post.view.client.html',
                 controller: 'postController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: {
+                    loggedIn: checkLoggedIn
+                }
             })
             .when('/search', {
                 templateUrl: 'views/search/templates/search.view.client.html',
@@ -80,21 +93,44 @@
                 $rootScope.errorMessage = null;
                 if (user.data !== '0') {
                     $rootScope.currentUser = user.data;
+                    console.log('user loggedin')
                     deferred.resolve(user.data);
                 } else {
-                    deferred.reject();
-                    $location.url('/login');
+                    console.log('user not logged in')
+                    $rootScope.currentUser = null;
+                    deferred.resolve(null);
                 }
             });
         return deferred.promise;
     };
 
+    var sendToLanding = function ($q, $timeout, $http, $location, $rootScope) {
+        checkLoggedIn($q, $timeout, $http, $location, $rootScope)
+            .then(function (user) {
+                $location.url('/home')
+            }, function (err) {
+                $location.url('/landing')
+            })
+    };
+
+
+    var requireLoggedIn = function ($q, $timeout, $http, $location, $rootScope) {
+        checkLoggedIn($q, $timeout, $http, $location, $rootScope)
+            .then(function (user) {
+                // allow
+            }, function (err) {
+                $location.url('/home')
+            })
+    };
+
     var checkAdmin = function ($q, $timeout, $http, $location, $rootScope) {
         checkLoggedIn($q, $timeout, $http, $location, $rootScope)
             .then(function (user) {
-                if (!user.role === 'admin') {
+                if (user.role !== 'admin') {
                     $location.url('/');
                 }
+            }, function (err) {
+                $location.url('/')
             })
     };
 })();
