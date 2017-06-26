@@ -1,8 +1,8 @@
-<md-content ng-show="rep" ng-controller="representativeController as ctrl">
+<md-content ng-show="rep" ng-controller="RepController as ctrl">
     <md-card ng-click="ctrl.goToRepDetailsPage(rep.id)"
              class="{{rep.party}}">
         <md-card-header>
-            <md-card-avatar ng-click="ctrl.test()">
+            <md-card-avatar>
                 <img class="md-user-avatar"
                      src="https://theunitedstates.io/images/congress/225x275/{{rep.id}}.jpg">
             </md-card-avatar>

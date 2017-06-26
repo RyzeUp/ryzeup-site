@@ -55,8 +55,16 @@
                     loggedIn: checkLoggedIn
                 }
             })
+            .when('/members', {
+                templateUrl: 'views/members/templates/members.view.client.html',
+                controller: 'membersController',
+                controllerAs: 'model',
+                resolve: {
+                    loggedIn: checkLoggedIn
+                }
+            })
             .when('/representative/details/:repid', {
-                templateUrl: 'views/representative/templates/representative.view.client.html',
+                templateUrl: 'views/members/templates/representative.view.client.html',
                 controller: 'representativeController',
                 controllerAs: 'model',
                 resolve: {

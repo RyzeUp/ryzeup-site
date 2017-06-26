@@ -1,0 +1,108 @@
+<ru-navbar></ru-navbar>
+
+<div layout="column" layout-align="center center" ng-show="!model.rep">
+    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+</div>
+    <md-card layout-padding flex-gt-sm="70" flex-offset-gt-sm="15" ng-show="model.rep">
+        <div layout="row">
+            <div class="rep-detail-titles"
+                 layout="column" flex="45">
+                <md-card-header layout-align="start start">
+                    <md-card-header-text>
+                <span class="md-title"
+                      ng-show="model.rep.middle_name">
+                    {{model.rep.first_name}} {{model.rep.middle_name}} {{model.rep.last_name}}
+                </span>
+                        <span class="md-title"
+                              ng-hide="model.rep.middle_name">{{model.rep.first_name}} {{model.rep.last_name}}
+                    </span>
+                        <span class="md-subhead">
+                        {{model.rep.chamber}}, {{model.rep.title}}<br>
+                        {{model.rep.currentTermStart}} to {{model.rep.currentTermEnd}}
+                    </span>
+                    </md-card-header-text>
+                </md-card-header>
+
+                <md-card-title>
+                    <md-card-title-text>
+                        <div class="md-headline">
+                            <span ng-if="model.rep.party">{{model.rep.party}}, {{model.rep.state}}</span>
+                            <span ng-if="!model.rep.party">I, {{model.rep.state}}</span>
+                        </div>
+                        <p class="md-subhead">
+                            DOB: {{model.rep.dob}}<br>
+                            Gender: {{model.rep.gender}}<br>
+                            Seniority: {{model.rep.seniority}}<br>
+                        </p>
+                    </md-card-title-text>
+                </md-card-title>
+            </div>
+
+            <md-card-title-media>
+                <div class="md-media-lg card-media">
+                    <img src="http://theunitedstates.io/images/congress/450x550/{{model.rep.id}}.jpg"
+                         class="md-card-image"
+                         alt="rep photo">
+                </div>
+            </md-card-title-media>
+        </div>
+
+        <md-card-content>
+            <h3>Votes:</h3>
+            <p class="rep-details">
+                <b>Most recent vote:</b> {{model.rep.most_recent_vote}}<br>
+                <b>Votes with party:</b> {{model.rep.votes_with_party_pct}}%<br>
+                <b>Missed votes:</b> {{model.rep.missed_votes_pct}}%<br>
+            </p>
+            <h3>Bills:</h3>
+            <p class="rep-details">
+                <b>Bills sponsored:</b> {{model.rep.bills_sponsored}}<br>
+                <b>Bills cosponsored:</b> {{model.rep.bills_cosponsored}}<br>
+                <b>Missed votes percentage:</b> {{model.rep.missed_votes_pct}}%<br>
+            </p>
+            <h3>Committees:</h3>
+            <div ng-repeat="com in model.rep.committees">
+                <p class="rep-details">
+                    <b>Name:</b> {{com.name}}
+                    <span ng-if="com.code">, (<i>{{com.code}}</i>)</span>
+                    <b><br>Rank:</b>
+                    <span ng-if="com.rank_in_party"> {{com.rank_in_party}}<br></span>
+                    <span ng-if="!com.rank_in_party"> None<br></span>
+                    <b>End Date:</b> {{com.end_date}}
+                </p>
+            </div>
+        </md-card-content>
+
+        <md-card-actions layout="row" layout-align="center center">
+            <md-button href="{{model.rep.contact.facebook}}"
+                       ng-show="model.rep.contact.facebook"
+                       aria-label="facebook-button">
+                <i class="mdi mdi-facebook mdi-24px"></i>
+            </md-button>
+            <md-button href="{{model.rep.contact.twitter}}"
+                       ng-show="model.rep.contact.twitter"
+                       aria-label="twitter-button">
+                <i class="mdi mdi-twitter mdi-24px"></i>
+            </md-button>
+            <md-button href="{{model.rep.contact.youtube}}"
+                       ng-show="model.rep.contact.youtube"
+                       aria-label="youtube-button">
+                <i class="mdi mdi-youtube-play mdi-24px"></i>
+            </md-button>
+            <md-button href="{{model.rep.contact.url}}"
+                       ng-show="model.rep.contact.url"
+                       aria-label="url-button">
+                <i class="mdi mdi-earth mdi-24px"></i>
+            </md-button>
+            <md-button href="{{model.rep.contact.rss}}"
+                       ng-show="model.rep.contact.rss"
+                       aria-label="rss-button">
+                <i class="mdi mdi-rss mdi-24px"></i>
+            </md-button>
+            <md-button ng-show="model.rep.contact.phone"
+                       ng-click="model.showPhone(model.rep.contact.phone)"
+                       aria-label="phone-button">
+                <i class="mdi mdi-phone mdi-24px"></i>
+            </md-button>
+        </md-card-actions>
+    </md-card>

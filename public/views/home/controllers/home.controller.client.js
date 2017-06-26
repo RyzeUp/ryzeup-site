@@ -13,20 +13,6 @@
         var model = this;
 
         function init() {
-            // congressService.senateReq()
-            //     .then(
-            //         function (res) {
-            //             model.senate = res.members;
-            //             setContact(model.senate);
-            //             console.log(model.senate);
-            //         });
-            // congressService.houseReq()
-            //     .then(
-            //         function (res) {
-            //             model.house = res.members;
-            //             setContact(model.house);
-            //             console.log(model.house);
-            //         });
             billsService.updated('house')
                 .then(function (res) {
                     console.log(res.bills);
@@ -50,12 +36,12 @@
                         imageUrl: 'authorImageUrl'
                     }
                 };
-                billsService.details('hr21-115')
-                    .then(function (response) {
-                        console.log(response);
-                        temp.bill = response;
-                        model.posts.push(temp);
-                    });
+                // billsService.details('hr21-115')
+                //     .then(function (response) {
+                //         console.log(response);
+                //         temp.bill = response;
+                //         model.posts.push(temp);
+                //     });
             }
             console.log('set test posts');
             console.log(model.posts);

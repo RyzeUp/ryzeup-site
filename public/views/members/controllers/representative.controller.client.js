@@ -4,7 +4,8 @@
 (function () {
     angular
         .module('RU')
-        .controller('representativeController', representativeController);
+        .controller('representativeController', representativeController)
+        .controller('membersController', membersController);
 
     function representativeController($routeParams,
                                       congressService) {
@@ -115,4 +116,21 @@
             alert(number);
         };
     }
+
+    function membersController(congressService) {
+        model = this;
+        congressService.senateReq()
+            .then(
+                function (res) {
+                    model.senate = res.members;
+                    console.log(model.senate);
+                });
+        congressService.houseReq()
+            .then(
+                function (res) {
+                    model.house = res.members;
+                    console.log(model.house);
+                });
+    }
+
 })();

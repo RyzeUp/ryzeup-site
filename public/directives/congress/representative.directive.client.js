@@ -5,11 +5,10 @@
 (function () {
     angular
         .module('RU')
-        .controller('representativeController', representativeController)
+        .controller('RepController', RepController)
         .directive('representativeItem', representativeItem);
 
-    function representativeController($location, $scope) {
-        console.log('declaring rep controller');
+    function RepController($location, $scope) {
         var rep = $scope.rep;
         var contact = {};
         if (rep.facebook_account) {

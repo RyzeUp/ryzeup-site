@@ -8,7 +8,7 @@
         .controller('navbarController', navbarController)
         .directive('ruNavbar', ruNavbar);
 
-    function navbarController($rootScope, $location, authService) {
+    function navbarController($rootScope, $location, authService, $window) {
         console.log('ctrl');
         this.user = $rootScope.currentUser;
         if (this.user) {
@@ -49,12 +49,12 @@
             $location.url('/login');
         };
 
-        this.goToMembers= function () {
+        this.goToMembers = function () {
             $location.url('/members');
         };
 
         this.goBack = function () {
-
+            $window.history.back();
         }
 
     }

@@ -1,0 +1,36 @@
+<ru-navbar></ru-navbar>
+
+<md-tabs md-dynamic-height md-border-bottom>
+    <md-tab label="senate">
+        <div layout="column" layout-align="center center" ng-show="!model.senate">
+            <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+        </div>
+        <md-content class="md-padding"
+                    flex-gt-sm="70"
+                    flex-offset-gt-sm="15">
+            <md-list>
+                <md-list-item ng-repeat="rep in model.senate | limitTo: 15">
+                    <representative-item model="model" representative="rep"
+                                         flex="100"></representative-item>
+                </md-list-item>
+            </md-list>
+        </md-content>
+    </md-tab>
+
+    <md-tab label="house">
+        <div layout="column" layout-align="center center" ng-show="!model.house">
+            <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+        </div>
+        <md-content class="md-padding"
+                    flex-gt-sm="70"
+                    flex-offset-gt-sm="15">
+            <md-list>
+                <md-list-item ng-repeat="rep in model.house | limitTo: 15">
+                    <representative-item model="model" representative="rep"
+                                         flex="100"></representative-item>
+                </md-list-item>
+            </md-list>
+        </md-content>
+    </md-tab>
+
+</md-tabs>
