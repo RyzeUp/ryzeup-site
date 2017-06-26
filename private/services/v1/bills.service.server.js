@@ -6,7 +6,7 @@ var q = require('q');
 const https = require('https');
 
 var propublica = require('./helpers/propublica.service.server')();
-var gpo        = require('./helpers/gpo.service.server')();
+var gpo = require('./helpers/gpo.service.server')();
 
 module.exports = function (app) {
 
@@ -26,7 +26,7 @@ module.exports = function (app) {
                 res.sendStatus(404);
             });
     }
-    
+
     function updatedReq(req, res) {
         var chamber = req.params['chamber'];
         propublica.get('/congress/v1/115/' + chamber + '/bills/updated.json')

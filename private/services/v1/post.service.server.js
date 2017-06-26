@@ -6,9 +6,9 @@ const https = require('https');
 
 module.exports = function (app, model) {
 
-    app.get   ('/api/v1/posts/recent', recentReq);
-    app.post  ('/api/v1/posts/new', newReq);
-    app.post  ('/api/v1/posts/update', updateReq);
+    app.get('/api/v1/posts/recent', recentReq);
+    app.post('/api/v1/posts/new', newReq);
+    app.post('/api/v1/posts/update', updateReq);
     app.delete('/api/v1/posts/delete/:postId', deleteReq);
 
 

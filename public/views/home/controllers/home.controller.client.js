@@ -56,9 +56,24 @@
                 .then(function (res) {
                     console.log(res.bills);
                     model.bills = res.bills;
-                })
+                });
 
+            model.posts = [];
+            for (var i = 0; i < 10; i++) {
+                var temp = {
+                    title: 'title',
+                    text: 'text',
+                    billId: 'billId',
+                    _author: {
+                        _id: 'authorId',
+                        name: 'Barack Obama',
+                        imageUrl: 'authorImageUrl'
+                    }
+                };
+                model.posts.push(temp);
+            }
         }
+
         init();
 
         model.showPhone = function (number) {
@@ -69,5 +84,12 @@
             $location.url('/representative/details/' + repId);
         };
 
+        model.getBillById = function (billId) {
+            billsService.details(billId);
+        };
+
+        model.trunc = function (str) {
+            return (this.length > 140) ? this.substr(0, n - 1) + '&hellip;' : this;
+        };
     }
 })();
