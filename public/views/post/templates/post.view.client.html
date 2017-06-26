@@ -3,10 +3,10 @@
 <md-content>
     <md-card>
         <md-card-header>
-            <div layout="row">
-                <md-card-header-text flex="65">
-                    <span class="md-title">{{post.title}}</span>
-                    <span class="md-subhead">{{post._author.name}}</span>
+            <div layout="row" flex="100">
+                <md-card-header-text>
+                    <span class="md-title">{{model.post.title}}</span>
+                    <span class="md-subhead">{{model.post._author.name}}</span>
                 </md-card-header-text>
                 <md-button ng-click="model.followPost(post._id)"
                            aria-label="follow-post-button">
@@ -16,34 +16,34 @@
         </md-card-header>
         <md-card-title>
             <md-card-title-text>
-                <span class="md-headline">{{post.bill.title}}</span>
-                <span class="md-subhead">{{post.bill.summary_short}}</span>
+                <span class="md-headline">{{model.post.bill.title}}</span>
+                <span class="md-subhead">{{model.post.bill.summary_short}}</span>
             </md-card-title-text>
         </md-card-title>
         <md-card-content>
-            <p>
-                {{post.text}}
+            <p class="post-text">
+                {{model.post.text}}
             </p>
         </md-card-content>
     </md-card>
 </md-content>
 
-<md-content class="md-padding"
-            flex-gt-sm="70"
-            flex-offset-gt-sm="15">
-    <p class="md-display-2">Comments</p>
+<md-content>
     <md-list>
+        <p class="md-display-1"
+           flex-offset="15">Comments</p>
         <md-list-item ng-repeat="comment in model.comments | limitTo:15">
-            <md-card>
+            <md-card flex="70"
+                     flex-offset="15">
                 <md-card-header>
                     <md-card-header-text>
-                        <span class="md-title">author name{{comment.author.name}}</span>
-                        <span class="md-subhead">date created{{comment.dateCreated}}</span>
+                        <span class="md-title">{{comment.author.name}}</span>
+                        <span class="md-subhead">{{comment.dateCreated}}</span>
                     </md-card-header-text>
                 </md-card-header>
                 <md-card-content>
                     <p>
-                        comment text{{comment.text}}
+                        {{comment.text}}
                     </p>
                 </md-card-content>
             </md-card>
