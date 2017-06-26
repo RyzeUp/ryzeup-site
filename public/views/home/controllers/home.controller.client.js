@@ -35,5 +35,9 @@
         model.getBillById = function (billId) {
             billsService.details(billId);
         };
+
+        model.goToNewPost = function() {
+            $location.url('/posts/new');
+        }
     }
 })();

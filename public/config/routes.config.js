@@ -87,6 +87,22 @@
                     loggedIn: checkLoggedIn
                 }
             })
+            .when('/posts/new', {
+                templateUrl: 'views/post/templates/post.new.view.client.html',
+                controller: 'newPostController',
+                controllerAs: 'model',
+                resolve: {
+                    loggedIn: requireLoggedIn
+                }
+            })
+            .when('/comments/new', {
+                templateUrl: 'views/search/templates/search.view.client.html',
+                controller: 'searchController',
+                controllerAs: 'model',
+                resolve: {
+                    loggedIn: checkLoggedIn
+                }
+            })
             .when('/admin', {
                 templateUrl: 'views/admin/templates/admin.view.client.html',
                 controller: 'adminController',

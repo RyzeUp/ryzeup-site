@@ -18,6 +18,7 @@
     <md-tab label="bills">
         <md-content class="md-padding"
                     flex-gt-sm="70" flex-offset-gt-sm="15">
+            <h2><i class="mdi mdi-book-open-variant mdi-48px"></i> Latest Bills</h2>
             <md-list>
                 <md-list-item ng-repeat="bill in model.bills | limitTo:25">
                     <bill-item bill="bill"
@@ -29,7 +30,9 @@
 
 </md-tabs>
 
+
 <md-button ng-if="model.loggedIn !== null || model.loggedIn !== undefined"
+           ng-click="model.goToNewPost()"
            class="md-fab action-fab"
            aria-label="Create post">
     <md-tooltip>Create Post</md-tooltip>

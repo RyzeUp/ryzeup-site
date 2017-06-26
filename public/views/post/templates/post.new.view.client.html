@@ -1,0 +1,37 @@
+<ru-navbar></ru-navbar>
+
+
+<md-content>
+    <md-card layout-padding flex-gt-sm="70"
+             flex-offset-gt-sm="15">
+
+        <form name="postForm" layout="column">
+
+            <md-card-header>
+                <md-input-container class="md-icon-float md-block" flex="100">
+                    <label>Title</label>
+                    <input ng-model="model.post.title"
+                           required name="title" type="text">
+                    <div ng-messages="postForm.title.$error" multiple md-auto-hide="false">
+                        <div ng-message="required">Title is required.</div>
+                    </div>
+                </md-input-container>
+            </md-card-header>
+
+            <md-input-container class="md-block">
+                <label>Content</label>
+                <textarea ng-model="model.post.text" md-maxlength="2048" rows="5" md-select-on-focus></textarea>
+            </md-input-container>
+
+            <md-card-actions layout="row" layout-align="end center">
+                <md-button class="md-raised md-primary" aria-label="submit"
+                           id="submit" flex="30"
+                           ng-click="model.submit()" type="submit">
+                    <i flex hide-gt-xs class="mdi mdi-check mdi-24px"></i>
+                    <span flex hide-xs>Submit</span>
+                </md-button>
+            </md-card-actions>
+
+        </form>
+    </md-card>
+</md-content>
