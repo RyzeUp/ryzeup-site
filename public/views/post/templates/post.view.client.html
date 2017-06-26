@@ -48,5 +48,27 @@
                 </md-card-content>
             </md-card>
         </md-list-item>
+
     </md-list>
+
+    <md-card layout-padding flex-gt-sm="70"
+             flex-offset-gt-sm="15">
+
+        <form name="commentForm" layout="column">
+            <md-input-container class="md-block">
+                <label>Content</label>
+                <textarea ng-model="model.newComment.text" md-maxlength="2048" rows="5" md-select-on-focus></textarea>
+            </md-input-container>
+
+            <md-card-actions layout="row" layout-align="end center">
+                <md-button class="md-raised md-primary" aria-label="submit"
+                           id="submit" flex="30"
+                           ng-click="model.submit()" type="submit">
+                    <i flex hide-gt-xs class="mdi mdi-check mdi-24px"></i>
+                    <span flex hide-xs>Submit</span>
+                </md-button>
+            </md-card-actions>
+
+        </form>
+    </md-card>
 </md-content>

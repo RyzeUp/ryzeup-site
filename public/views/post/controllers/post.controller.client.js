@@ -7,11 +7,14 @@
         .controller('postController', postController)
         .controller('newPostController', newPostController);
 
-    function postController($routeParams,
+    function postController($rootScope,
+                            $routeParams,
                             billsService,
                             postService,
                             commentService) {
         var model = this;
+
+        var user = $rootScope.currentUser;
 
         function init() {
             postService.recentReq()
@@ -55,6 +58,22 @@
             console.log(model.post);
             console.log(model.comments);
         }
+
+
+        model.submit = function() {
+            console.log(user);
+            model.newComment._author = {
+                _id: user._id,
+                name: user.firstName + " " + user.lastName,
+                imageUrl: user.picture.url
+            };
+            console.log('submitting', model.newComment);
+            commentService.newReq(model.newComment)
+                .then(function (then) {
+                    model.comments.push(model.newComment);
+                    model.newComment = null;
+                })
+        }
     }
 
 
@@ -70,7 +89,11 @@
                 imageUrl: user.picture.url
             };
             console.log('submitting', model.post);
-            postService.newReq(model.post);
+            postService.newReq(model.post)
+                .then(function (then) {
+                    $location.url('/');
+                })
         }
     }
+
 })();
