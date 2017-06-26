@@ -26,4 +26,7 @@ module.exports = function (app) {
     require('./services/v1/post.service.server')(app, postModel);
     require('./services/v1/comment.service.server')(app, commentModel);
 
+
+    require('./fixtures/fake.data.server')(app);
+
 };

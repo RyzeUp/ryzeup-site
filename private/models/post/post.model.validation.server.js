@@ -6,7 +6,7 @@
 // returns validated comment
 
 var validations = {
-    validatesLength: validatesLength
+    // validatesLength: validatesLength
 };
 module.exports = validations;
 

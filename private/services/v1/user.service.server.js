@@ -12,48 +12,6 @@ module.exports = function (app, model) {
     app.post('/api/v1/user/newpass/:id', newpassReq);
     app.get('/api/v1/user/unregister/:id', unregisterReq);
 
-    app.get('/dev/v1/add/users', addDummyUsers)
-    // Mock users
-    var dummyUsers = [
-        {
-            firstName: 'Alice',
-            lastName: 'Wonderland',
-            email: 'alice@email.com',
-            password: 'alice'
-        },
-        {
-            firstName: 'Bob',
-            lastName: 'Bo',
-            email: 'bob@email.com',
-            password: 'bob'
-        },
-        {
-            firstName: 'Alex',
-            lastName: 'Alex',
-            email: 'alex@email.com',
-            password: 'alex'
-        },
-        {
-            firstName: 'Mary',
-            lastName: 'Ellen',
-            email: 'mary@email.com',
-            password: 'mary'
-        }
-    ];
-
-    function addDummyUsers(req, res) {
-        for (var u in dummyUsers) {
-            dummyUsers[u].password =  bcrypt.hashSync(dummyUsers[u].password);
-            dummyUsers[u].picture = {
-                is_unset: true,
-                url: '/assets/images/profile-images/default-profile.png'
-            };
-            model.createUser(dummyUsers[u]);
-        }
-        res.sendStatus(200);
-    }
-
-
     function userReq(req, res) {
         var userId = req.params['id'];
         if (req.isAuthenticated() && (req.user._id + '') === userId) {

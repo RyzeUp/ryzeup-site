@@ -12,11 +12,14 @@ const userModel   = require('../user/user.model.server');
 var model = mongoose.model('PostModel', schema);
 
 model.createPost = function (post) {
+    console.log('creating post');
     return validate(post)
         .then(function(validatedPost) {
+            console.log('post validated');
             return model.create(validatedPost);
         })
         .then(function (addedPost) {
+            console.log('adding post to user');
             return userModel.addPost(post._author._id, post._id);
         })
 };
