@@ -29,6 +29,7 @@
             model.posts = [];
             for (var i = 0; i < 10; i++) {
                 var temp = {
+                    _id: i,
                     title: 'title' + i,
                     text: 'text' + i,
                     billId: 'billId' + i,
