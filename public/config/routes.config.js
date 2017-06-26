@@ -11,12 +11,12 @@
         //.when('/', {
         //    templateUrl: 'views/landing/templates/landing.view.client.html'
         //})
-            .when('/', {
+            .when('/home', {
                 resolve: {
                     loggedIn: sendToLanding
                 }
             })
-            .when('/home', {
+            .when('/', {
                 templateUrl: 'views/home/templates/home.view.client.html',
                 controller: 'homeController',
                 controllerAs: 'model',

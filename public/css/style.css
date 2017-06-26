@@ -103,3 +103,14 @@ md-card md-card-header md-card-avatar .md-user-avatar {
     padding-bottom: 10px;
     margin-bottom: 5px;
 }
+
+.landing-container {
+    margin-left: 50px;
+    margin-right: 50px;
+    min-width: 250px;
+    max-width: 1000px;
+}
+
+.landing-links {
+    margin-left: 100px;
+}
