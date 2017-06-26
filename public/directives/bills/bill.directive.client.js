@@ -11,7 +11,6 @@
         return {
             require: "ngModel",
             scope: {
-                model: "=model",
                 bill:   "=bill"
             },
             templateUrl: "/directives/bills/bill.item.view.client.html"

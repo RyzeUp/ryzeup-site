@@ -62,7 +62,9 @@ md-card md-card-header md-card-avatar .md-user-avatar {
 
 .profile-image {
     height: 40px;
+    width: 40px;
 }
+
 
 .navbar-fixed-top {
     position: fixed; /* Set the navbar to fixed position */
@@ -102,4 +104,12 @@ md-card md-card-header md-card-avatar .md-user-avatar {
 .post-text {
     padding-bottom: 10px;
     margin-bottom: 5px;
+}
+
+
+.action-fab {
+    position: fixed;
+    bottom: 48px;
+    right: 48px;
+
 }
