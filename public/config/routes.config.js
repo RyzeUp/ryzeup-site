@@ -118,9 +118,10 @@
     var sendToLanding = function ($q, $timeout, $http, $location, $rootScope) {
         checkLoggedIn($q, $timeout, $http, $location, $rootScope)
             .then(function (user) {
-                $location.url('/home')
-            }, function (err) {
-                $location.url('/landing')
+                if (user)
+                    $location.url('/home');
+                else
+                    $location.url('/landing');
             })
     };
 
@@ -129,8 +130,8 @@
         checkLoggedIn($q, $timeout, $http, $location, $rootScope)
             .then(function (user) {
                 // allow
-            }, function (err) {
-                $location.url('/home')
+                if (!user)
+                    $location.url('/home');
             })
     };
 
@@ -140,8 +141,6 @@
                 if (user.role !== 'admin') {
                     $location.url('/');
                 }
-            }, function (err) {
-                $location.url('/')
             })
     };
 })();
