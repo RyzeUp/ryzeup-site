@@ -49,4 +49,20 @@ model.getPosts = function () {
     return model.find();
 };
 
+model.addComment = function(postId, commentId) {
+    return model.update(
+        { _id: postId },
+        { $push: { _comments: commentId } });
+};
+
+model.removeComment = function(postId, commentId) {
+    return model.update(
+        { _id: postId },
+        { $pull: { _comments: commentId } });
+};
+
+model.findPostsByUsertId = function (userId) {
+    model.find({ _author: { _id: userId } });
+};
+
 module.exports = model;
