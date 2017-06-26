@@ -18,7 +18,6 @@
 
              });
              */
-            model.post = {};
             var temp = {
                 _id: '123',
                 title: 'title',
@@ -30,11 +29,11 @@
                     imageUrl: 'authorImageUrl'
                 }
             };
+            model.post = temp;
             billsService.details('hr21-115')
                 .then(function (response) {
                     console.log(response);
-                    temp.bill = response;
-                    model.post = temp;
+                    model.post.bill = response;
                 });
 
             commentService.commentsReq()
@@ -44,11 +43,10 @@
                     console.log(model.comments);
                 });
         }
+
+        init();
+        model.followPost = function (postid) {
+            //TODO FOLLOW
+        };
     }
-
-    init();
-
-    model.followPost = function (postid) {
-        //TODO FOLLOW
-    };
 })();

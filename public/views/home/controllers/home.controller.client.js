@@ -32,22 +32,24 @@
                     console.log(res.bills);
                     model.bills = res.bills;
                 });
-
-            postService.recentReq()
-                .then(function (res) {
-                    model.posts = res;
-                    console.log(model.posts);
-                });
-
+            /*
+             postService.recentReq()
+             .then(function (res) {
+             model.posts = res;
+             console.log('grabbing posts');
+             console.log(model.posts);
+             });
+             */
+            model.posts = [];
             for (var i = 0; i < 10; i++) {
                 var temp = {
-                    title: 'title',
-                    text: 'text',
-                    billId: 'billId',
+                    title: 'title' + i,
+                    text: 'text' + i,
+                    billId: 'billId' + i,
                     _author: {
-                        _id: 'authorId',
-                        name: 'Barack Obama',
-                        imageUrl: 'authorImageUrl'
+                        _id: 'authorId' + i,
+                        name: 'Barack Obama' + i,
+                        imageUrl: 'authorImageUrl' + i
                     }
                 };
                 billsService.details('hr21-115')
@@ -60,6 +62,7 @@
             console.log('set test posts');
             console.log(model.posts);
         }
+
         init();
 
         model.goToPostDetailsPage = function (postId) {
