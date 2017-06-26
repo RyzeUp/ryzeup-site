@@ -8,7 +8,8 @@
                      src="{{ctrl.userImgUrl}}">
             </div>
 
-            <md-card-header-text>
+            <md-card-header-text class="post-title"
+                                 ng-click="ctrl.goToPostDetailsPage(post._id)">
                 <span class="md-title">{{post.title}}</span>
                 <span class="md-subhead">{{post._author.name}}</span>
             </md-card-header-text>

@@ -65,7 +65,6 @@ md-card md-card-header md-card-avatar .md-user-avatar {
     width: 40px;
 }
 
-
 .navbar-fixed-top {
     position: fixed; /* Set the navbar to fixed position */
     top: 0; /* Position the navbar at the top of the page */
@@ -121,4 +120,9 @@ md-card md-card-header md-card-avatar .md-user-avatar {
 
 .landing-links {
     margin-left: 100px;
+}
+
+.post-title:hover {
+    background: rgba(122, 122, 122, 0.4);
+    opacity: 0.85;
 }

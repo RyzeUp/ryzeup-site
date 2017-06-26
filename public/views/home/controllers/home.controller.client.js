@@ -6,8 +6,7 @@
         .module('RU')
         .controller('homeController', homeController);
 
-    function homeController($location,
-                            congressService,
+    function homeController($rootScope,
                             billsService,
                             postService) {
         var model = this;
@@ -19,12 +18,16 @@
                     model.bills = res.bills;
                 });
 
-             postService.recentReq()
-                 .then(function (res) {
-                     model.posts = res;
-                     console.log('grabbing posts', res);
-                     console.log(model.posts);
-                 });
+            postService.recentReq()
+                .then(function (res) {
+                    model.posts = res;
+                    console.log('grabbing posts', res);
+                    console.log(model.posts);
+                });
+
+
+            model.loggedIn = $rootScope.currentUser;
+            console.log(model.loggedIn);
         }
 
         init();
