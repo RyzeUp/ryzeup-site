@@ -11,7 +11,8 @@
                             $routeParams,
                             billsService,
                             postService,
-                            commentService) {
+                            commentService,
+    $route) {
         var model = this;
 
         var user = $rootScope.currentUser;
@@ -30,6 +31,7 @@
                     model.comments = res;
                     console.log('hello comments');
                     console.log(model.comments);
+                    $route.reload();
                 });
         }
 
