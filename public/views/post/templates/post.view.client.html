@@ -1,14 +1,21 @@
 <md-content>
     <md-card ng-click="model.goToDetailsPage(rep.id)">
         <md-card-header>
-            <md-card-header-text>
-                <span class="md-title">{{post.title}}</span>
-                <span class="md-subhead">{{post.author.name}}</span>
-            </md-card-header-text>
+            <div layout="row">
+                <md-card-header-text flex="65">
+                    <span class="md-title">{{post.title}}</span>
+                    <span class="md-subhead">{{post._author.name}}</span>
+                </md-card-header-text>
+                <md-button ng-click="model.followPost(post._id)"
+                           aria-label="follow-post-button">
+                    <i class="mdi mdi-bookmark-plus"></i>
+                </md-button>
+            </div>
         </md-card-header>
         <md-card-title>
             <md-card-title-text>
-                <span class="md-headline">{{post.billId}}</span>
+                <span class="md-headline">{{post.bill.title}}</span>
+                <span class="md-subhead">{{post.bill.summary_short}}</span>
             </md-card-title-text>
         </md-card-title>
         <md-card-content>

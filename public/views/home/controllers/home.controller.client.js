@@ -95,6 +95,10 @@
             $location.url('/post/details/' + postId);
         };
 
+        model.followPost = function (postid) {
+            //TODO FOLLOW
+        };
+
         model.getBillById = function (billId) {
             billsService.details(billId);
         };
