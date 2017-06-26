@@ -8,7 +8,7 @@
 
     function homeController($rootScope,
                             billsService,
-                            postService) {
+                            postService, $location) {
         var model = this;
 
         function init() {
