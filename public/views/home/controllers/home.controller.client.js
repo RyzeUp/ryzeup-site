@@ -62,6 +62,9 @@
         }
         init();
 
+        model.goToPostDetailsPage = function (postId) {
+            $location.url('/post/details/' + postId);
+        };
 
         model.followPost = function (postid) {
             //TODO FOLLOW

@@ -8,12 +8,19 @@
 
     function postController($routeParams,
                             billsService,
-                            postService) {
+                            postService,
+                            commentService) {
         var model = this;
 
         function init() {
-            model.posts = [];
+            /*postService.detailsReq()
+             .then(function () {
+
+             });
+             */
+            model.post = {};
             var temp = {
+                _id: '123',
                 title: 'title',
                 text: 'text',
                 billId: 'hr21-115',
@@ -27,7 +34,14 @@
                 .then(function (response) {
                     console.log(response);
                     temp.bill = response;
-                    model.posts.push(temp);
+                    model.post = temp;
+                });
+
+            commentService.commentsReq()
+                .then(function (res) {
+                    model.comments = res;
+                    console.log('hello comments');
+                    console.log(model.comments);
                 });
         }
     }

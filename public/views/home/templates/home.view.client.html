@@ -48,7 +48,7 @@
             <h1 class="md-display-2">Posts</h1>
             <md-list>
                 <md-list-item ng-repeat="post in model.posts | limitTo:15">
-                    <md-card ng-click="model.goToPostDetails(post._id)">
+                    <md-card ng-click="model.goToPostDetailsPage(post._id)">
                         <md-card-header>
                             <md-card-header-text>
                                 <span class="md-title">{{post.title}}</span>
