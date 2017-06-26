@@ -25,3 +25,30 @@
         </md-card-content>
     </md-card>
 </md-content>
+
+<md-content class="md-padding"
+            flex-gt-sm="70"
+            flex-offset-gt-sm="15">
+    <h3 class="md-display-2">Comments</h3>
+    <md-list>
+        <md-list-item ng-repeat="comment in model.comments | limitTo:15">
+            <md-card>
+                <md-card-header>
+                    <md-card-header-text>
+                        <span class="md-title">{{post.title}}</span>
+                        <span class="md-subhead">{{post._author.name}}</span>
+                    </md-card-header-text>
+                    <md-button ng-click="model.followPost(post._id)"
+                               aria-label="follow-post-button">
+                        <i class="mdi mdi-bookmark-plus"></i>
+                    </md-button>
+                </md-card-header>
+                <md-card-content>
+                    <p>
+                        {{(post.text).substring(0, 140)}}
+                    </p>
+                </md-card-content>
+            </md-card>
+        </md-list-item>
+    </md-list>
+</md-content>

@@ -8,7 +8,8 @@
 
     function homeController($location,
                             congressService,
-                            billsService) {
+                            billsService,
+                            postService) {
         var model = this;
 
         function init() {
@@ -56,6 +57,11 @@
                 .then(function (res) {
                     console.log(res.bills);
                     model.bills = res.bills;
+                });
+
+            postService.recentReq()
+                .then(function (res) {
+                    model.posts = res;
                 });
 
             model.posts = [];
