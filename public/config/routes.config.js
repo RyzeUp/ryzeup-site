@@ -47,6 +47,11 @@
                 controller: 'representativeController',
                 controllerAs: 'model'
             })
+            .when('/post/details/:postid', {
+                templateUrl: 'views/post/templates/post.view.client.html',
+                controller: 'postController',
+                controllerAs: 'model'
+            })
             .when('/search', {
                 templateUrl: 'views/search/templates/search.view.client.html',
                 controller: 'searchController',

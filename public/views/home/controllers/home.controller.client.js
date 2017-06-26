@@ -80,8 +80,12 @@
             alert(number);
         };
 
-        model.goToDetailsPage = function (repId) {
+        model.goToRepDetailsPage = function (repId) {
             $location.url('/representative/details/' + repId);
+        };
+
+        model.goToPostDetailsPage = function () {
+            $location.url('/post/details/' + postId);
         };
 
         model.getBillById = function (billId) {
