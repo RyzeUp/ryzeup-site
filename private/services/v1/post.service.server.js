@@ -31,7 +31,7 @@ module.exports = function (app, model) {
     }
 
     function updateReq(req, res) {
-        model.createPost(req.body._id, req.body)
+        model.updatePostById(req.body._id, req.body)
             .then(function (response) {
                 res.sendStatus(200);
             }, function (err) {

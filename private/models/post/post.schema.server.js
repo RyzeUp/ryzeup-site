@@ -12,7 +12,11 @@ var postSchema = mongoose.Schema({
     },
     title: String,
     text: String,
-    billId: String
+    billId: String,
+
+    _comments: [
+        { type: mongoose.Schema.Types.ObjectId, ref:"CommentModel" }
+    ]
 
 }, { collection: "post" });
 module.exports = postSchema;

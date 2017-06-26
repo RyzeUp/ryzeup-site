@@ -7,45 +7,41 @@ const schema   = require('./comment.schema.server');
 const validations = require('./comment.model.validation.server');
 const validate    = require('../model.validator.server')(validations);
 
+const commentModel   = require('../comment/comment.model.server');
+
+
 var model = mongoose.model('CommentModel', schema);
 
-model.createUser = function (user) {
-    return validate(user)
-        .then(function(validatedUser) {
-            return model.create(validatedUser);
-        });
+
+model.createComment = function (comment) {
+    return validate(comment)
+        .then(function(validatedComment) {
+            return model.create(validatedComment);
+        })
+        .then(function (addedComment) {
+            return commentModel.addPost(comment._discussion._id, comment._id);
+        })
 };
 
-model.findUserById = function (id) {
+model.findCommentById = function (id) {
     return model.findById(id);
 };
 
-model.findByUsername = function (username) {
-    return model.findOne({ username_lower: username.toLowerCase() });
-};
-
-model.findByEmail = function (email) {
-    return model.findOne({ email: email });
-};
-model.updateUserById = function (id, newUser) {
-    return validate(newUser)
-        .then(function(validatedUser) {
+model.updateCommentById = function (id, newComment) {
+    return validate(newComment)
+        .then(function(validatedComment) {
             return model.update(
                 { _id: id },
-                { $set: validatedUser });
+                { $set: validatedComment });
         });
 };
 
-model.removeUserById = function (id) {
-    return model.remove({ _id: id })
+model.removeCommentById = function (id) {
+    return model.remove({ _id: id });
 };
 
-model.findUserByFacebookId = function(facebook_id) {
-    return model.findOne({ 'facebook.id': facebook_id });
-};
-
-model.findUserByGoogleId = function(google_id) {
-    return model.findOne({ 'google.id': google_id });
+model.findCommentsByPostId = function (postId) {
+    model.find({ _discussion: postId });
 };
 
 module.exports = model;
