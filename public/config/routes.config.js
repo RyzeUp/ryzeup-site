@@ -8,8 +8,16 @@
 
     function configuration($routeProvider) {
         $routeProvider
+        //.when('/', {
+        //    templateUrl: 'views/landing/templates/landing.view.client.html'
+        //})
             .when('/', {
-                templateUrl: 'views/landing/templates/landing.view.client.html'
+                templateUrl: 'views/home/templates/home.view.client.html',
+                controller: 'homeController',
+                controllerAs: 'model',
+                resolve: {
+                    loggedIn: checkLoggedIn
+                }
             })
             .when('/login', {
                 templateUrl: 'views/user/templates/login.view.client.html',
@@ -20,14 +28,6 @@
                 templateUrl: 'views/user/templates/register.view.client.html',
                 controller: 'registerController',
                 controllerAs: 'model'
-            })
-            .when('/home', {
-                templateUrl: 'views/home/templates/home.view.client.html',
-                controller: 'homeController',
-                controllerAs: 'model',
-                resolve: {
-                    loggedIn: checkLoggedIn
-                }
             })
             .when('/profile', {
                 templateUrl: 'views/user/templates/profile.view.client.html',
