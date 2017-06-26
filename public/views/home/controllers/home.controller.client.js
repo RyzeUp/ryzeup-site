@@ -29,6 +29,7 @@
             model.posts = [];
             for (var i = 0; i < 10; i++) {
                 var temp = {
+                    _id: i,
                     title: 'title' + i,
                     text: 'text' + i,
                     billId: 'billId' + i,
@@ -38,12 +39,7 @@
                         imageUrl: 'authorImageUrl' + i
                     }
                 };
-                // billsService.details('hr21-115')
-                //     .then(function (response) {
-                //         console.log(response);
-                //         temp.bill = response;
-                //         model.posts.push(temp);
-                //     });
+                model.posts.push(temp);
             }
             console.log('set test posts');
             console.log(model.posts);
