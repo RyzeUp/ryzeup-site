@@ -70,7 +70,12 @@
                         imageUrl: 'authorImageUrl'
                     }
                 };
-                model.posts.push(temp);
+                billsService.details('hr21-115')
+                    .then(function (response) {
+                        console.log(response.data);
+                        temp.bill = response.data;
+                        model.posts.push(temp);
+                    });
             }
         }
 
