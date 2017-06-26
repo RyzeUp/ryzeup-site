@@ -98,3 +98,8 @@ md-card md-card-header md-card-avatar .md-user-avatar {
     background: rgba(122, 122, 122, 0.4);
     opacity: 0.85;
 }
+
+.post-text {
+    padding-bottom: 10px;
+    margin-bottom: 5px;
+}
