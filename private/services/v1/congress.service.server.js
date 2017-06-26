@@ -24,8 +24,61 @@ module.exports = function (app) {
     getHouse();
     getSenate();
 
+    function searchHouseBy(results, ocdId, name, state, district) {
+        var deferred = q.defer();
+        getHouse()
+            .then(function (house) {
+                for (var r in house.members) {
+                    var found = false;
+                    var rep = house.members[r];
+                    if (!found && name) {
+                        var names = name.split(' ');
+                        for (var n in names) {
+                            if (rep.first_name.toLowerCase() === names[n].toLowerCase()) {
+                                results.push(rep);
+                                break;
+                            }
+                            else if (rep.last_name.toLowerCase() === names[n].toLowerCase()) {
+                                results.push(rep);
+                                break;
+                            }
+                        }
+                    }
+                    if (state) {
+                        if (rep.state === state.toUpperCase()) {
+                            console.log(rep.first_name);
+                            console.log(district);
+                            if (district) {
+                                if (rep.district == district) {
+                                    results.push(rep);
+                                    found = true;
+                                }
+                            }
+                            else {
+                                results.push(rep);
+                                found = true;
+                            }
+                        }
+                    }
+                    if (!found && ocdId) {
+                        if (rep.ocd_id === ocdId) {
+                            results.push(rep);
+                            found = true;
+                        }
+                    }
+                }
+                deferred.resolve({
+                    ocdId: ocdId,
+                    name: name,
+                    state: state,
+                    district: district,
+                    results: results
+                });
+            });
+        return deferred.promise;
+    }
 
-    function searchSenateBy(ocdId, name, state) {
+    function searchSenateBy(ocdId, name, state, district) {
         var deferred = q.defer();
         results = [];
         getSenate()
@@ -33,21 +86,7 @@ module.exports = function (app) {
                 for (var s in senate.members) {
                     var found = false;
                     var sen = senate.members[s];
-                    console.log('testing..', sen.first_name);
-
-                    if (state) {
-                        if (sen.state === state.toUpperCase()) {
-                            results.push(sen);
-                            found = true;
-                        }
-                    }
-                    else if (!found && ocdId) {
-                        if (sen.ocd_id === ocdId) {
-                            results.push(sen);
-                            found = true;
-                        }
-                    }
-                    else if (!found && name) {
+                    if (!found && name) {
                         var names = name.split(' ');
                         for (var n in names) {
                             if (sen.first_name.toLowerCase() === names[n].toLowerCase()) {
@@ -60,8 +99,26 @@ module.exports = function (app) {
                             }
                         }
                     }
+                    if (!found && state) {
+                        if (sen.state === state.toUpperCase()) {
+                            results.push(sen);
+                            found = true;
+                        }
+                    }
+                    if (!found && ocdId) {
+                        if (sen.ocd_id === ocdId) {
+                            results.push(sen);
+                            found = true;
+                        }
+                    }
                 }
-                deferred.resolve(results);
+                deferred.resolve({
+                    ocdId: ocdId,
+                    name: name,
+                    state: state,
+                    district: district,
+                    results: results
+                });
             });
         return deferred.promise;
     }
@@ -77,7 +134,8 @@ module.exports = function (app) {
         if (query) {
             google.get('/representatives', { address: req.query.query })
                 .then(function (response) {
-                    console.log(response);
+                    var state;
+                    var district;
                     for (var d in response.divisions) {
                         var s = d.indexOf('/state:');
                         var c = d.indexOf('/cd:');
@@ -89,8 +147,21 @@ module.exports = function (app) {
                             break;
                         }
                     }
-                }, function (error) {
-                    res.sendStatus(404).send(error);
+                    return searchSenateBy(null, req.query.query, state, district);
+                })
+                .then(function (result) {
+                    return searchHouseBy(
+                        result.results,
+                        result.ocdId,
+                        result.name,
+                        result.state,
+                        result.district
+                    )
+                })
+                .then(function (result) {
+                    res.json(result.results);
+                }, function (err) {
+                    res.sendStatus(404);
                 })
         }
 
