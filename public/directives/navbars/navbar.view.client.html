@@ -1,23 +1,33 @@
-<md-toolbar class="md-hue-2 navbar-fixed-top" ng-controller="navbarController as ctrl">
+<md-toolbar class="navbar-fixed-top"
+            md-theme="grey-theme"
+            ng-controller="navbarController as ctrl">
     <div class="md-toolbar-tools">
 
-        <md-button class="mdi-icon-button" aria-label="Back"
-                   ng-click="ctrl.goBack()">
-            <md-tooltip>Back</md-tooltip>
-            <i class="mdi mdi-arrow-left-thick mdi-24px"></i>
-        </md-button>
+        <!--<md-button class="mdi-icon-button" aria-label="Back"-->
+                   <!--ng-click="ctrl.goBack()">-->
+            <!--<md-tooltip>Back</md-tooltip>-->
+            <!--<i class="mdi mdi-arrow-left-thick mdi-24px"></i>-->
+        <!--</md-button>-->
 
 
         <h2 flex md-truncate>
-            <span ng-click="ctrl.goToHome()">Ryze Up</span></h2>
+            <!--<span ng-click="ctrl.goToHome()">Ryze Up</span>-->
+            <img class="navbar-logo"
+                 src="/assets/logos/RyzeUp-logo-noback.png">
+            <!--<md-tooltip>Home</md-tooltip>-->
+            </img>
+        </h2>
 
-        <!--<md-button class="md-icon-button" aria-label="Favorite">-->
-        <!--<md-icon md-font-set="material-icons">favorite</md-icon>-->
-        <!--</md-button>-->
+        <p style="font-weight: 200; margin-right: 10px">
+            {{ctrl.user.firstName.toUpperCase()}}
+        </p>
 
-        <!--<md-button class="md-icon-button" aria-label="More">-->
-        <!--<md-icon md-font-set="material-icons">more_vert</md-icon>-->
-        <!--</md-button>-->
+        <div class="profile-image" ng-click="ctrl.profileClick()"
+             ng-show="ctrl.user">
+            <md-tooltip>Profile</md-tooltip>
+            <img class="profile-avatar"
+                 src="{{ctrl.userImgUrl}}">
+        </div>
 
         <md-button class="mdi-icon-button" aria-label="Administer"
                    ng-show="ctrl.isAdmin"
@@ -38,18 +48,11 @@
             <i class="mdi mdi-magnify mdi-24px"></i>
         </md-button>
 
-        <div class="profile-image" ng-click="ctrl.profileClick()"
-             ng-show="ctrl.user">
-            <md-tooltip>Profile</md-tooltip>
-            <img class="profile-avatar"
-                 src="{{ctrl.userImgUrl}}">
-        </div>
-
         <md-button class="mdi-icon-button" aria-label="Logout"
                    ng-show="ctrl.user"
                    ng-click="ctrl.logoutClick()">
             <md-tooltip>Logout</md-tooltip>
-            <i class="mdi mdi-logout mdi-24px"></i>
+            <i class="mdi mdi-dots-vertical mdi-24px"></i>
         </md-button>
 
         <md-button class="mdi-icon-button" aria-label="Login"
@@ -61,4 +64,4 @@
 
     </div>
 </md-toolbar>
-<div style="margin-top: 64px;"></div>
+<div style="margin-top: 56px;"></div>

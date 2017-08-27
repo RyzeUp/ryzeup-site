@@ -130,3 +130,16 @@ md-card md-card-header md-card-avatar .md-user-avatar {
 .profile-image {
     padding-right: 10px;
 }
+
+md-tabs {
+    background: #F5F5F5
+}
+
+.navbar-logo {
+    height: 36px;
+    margin-left: 10px;
+}
+
+.tab-fire {
+    color: #FF6F00 /* amber 900 */
+}
