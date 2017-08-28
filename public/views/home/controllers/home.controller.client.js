@@ -12,11 +12,11 @@
         var model = this;
 
         function init() {
-            // billsService.updated('house')
-            //     .then(function (res) {
-            //         console.log(res.bills);
-            //         model.bills = res.bills;
-            //     });
+            billsService.updated('house')
+                .then(function (res) {
+                    console.log(res.bills);
+                    model.bills = res.bills;
+                });
 
             postService.recentReq()
                 .then(function (res) {

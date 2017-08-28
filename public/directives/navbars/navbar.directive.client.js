@@ -55,7 +55,7 @@
 
         this.goBack = function () {
             $window.history.back();
-        }
+        };
 
     }
 

@@ -23,20 +23,20 @@
     min-width: 10px;
 }
 
-.D:hover {
-    background: #BBDEFB;
-    opacity: 0.85;
-}
+/*.D:hover {*/
+    /*background: #BBDEFB;*/
+    /*opacity: 0.85;*/
+/*}*/
 
-.R:hover {
-    background: #FFCDD2;
-    opacity: 0.85;
-}
+/*.R:hover {*/
+    /*background: #FFCDD2;*/
+    /*opacity: 0.85;*/
+/*}*/
 
-.I:hover {
-    background: #ffffa8;
-    opacity: 0.85;
-}
+/*.I:hover {*/
+    /*background: #ffffa8;*/
+    /*opacity: 0.85;*/
+/*}*/
 
 md-card md-card-title {
     padding-top: 5px;
@@ -70,6 +70,10 @@ md-card md-card-header md-card-avatar .md-user-avatar {
     position: fixed; /* Set the navbar to fixed position */
     top: 0; /* Position the navbar at the top of the page */
     width: 100%; /* Full width */
+}
+
+navbar-raised {
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
 }
 
 #vertical-container {
@@ -132,8 +136,9 @@ md-card md-card-header md-card-avatar .md-user-avatar {
     padding-right: 10px;
 }
 
-md-tabs {
-    background: #F5F5F5
+/* makes tabs header F5 gray */
+md-tabs.md-default-theme md-tabs-wrapper, md-tabs md-tabs-wrapper {
+    background: #F5F5F5;
 }
 
 .navbar-logo {
@@ -141,6 +146,7 @@ md-tabs {
     margin-left: 10px;
 }
 
+/* tab fire color */
 .tab-fire {
     color: #FF6F00 /* amber 900 */
 }
