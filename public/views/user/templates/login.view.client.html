@@ -1,73 +1,69 @@
-<md-content layout="row">
-    <div layout flex-gt-sm="60" flex-offset-gt-sm="20">
+<md-content layout-align="center center" layout="row">
+    <div layout="column" flex="nogrow" style="max-width: 483px;">
+        <div hide show-gt-xs style="height: 150px"></div>
 
-        <md-card layout="column" style="padding: 30px; margin-top: 150px">
-            <img class="img-responsive center-block login-card"
-                 style="margin-bottom: 20px;"
-                 src="/assets/logos/RyzeUp-logo-noback.png">
+        <img class="img-responsive center-block login-card"
+             style="margin-bottom: 20px;"
+             src="/assets/logos/RYZE-UP-logo-quote.png">
 
-            <md-card md-whiteframe="5" md-colors="{ background: 'deep-orange-500' }"
-                 layout-padding style="margin-bottom: 20px"
-                 ng-show="model.message">
-                <span flex="100">{{model.message}}</span></md-card>
+        <md-card md-whiteframe="5" md-colors="{ background: 'deep-orange-500' }"
+             layout-padding style="margin-bottom: 20px"
+             ng-show="model.message">
+            <span flex="100">{{model.message}}</span></md-card>
 
-            <form name="loginForm" layout="column">
-                <md-input-container class="md-icon-float md-block">
-                    <!-- Use floating label instead of placeholder -->
-                    <label>Email</label>
-                    <md-icon md-font-set="material-icons" class="name">mail</md-icon>
-                    <input required ng-pattern="/^.+@.+\..+$/"
-                           ng-model="model.user.email" name="email" type="text">
-                    <div ng-messages="loginForm.email.$error" multiple md-auto-hide="false">
-                        <div ng-message="required">You must enter an email.</div>
-                        <div ng-message="pattern">
-                            Must be a valid email address
-                        </div>
+        <form name="loginForm" layout="column">
+            <md-input-container class="md-icon-float md-block">
+                <!-- Use floating label instead of placeholder -->
+                <label>Email</label>
+                <md-icon md-font-set="material-icons" class="name">mail</md-icon>
+                <input required ng-pattern="/^.+@.+\..+$/"
+                       ng-model="model.user.email" name="email" type="text">
+                <div ng-messages="loginForm.email.$error" multiple md-auto-hide="false">
+                    <div ng-message="required">You must enter an email.</div>
+                    <div ng-message="pattern">
+                        Must be a valid email address
                     </div>
-                </md-input-container>
+                </div>
+            </md-input-container>
 
-                <md-input-container class="md-icon-float md-block">
-                    <!-- Use floating label instead of placeholder -->
-                    <label>Password</label>
-                    <md-icon md-font-set="material-icons" class="password">lock</md-icon>
-                    <input required
-                           ng-model="model.user.password" name="password" type="password">
-                    <div ng-messages="loginForm.password.$error">
-                        <div ng-message="required">You must enter a password.</div>
-                    </div>
-                </md-input-container>
+            <md-input-container class="md-icon-float md-block">
+                <!-- Use floating label instead of placeholder -->
+                <label>Password</label>
+                <md-icon md-font-set="material-icons" class="password">lock</md-icon>
+                <input required
+                       ng-model="model.user.password" name="password" type="password">
+                <div ng-messages="loginForm.password.$error">
+                    <div ng-message="required">You must enter a password.</div>
+                </div>
+            </md-input-container>
 
-                <md-checkbox ng-model="checkbox" aria-label="Remember Me">
-                    Remember Me
-                </md-checkbox>
+            <md-checkbox ng-model="checkbox" aria-label="Remember Me">
+                Remember Me
+            </md-checkbox>
 
-                <md-button class="md-raised md-primary"
-                           ng-click="model.login()" type="submit">
-                    Login</md-button>
-            </form>
+            <md-button class="md-raised md-primary"
+                       ng-click="model.login()" type="submit">
+                Login</md-button>
 
-            <md-button layout="row"
-                       class="md-raised md-primary"
-                       style="background-color: #3b5998;"
-                       ng-href="/auth/v1/facebook">
-                <i class="mdi mdi-facebook-box mdi-24px" flex="5"></i>
-                <span flex="90">Login with Facebook</span>
-            </md-button>
-            <md-button layout="row"
-                       class="md-raised md-primary"
-                       style="background-color: #dd4b39;"
-                       ng-href="/auth/v1/google">
-                <i class="mdi mdi-google-plus-box mdi-24px" flex="5"></i>
-                <span flex="90">Login with Google</span>
-            </md-button>
+            <md-button class="md-raised md-primary"
+                       md-theme="red-theme"
+                       ng-href="#!/register">Sign Up</md-button>
+        </form>
 
-
-            <div layout="column" layout-align="center center">
-                <p>Don't have an account? <a href="#!/register">Sign Up</a></p>
-                <p>No Thanks! <a href="#!/home">Sign in later</a></p>
-            </div>
-
-        </md-card>
+        <div layout="column" layout-align="center center">
+            <p>Or sign in with:
+                <a ng-href="/auth/v1/facebook">
+                    <i class="mdi mdi-facebook-box mdi-36px"
+                       style="color: #3b5998"></i></a>
+                <a  ng-href="/auth/v1/google">
+                    <i class="mdi mdi-twitter mdi-36px"
+                       style="color: #00aced"></i></a>
+                <a ng-href="/auth/v1/google">
+                    <i class="mdi mdi-google-plus mdi-36px"
+                       style="color: #dd4b39"></i></a>
+            </p>
+            <p>No Thanks! <a href="#!/home">Sign in later</a></p>
+        </div>
 
     </div>
 </md-content>

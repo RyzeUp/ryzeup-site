@@ -1,83 +1,83 @@
-<md-content layout="row">
-    <div layout flex-gt-sm="60" flex-offset-gt-sm="20">
+<md-content layout-align="center center" layout="row">
+    <div layout="column" flex="nogrow" style="max-width: 483px;">
+        <div hide show-gt-xs style="height: 150px"></div>
 
-        <md-card layout="column" style="padding: 30px; margin-top: 150px">
-            <img class="img-responsive center-block"
-                 style="margin-bottom: 20px;"
-                 src="/assets/logos/RyzeUp-logo-noback.png">
+        <img class="img-responsive center-block login-card"
+             style="margin-bottom: 20px;"
+             src="/assets/logos/RYZE-UP-logo-quote.png">
 
-            <form name="registerForm" layout="column">
-                <div layout="row">
-                    <md-input-container class="md-icon-float md-block" flex="40">
-                        <label>First Name</label>
-                        <md-icon md-font-set="material-icons" class="name">person</md-icon>
-                        <input ng-model="model.user.firstName"
-                               required name="firstName" type="text">
-                        <div ng-messages="registerForm.firstName.$error">
-                            <div ng-message="required">First Name required.</div>
-                        </div>
-                    </md-input-container>
-                    <md-input-container class="md-icon-float md-block" flex="20">
-                        <label>Middle Name</label>
-                        <input ng-model="model.user.middleName" type="text">
-                    </md-input-container>
-                    <md-input-container class="md-icon-float md-block" flex="40">
-                        <label>Last Name</label>
-                        <input ng-model="model.user.lastName"
-                               required name="lastName" type="text">
-                        <div ng-messages="registerForm.firstName.$error" ng-if="model.butts">
-                            <div ng-message="required">Last Name required.</div>
-                        </div>
-                    </md-input-container>
-                </div>
-
-                <md-input-container class="md-icon-float md-block" flex="100">
-                    <label>Email</label>
-                    <md-icon md-font-set="material-icons" class="name">mail</md-icon>
-                    <input ng-model="model.user.email"
-                           required ng-pattern="model.emailRegex" name="email" type="text">
-                    <div ng-messages="registerForm.email.$error" multiple md-auto-hide="false">
-                        <div ng-message="required">Email required.</div>
-                        <div ng-message="pattern">Must be a valid email address</div>
+        <form name="registerForm" layout="column">
+            <div layout="row">
+                <md-input-container class="md-icon-float md-block" flex="40">
+                    <label>First Name</label>
+                    <md-icon md-font-set="material-icons" class="name">person</md-icon>
+                    <input ng-model="model.user.firstName"
+                           required name="firstName" type="text">
+                    <div ng-messages="registerForm.firstName.$error">
+                        <div ng-message="required">First Name required.</div>
                     </div>
                 </md-input-container>
-
-                <md-input-container class="md-icon-float md-block">
-                    <!-- Use floating label instead of placeholder -->
-                    <label>Password</label>
-                    <md-icon md-font-set="material-icons" class="password">lock</md-icon>
-                    <input ng-model="model.user.password"
-                           required name="password" type="password">
-                    <div ng-messages="registerForm.password.$error">
-                        <div ng-message="required">Password required.</div>
+                <md-input-container class="md-icon-float md-block" flex="20">
+                    <label>Middle Name</label>
+                    <input ng-model="model.user.middleName" type="text">
+                </md-input-container>
+                <md-input-container class="md-icon-float md-block" flex="40">
+                    <label>Last Name</label>
+                    <input ng-model="model.user.lastName"
+                           required name="lastName" type="text">
+                    <div ng-messages="registerForm.firstName.$error" ng-if="model.butts">
+                        <div ng-message="required">Last Name required.</div>
                     </div>
                 </md-input-container>
-
-                <md-input-container class="md-icon-float md-block">
-                    <!-- Use floating label instead of placeholder -->
-                    <label>Retype Password</label>
-                    <md-icon md-font-set="material-icons" class="password2">lock</md-icon>
-                    <input ng-model="model.user.password2"
-                           required compare-to="model.user.password" name="password2" type="password">
-                    <div ng-messages="registerForm.password2.$error" multiple md-auto-hide="false">
-                        <div ng-message="required">Password required.</div>
-                        <div ng-message="compareTo">Passwords must match</div>
-                    </div>
-                </md-input-container>
-
-
-                <md-button class="md-raised md-primary"
-                           ng-click="model.register()"
-                           type="submit">Register</md-button>
-            </form>
-            <md-button class="md-raised md-warn" ng-href="#!/login">Cancel</md-button>
-
-
-            <div layout="row" layout-align="center center">
-                <p>Already have an account? <a href="#!/login">Log In</a></p>
             </div>
 
-        </md-card>
+            <md-input-container class="md-icon-float md-block" flex="100">
+                <label>Email</label>
+                <md-icon md-font-set="material-icons" class="name">mail</md-icon>
+                <input ng-model="model.user.email"
+                       required ng-pattern="model.emailRegex" name="email" type="text">
+                <div ng-messages="registerForm.email.$error" multiple md-auto-hide="false">
+                    <div ng-message="required">Email required.</div>
+                    <div ng-message="pattern">Must be a valid email address</div>
+                </div>
+            </md-input-container>
+
+            <md-input-container class="md-icon-float md-block">
+                <!-- Use floating label instead of placeholder -->
+                <label>Password</label>
+                <md-icon md-font-set="material-icons" class="password">lock</md-icon>
+                <input ng-model="model.user.password"
+                       required name="password" type="password">
+                <div ng-messages="registerForm.password.$error">
+                    <div ng-message="required">Password required.</div>
+                </div>
+            </md-input-container>
+
+            <md-input-container class="md-icon-float md-block">
+                <!-- Use floating label instead of placeholder -->
+                <label>Retype Password</label>
+                <md-icon md-font-set="material-icons" class="password2">lock</md-icon>
+                <input ng-model="model.user.password2"
+                       required compare-to="model.user.password" name="password2" type="password">
+                <div ng-messages="registerForm.password2.$error" multiple md-auto-hide="false">
+                    <div ng-message="required">Password required.</div>
+                    <div ng-message="compareTo">Passwords must match</div>
+                </div>
+            </md-input-container>
+
+
+            <md-button class="md-raised md-primary"
+                       ng-click="model.register()"
+                       type="submit">Register</md-button>
+        </form>
+        <md-button class="md-raised md-primary"
+                   md-theme="red-theme"
+                   ng-href="#!/login">Cancel</md-button>
+
+
+        <div layout="row" layout-align="center center">
+            <p>Already have an account? <a href="#!/login">Log In</a></p>
+        </div>
 
     </div>
 </md-content>

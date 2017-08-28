@@ -61,20 +61,20 @@
             'contrastDarkColors': [
                 '50',
                 '100',
+                'A100',
+                'A200'
+            ],
+            'contrastLightColors': [
                 '200',
                 '300',
                 '400',
                 '500',
-                'A100',
-                'A200',
-                'A400',
-                'A700'
-            ],
-            'contrastLightColors': [
                 '600',
                 '700',
                 '800',
-                '900'
+                '900',
+                'A400',
+                'A700'
             ]
         });
 
@@ -83,6 +83,12 @@
         $mdThemingProvider.theme('default')
             .primaryPalette('default-blue')
             .accentPalette('default-red', {
+                'default': '500'
+            });
+
+        $mdThemingProvider.theme('red-theme')
+            .primaryPalette('default-red')
+            .accentPalette('default-blue', {
                 'default': '500'
             });
 
