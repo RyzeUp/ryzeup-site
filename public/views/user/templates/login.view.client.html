@@ -12,7 +12,7 @@
             <span flex="100">{{model.message}}</span></md-card>
 
         <form name="loginForm" layout="column">
-            <md-input-container class="md-icon-float md-block">
+            <md-input-container class="md-icon-float md-block form-input">
                 <!-- Use floating label instead of placeholder -->
                 <label>Email</label>
                 <md-icon md-font-set="material-icons" class="name">mail</md-icon>
@@ -26,7 +26,7 @@
                 </div>
             </md-input-container>
 
-            <md-input-container class="md-icon-float md-block">
+            <md-input-container class="md-icon-float md-block form-input">
                 <!-- Use floating label instead of placeholder -->
                 <label>Password</label>
                 <md-icon md-font-set="material-icons" class="password">lock</md-icon>
@@ -37,7 +37,8 @@
                 </div>
             </md-input-container>
 
-            <md-checkbox ng-model="checkbox" aria-label="Remember Me">
+            <md-checkbox ng-model="checkbox"
+                         aria-label="Remember Me" style="margin-left: 10px">
                 Remember Me
             </md-checkbox>
 
@@ -54,13 +55,18 @@
             <p>Or sign in with:
                 <a ng-href="/auth/v1/facebook">
                     <i class="mdi mdi-facebook-box mdi-36px"
-                       style="color: #3b5998"></i></a>
+                       style="color: #3b5998"
+                    ><md-tooltip>Facebook</md-tooltip></i></a>
                 <a  ng-href="/auth/v1/google">
                     <i class="mdi mdi-twitter mdi-36px"
-                       style="color: #00aced"></i></a>
+                       style="color: #00aced"
+                    ></i><md-tooltip>Twitter</md-tooltip></a>
                 <a ng-href="/auth/v1/google">
-                    <i class="mdi mdi-google-plus mdi-36px"
-                       style="color: #dd4b39"></i></a>
+                    <img src="/assets/other/google-g.svg"
+                         style="width: 30px;
+                         margin-bottom: -1px;
+                         cursor: pointer;"
+                    /><md-tooltip>Google</md-tooltip></a>
             </p>
             <p>No Thanks! <a href="#!/home">Sign in later</a></p>
         </div>

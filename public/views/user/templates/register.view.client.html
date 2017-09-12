@@ -8,30 +8,30 @@
 
         <form name="registerForm" layout="column">
             <div layout="row">
-                <md-input-container class="md-icon-float md-block" flex="40">
+                <md-input-container class="md-icon-float md-block form-input" flex="40">
                     <label>First Name</label>
                     <md-icon md-font-set="material-icons" class="name">person</md-icon>
                     <input ng-model="model.user.firstName"
                            required name="firstName" type="text">
                     <div ng-messages="registerForm.firstName.$error">
-                        <div ng-message="required">First Name required.</div>
+                        <div ng-message="required">First name required.</div>
                     </div>
                 </md-input-container>
-                <md-input-container class="md-icon-float md-block" flex="20">
+                <md-input-container class="md-icon-float md-block form-input" flex="20">
                     <label>Middle Name</label>
                     <input ng-model="model.user.middleName" type="text">
                 </md-input-container>
-                <md-input-container class="md-icon-float md-block" flex="40">
+                <md-input-container class="md-icon-float md-block form-input" flex="40">
                     <label>Last Name</label>
                     <input ng-model="model.user.lastName"
                            required name="lastName" type="text">
-                    <div ng-messages="registerForm.firstName.$error" ng-if="model.butts">
-                        <div ng-message="required">Last Name required.</div>
+                    <div ng-messages="registerForm.firstName.$error">
+                        <div ng-message="required">Last name required.</div>
                     </div>
                 </md-input-container>
             </div>
 
-            <md-input-container class="md-icon-float md-block" flex="100">
+            <md-input-container class="md-icon-float md-block form-input" flex="100">
                 <label>Email</label>
                 <md-icon md-font-set="material-icons" class="name">mail</md-icon>
                 <input ng-model="model.user.email"
@@ -42,7 +42,7 @@
                 </div>
             </md-input-container>
 
-            <md-input-container class="md-icon-float md-block">
+            <md-input-container class="md-icon-float md-block form-input">
                 <!-- Use floating label instead of placeholder -->
                 <label>Password</label>
                 <md-icon md-font-set="material-icons" class="password">lock</md-icon>
@@ -53,10 +53,12 @@
                 </div>
             </md-input-container>
 
-            <md-input-container class="md-icon-float md-block">
+            <md-input-container class="md-icon-float md-block form-input">
                 <!-- Use floating label instead of placeholder -->
                 <label>Retype Password</label>
-                <md-icon md-font-set="material-icons" class="password2">lock</md-icon>
+                <md-icon md-font-icon="mdi mdi-lock mdi-24px"
+                         class="input-mdi"></md-icon>
+                <!--<md-icon md-font-set="material-icons" class="password2">lock-reset</md-icon>-->
                 <input ng-model="model.user.password2"
                        required compare-to="model.user.password" name="password2" type="password">
                 <div ng-messages="registerForm.password2.$error" multiple md-auto-hide="false">

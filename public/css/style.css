@@ -146,6 +146,15 @@ md-tabs.md-default-theme md-tabs-wrapper, md-tabs md-tabs-wrapper {
     margin-left: 10px;
 }
 
+.form-input {
+    margin-top: 6px;
+    margin-bottom:6px;
+}
+
+.input-mdi {
+    top: 5px;
+}
+
 /* tab fire color */
 .tab-fire {
     color: #FF6F00 /* amber 900 */
